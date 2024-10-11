@@ -9,7 +9,7 @@ module.exports.signUp = async (req, res) => {
   const { phone, nom, postnom, prenom, photo, email, role, direction, service } = req.body;
 
 
-  const numberExist = await User.findOne({ number: number });
+  const numberExist = await User.findOne({ phone: phone });
   const emailExist = await User.findOne({ email: email });
 
   if (numberExist) {
@@ -37,7 +37,7 @@ module.exports.signUp = async (req, res) => {
 
     const result = await user.save();
 
-    return res.status(200).send({
+    return res.status(201).send({
       message: "User Registration Successfully",
       data: result,
       token: jwt.sign(
@@ -79,7 +79,7 @@ module.exports.login = async (req, res) => {
 module.exports.hello = async (req, res) => {
 
   return res.status(200).send({
-    message: "Api Rest Bantou - store"
+    message: "Api Rest EDU-NC"
   });
 };
 
