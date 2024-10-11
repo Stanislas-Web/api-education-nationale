@@ -26,7 +26,6 @@ const swaggerOptions = {
 };
 
 const swaggerSpecs = swaggerJsdoc(swaggerOptions);
-
 app.use(cors());
 app.use(express.json());
 
