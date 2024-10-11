@@ -8,20 +8,32 @@ module.exports.signUp = async (req, res) => {
 
   const { phone, nom, postnom, prenom, photo, email, role, direction, service } = req.body;
 
+  // Vérification du rôle soumis
+  const validRoles = ['Administrateur', 'Utilisateur', 'Superviseur', 'Inspecteur', 'Décideur'];
+  if (!validRoles.includes(role)) {
+    return res.status(400).send({
+      message: `Le rôle doit être parmi les suivants : ${validRoles.join(', ')}`
+    });
+  }
 
+  // Vérification si le numéro de téléphone existe déjà
   const numberExist = await User.findOne({ phone: phone });
-  const emailExist = await User.findOne({ email: email });
-
   if (numberExist) {
     return res.status(400).send({
-      message: "ce numéro de télephone existe déjà "
+      message: "Ce numéro de téléphone existe déjà"
     });
-  } else if (emailExist) {
-    return res.status(400).send({
-      message: 'ce courriel existe déjà'
-    });
+  }
 
-  } else {
+  // Vérification si l'email existe déjà
+  const emailExist = await User.findOne({ email: email });
+  if (emailExist) {
+    return res.status(400).send({
+      message: 'Cet email existe déjà'
+    });
+  }
+
+  try {
+    // Création d'un nouvel utilisateur
     const user = new User({
       password,
       phone,
@@ -37,16 +49,31 @@ module.exports.signUp = async (req, res) => {
 
     const result = await user.save();
 
+    // Génération du token JWT
+    const token = jwt.sign(
+      {
+        nom: result.nom,
+        postnom: result.postnom,
+        prenom: result.prenom,
+        phone: result.phone,
+        _id: result._id,
+      },
+      "RESTFULAPIs"
+    );
+
     return res.status(201).send({
-      message: "User Registration Successfully",
+      message: "Inscription réussie",
       data: result,
-      token: jwt.sign(
-        { nom: result.nom, postnom: result.postnom, prenom: result.prenom, phone: result.phone, _id: result._id },
-        "RESTFULAPIs"
-      ),
+      token: token
+    });
+  } catch (error) {
+    return res.status(500).send({
+      message: "Une erreur est survenue lors de l'inscription",
+      error: error.message
     });
   }
 };
+
 
 
 module.exports.login = async (req, res) => {

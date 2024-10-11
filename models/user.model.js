@@ -1,4 +1,4 @@
-const {Schema, model} = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 /**
  * @swagger
@@ -38,6 +38,7 @@ const {Schema, model} = require('mongoose');
  *           description: Adresse email de l'utilisateur
  *         role:
  *           type: string
+ *           enum: ['Administrateur', 'Utilisateur', 'Superviseur', 'Inspecteur', 'Décideur']
  *           description: Rôle de l'utilisateur dans le système
  *         direction:
  *           type: string
@@ -50,16 +51,20 @@ const {Schema, model} = require('mongoose');
  *           description: Numéro de téléphone de l'utilisateur
  */
 const userSchema = new Schema({
-    password: { type: String, required: true },
-    nom: { type: String, required: true },
-    postnom: { type: String, required: true },
-    prenom: { type: String, required: true },
-    photo: {type: String, required: true},
-    email: {type: String, required: true},
-    role: {type: String, required: true},
-    direction: {type: String, required: true},
-    service: {type: String, required: true},
-    phone: {type: String, required: true},
-},{timestamps: true, versionKey: false });
+  password: { type: String, required: true },
+  nom: { type: String, required: true },
+  postnom: { type: String, required: true },
+  prenom: { type: String, required: true },
+  photo: { type: String, required: true },
+  email: { type: String, required: true },
+  role: { 
+    type: String, 
+    enum: ['Administrateur', 'Utilisateur', 'Superviseur', 'Inspecteur', 'Décideur'], // Définition de l'énumération des rôles
+    required: true 
+  },
+  direction: { type: String, required: true },
+  service: { type: String, required: true },
+  phone: { type: String, required: true }
+}, { timestamps: true, versionKey: false });
 
 module.exports.User = model('User', userSchema);
