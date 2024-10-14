@@ -49,6 +49,10 @@ const { Schema, model } = require('mongoose');
  *         phone:
  *           type: string
  *           description: Numéro de téléphone de l'utilisateur
+ *         isActive:
+ *           type: boolean
+ *           description: Indicateur d'activité de l'utilisateur
+
  */
 const userSchema = new Schema({
   password: { type: String, required: true },
@@ -64,7 +68,8 @@ const userSchema = new Schema({
   },
   direction: { type: String, required: true },
   service: { type: String, required: true },
-  phone: { type: String, required: true }
+  phone: { type: String, required: true },
+  isActive: { type: Boolean, default: true},
 }, { timestamps: true, versionKey: false });
 
 module.exports.User = model('User', userSchema);

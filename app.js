@@ -10,6 +10,20 @@ const app = express();
 const swaggerOptions = {
   definition: {
     openapi: '3.0.0',
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
+        },
+      },
+    },
+    security: [
+      {
+        bearerAuth: [],
+      },
+    ],
     info: {
       title: 'API Education Nationale',
       version: '1.0.0',
@@ -17,13 +31,16 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: 'http://134.122.23.150/api/v1',
+        // url: 'http://134.122.23.150/api/v1',
+        url: 'http://localhost/api/v1',
         description: 'Serveur de développement',
       },
     ],
   },
   apis: ['./routers/*.js', './models/*.js'], // Assurez-vous que ces chemins sont corrects
 };
+
+
 
 const swaggerSpecs = swaggerJsdoc(swaggerOptions);
 app.use(cors());

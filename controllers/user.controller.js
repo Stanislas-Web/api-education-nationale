@@ -103,6 +103,125 @@ module.exports.login = async (req, res) => {
   }
 };
 
+
+// get all users
+
+module.exports.getAllUsers = async (req, res) => {
+
+  try {
+
+    const users = await User.find();
+
+    return res.status(200).send({
+      message: "get all users",
+      data: users,
+    });
+  } catch (error) {
+    return res.status(500).send({
+      message: "Une erreur est survenue lors du get all users",
+      error: error.message
+    });
+  }
+};
+
+
+module.exports.updateUser = async (req, res) => {
+  const userId = req.params.id;
+  const updateData = req.body;
+
+  try {
+    const updatedUser = await User.findByIdAndUpdate(userId, updateData, { new: true });
+
+    if (!updatedUser) {
+      return res.status(404).send({
+        message: "Utilisateur non trouvé",
+      });
+    }
+
+    return res.status(200).send({
+      message: "Utilisateur mis à jour avec succès",
+      data: updatedUser,
+    });
+  } catch (error) {
+    return res.status(500).send({
+      message: "Une erreur est survenue lors de la mise à jour de l'utilisateur",
+      error: error.message,
+    });
+  }
+};
+
+
+module.exports.deleteUser = async (req, res) => {
+  const userId = req.params.id;
+
+  try {
+    // Trouver l'utilisateur par ID et supprimer
+    const deletedUser = await User.findByIdAndDelete(userId);
+
+    if (!deletedUser) {
+      return res.status(404).send({
+        message: "Utilisateur non trouvé",
+      });
+    }
+
+    return res.status(200).send({
+      message: "Utilisateur supprimé avec succès",
+    });
+  } catch (error) {
+    return res.status(500).send({
+      message: "Une erreur est survenue lors de la suppression de l'utilisateur",
+      error: error.message,
+    });
+  }
+};
+
+
+module.exports.toggleUserStatus = async (req, res) => {
+  const userId = req.params.id;
+  const { action } = req.body; // 'enable' ou 'disable'
+
+  try {
+    // Vérifier l'action et définir le nouveau statut isActive
+    const isActive = action === 'enable' ? true : false;
+
+    // Mettre à jour le statut isActive de l'utilisateur
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { isActive },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).send({
+        message: "Utilisateur non trouvé",
+      });
+    }
+
+    const message = isActive
+      ? "Utilisateur activé avec succès"
+      : "Utilisateur désactivé avec succès";
+
+    return res.status(200).send({
+      message,
+      data: updatedUser,
+    });
+  } catch (error) {
+    return res.status(500).send({
+      message: "Une erreur est survenue lors de la mise à jour du statut de l'utilisateur",
+      error: error.message,
+    });
+  }
+};
+
+
+
+
+
+
+
+
+
+
 module.exports.hello = async (req, res) => {
 
   return res.status(200).send({
