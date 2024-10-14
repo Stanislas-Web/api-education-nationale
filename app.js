@@ -17,7 +17,7 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: 'https://api-education-nationale.vercel.app/api/v1',
+        url: 'http://134.122.23.150/api/v1',
         description: 'Serveur de développement',
       },
     ],
