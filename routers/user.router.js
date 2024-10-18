@@ -1,6 +1,7 @@
 const router = require('express').Router();
-const { signUp, login, getAllUsers, updateUser, deleteUser, toggleUserStatus } = require('../controllers/user.controller');
+const { signUp, login, getAllUsers, updateUser, deleteUser, toggleUserStatus, uploadUserPhoto, getUserPhoto } = require('../controllers/user.controller');
 const {isLoggedIn} = require('../middleware');
+const upload = require('../config/multer');
 /**
  * @swagger
  * /signup:
@@ -150,7 +151,7 @@ router.route('/users').get(isLoggedIn,getAllUsers);
  *                 example: true
 
  *     responses:
- *       200:
+ *       201:
  *         description: Utilisateur modifié avec succès
  *         content:
  *           application/json:
@@ -249,6 +250,78 @@ router.route('/users/:id').put(isLoggedIn,deleteUser);
  *         description: Erreur interne du serveur
  */
 router.route('/users/:id/status').patch(isLoggedIn, toggleUserStatus);
+/**
+ * @swagger
+ * /users/{id}/upload-photo:
+ *   post:
+ *     summary: Upload une image pour un utilisateur
+ *     tags: [Users]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID de l'utilisateur
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               photo:
+ *                 type: string
+ *                 format: binary
+ *     responses:
+ *       200:
+ *         description: Image téléchargée avec succès
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Image téléchargée avec succès"
+ *                 data:
+ *                   $ref: '#/components/schemas/User'
+ *       400:
+ *         description: Aucun fichier téléchargé
+ *       500:
+ *         description: Erreur interne du serveur
+ */
+router.route('/users/:id/upload-photo')
+  .post(isLoggedIn, upload.single('photo'), uploadUserPhoto);
+
+/**
+ * @swagger
+ * /users/{id}/photo:
+ *   get:
+ *     summary: Récupérer la photo de l'utilisateur
+ *     tags: [Users]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID de l'utilisateur
+ *     responses:
+ *       200:
+ *         description: Image récupérée avec succès
+ *         content:
+ *           image/jpeg:
+ *             schema:
+ *               type: string
+ *               format: binary
+ *       404:
+ *         description: Image non trouvée
+ *       500:
+ *         description: Erreur du serveur
+ */
+router.route('/users/:id/photo').get(isLoggedIn, getUserPhoto);
+  
 
 
 
