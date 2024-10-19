@@ -54,7 +54,7 @@ module.exports.getUserPhoto = (req, res) => {
 module.exports.signUp = async (req, res) => {
   const password = await bcrypt.hash(req.body.password, 10);
 
-  const { phone, nom, postnom, prenom, photo, email, role, direction, service, fonction, grade } = req.body;
+  const { phone, nom, postnom, prenom, photo, email, role, direction, service, fonction, grade, provinces } = req.body;
 
   const validRoles = ['Administrateur', 'Utilisateur', 'Superviseur', 'Inspecteur', 'Décideur'];
   if (!validRoles.includes(role)) {
@@ -86,7 +86,8 @@ module.exports.signUp = async (req, res) => {
       fonction,
       grade,
       direction,
-      service
+      service,
+      provinces
     });
 
     const result = await user.save();

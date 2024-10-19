@@ -146,6 +146,10 @@ router.route('/users').get(isLoggedIn,getAllUsers);
  *               grade:
  *                 type: string
  *                 example: "grade 1"
+ *               provinces:
+ *                 type: string
+ *                 example: "Kinshasa"
+ * 
  *               phone:
  *                 type: string
  *                 example: "123456789"

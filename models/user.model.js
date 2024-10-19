@@ -19,6 +19,7 @@ const { Schema, model } = require('mongoose');
  *         - grade
  *         - fonction
  *         - phone
+ *         - provinces
  *         - isActive
  *       properties:
  *         password:
@@ -43,6 +44,9 @@ const { Schema, model } = require('mongoose');
  *           type: string
  *           enum: ['Administrateur', 'Utilisateur', 'Superviseur', 'Inspecteur', 'Décideur']
  *           description: Rôle de l'utilisateur dans le système
+ *         provinces:
+ *           type: string
+ *           description: Province de la direction de l'utilisateur
  *         direction:
  *           type: string
  *           description: Direction ou département de l'utilisateur
@@ -78,6 +82,7 @@ const userSchema = new Schema({
     enum: ['Administrateur', 'Utilisateur', 'Superviseur', 'Inspecteur', 'Décideur'],
     required: true 
   },
+  provinces: { type: String, required: true },
   direction: { type: Schema.Types.ObjectId, ref: 'Direction', required: true }, // Référence à Direction
   sousDirection: { type: Schema.Types.ObjectId, ref: 'SousDirection' }, // Référence à SousDirection
   service: { type: Schema.Types.ObjectId, ref: 'Service', required: true }, // Référence à Service
