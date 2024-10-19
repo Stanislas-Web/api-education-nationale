@@ -143,6 +143,9 @@ router.route('/users').get(isLoggedIn,getAllUsers);
  *               fonction:
  *                 type: string
  *                 example: "Fonction 1"
+ *               grade:
+ *                 type: string
+ *                 example: "grade 1"
  *               phone:
  *                 type: string
  *                 example: "123456789"
