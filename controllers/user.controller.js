@@ -80,7 +80,7 @@ module.exports.signUp = async (req, res) => {
       nom,
       postnom,
       prenom,
-      photo,
+      photo:"/uploads/default.jpg",
       email,
       role,
       fonction,
