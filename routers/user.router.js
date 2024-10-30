@@ -209,7 +209,7 @@ router.route('/users/:id').put(isLoggedIn,updateUser);
  *       500:
  *         description: Erreur interne du serveur
  */
-router.route('/users/:id').put(isLoggedIn,deleteUser);
+router.route('/users/:id').delete(isLoggedIn,deleteUser);
 
 /**
  * @swagger
