@@ -118,28 +118,38 @@ module.exports.signUp = async (req, res) => {
 
 module.exports.login = async (req, res) => {
   const password = req.body.password;
-  const email = req.body.email;
+  const identifier = req.body.email; // Utiliser le même champ pour email ou téléphone
+
   console.log(req.body);
-  const checkEmail = await User.findOne({ email: email });
-  console.log(checkEmail);
-  if (checkEmail) {
-    const checkPassword = await bcrypt.compare(password, checkEmail.password);
+
+  const checkUser = await User.findOne({
+    $or: [
+      { email: identifier },
+      { phone: identifier }
+    ]
+  });
+
+  console.log(checkUser);
+  
+  if (checkUser) {
+    const checkPassword = await bcrypt.compare(password, checkUser.password);
     if (checkPassword) {
       return res.status(200).send({
         message: "User login Successfully",
-        data: checkEmail,
+        data: checkUser,
         token: jwt.sign(
-          { name: checkEmail.name, phone: checkEmail.phone, _id: checkEmail._id },
+          { name: checkUser.name, phone: checkUser.phone, _id: checkUser._id },
           "RESTFULAPIs"
         ),
       });
     } else {
-      return res.status(400).send({ message: "Numéro de téléphone ou mot de passe incorrecte" });
+      return res.status(400).send({ message: "Numéro de téléphone ou mot de passe incorrect" });
     }
   } else {
-    return res.status(400).send({ message: "Numéro de téléphone ou mot de passe incorrecte" });
+    return res.status(400).send({ message: "Numéro de téléphone ou mot de passe incorrect" });
   }
 };
+
 
 // Récupérer tous les utilisateurs
 module.exports.getAllUsers = async (req, res) => {
