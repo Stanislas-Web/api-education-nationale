@@ -7,11 +7,23 @@ const ProvinceRouter = require('./routers/province.router');
 const DirectionRouter = require('./routers/direction.route');
 const SousDirectionRouter = require('./routers/sousDirection.js');
 const ServiceRouter = require('./routers/service.route');
+const EcoleRouter = require('./routers/ecole.router');
+const EleveRouter = require('./routers/eleve.route');
+const PersonnelRouter = require('./routers/personnel.route.js');
+const BesoinRessourceRouter = require('./routers/besoinRessource.route.js');
+const EffectifRouter = require('./routers/effectif.router.js');
+const PresenceRouter = require('./routers/presence.route.js');
+const ResultatScolaireRouter = require('./routers/resultatScolaire.route.js');
+const PermissionRouter = require('./routers/permission.route.js');
+const InfrastructureRouter = require('./routers/infras.route.js');
+const EquipementRouter = require('./routers/equipement.route.js');
+const CommissionRouter = require('./routers/commission.route.js');
 const path = require('path');
 
 const app = express();
 
 // Configuration Swagger
+
 const swaggerOptions = {
   definition: {
     openapi: '3.0.0',
@@ -68,8 +80,8 @@ app.get('/image/:filename', (req, res) => {
   });
 });
 
-// Configuration des routes
-app.use('/api/v1/', UserRouter, ProvinceRouter, DirectionRouter, SousDirectionRouter, ServiceRouter);
+
+app.use('/api/v1/', UserRouter, ProvinceRouter, DirectionRouter, SousDirectionRouter, ServiceRouter, EcoleRouter, EleveRouter, PersonnelRouter, BesoinRessourceRouter, EffectifRouter, PresenceRouter, ResultatScolaireRouter, PermissionRouter, InfrastructureRouter, EquipementRouter, CommissionRouter);
 
 // Middleware Swagger Docs
 app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
