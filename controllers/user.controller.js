@@ -54,7 +54,7 @@ module.exports.getUserPhoto = (req, res) => {
 module.exports.signUp = async (req, res) => {
   const password = await bcrypt.hash(req.body.password, 10);
 
-  const { phone, nom, postnom, prenom, photo, email, role, direction, service, fonction, grade, provinces } = req.body;
+  const { phone, nom, postnom, prenom, photo, email, role, direction, service, fonction, grade, provinces, sousDirection } = req.body;
 
   const validRoles = ['Administrateur', 'Utilisateur', 'Superviseur', 'Inspecteur', 'Décideur'];
   if (!validRoles.includes(role)) {
@@ -86,6 +86,7 @@ module.exports.signUp = async (req, res) => {
       fonction,
       grade,
       direction,
+      sousDirection,
       service,
       provinces
     });
@@ -154,7 +155,10 @@ module.exports.login = async (req, res) => {
 // Récupérer tous les utilisateurs
 module.exports.getAllUsers = async (req, res) => {
   try {
-    const users = await User.find();
+    const users = await User.find()
+    .populate('direction')
+    .populate('sousDirection')
+    .populate('service');
     return res.status(200).send({
       message: "get all users",
       data: users,
