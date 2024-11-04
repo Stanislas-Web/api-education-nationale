@@ -80,7 +80,7 @@ module.exports.signUp = async (req, res) => {
       nom,
       postnom,
       prenom,
-      photo:"/uploads/default.jpg",
+      photo: "/uploads/default.jpg",
       email,
       role,
       fonction,
@@ -128,10 +128,12 @@ module.exports.login = async (req, res) => {
       { email: identifier },
       { phone: identifier }
     ]
-  });
+  }).populate('direction')
+    .populate('sousDirection')
+    .populate('service');
 
   console.log(checkUser);
-  
+
   if (checkUser) {
     const checkPassword = await bcrypt.compare(password, checkUser.password);
     if (checkPassword) {
@@ -156,9 +158,9 @@ module.exports.login = async (req, res) => {
 module.exports.getAllUsers = async (req, res) => {
   try {
     const users = await User.find()
-    .populate('direction')
-    .populate('sousDirection')
-    .populate('service');
+      .populate('direction')
+      .populate('sousDirection')
+      .populate('service');
     return res.status(200).send({
       message: "get all users",
       data: users,
