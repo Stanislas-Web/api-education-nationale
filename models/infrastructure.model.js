@@ -7,14 +7,14 @@ const { Schema, model } = require('mongoose');
  *     Infrastructure:
  *       type: object
  *       required:
- *         - name
+ *         - description
  *         - type
  *         - location
  *         - schoolId
  *       properties:
- *         name:
+ *         description:
  *           type: string
- *           description: Nom de l'infrastructure
+ *           description: description de l'infrastructure
  *         type:
  *           type: string
  *           enum: ['Salle de classe', 'Bibliothèque', 'Laboratoire', 'Toilettes', 'Autre']
@@ -29,13 +29,12 @@ const { Schema, model } = require('mongoose');
 
 const infrastructureSchema = new Schema({
   createdBy: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-  name: { type: String, required: true },
+  description: { type: String, required: true },
   type: {
     type: String,
     enum: ['Salle de classe', 'Bibliothèque', 'Laboratoire', 'Toilettes', 'Autre'],
     required: true,
   },
-  location: { type: String, required: true },
   schoolId: { type: Schema.Types.ObjectId, ref: 'Ecole', required: true },
 }, { timestamps: true, versionKey: false });
 
