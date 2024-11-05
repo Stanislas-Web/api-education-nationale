@@ -1,13 +1,13 @@
 const { Ecole } = require('../models/ecole.model');
 
 module.exports.createEcole = async (req, res) => {
-  const { nom, adresse, localisation, sousDirectionId, createdBy } = req.body;
+  const { nom, adresse, localisation, sousDirection, createdBy } = req.body;
 
   try {
     // Vérification des champs requis
-    if (!sousDirectionId) {
+    if (!sousDirection) {
       return res.status(400).send({
-        message: "Le champ sousDirectionId est requis pour créer une école."
+        message: "Le champ sousDirection est requis pour créer une école."
       });
     }
 
@@ -17,7 +17,7 @@ module.exports.createEcole = async (req, res) => {
       createdBy,
       adresse,
       localisation,
-      sousDirectionId
+      sousDirection
     });
 
     const result = await ecole.save();
@@ -37,7 +37,7 @@ module.exports.createEcole = async (req, res) => {
 module.exports.getAllEcoles = async (req, res) => {
   try {
     const ecoles = await Ecole.find()
-      .populate('sousDirectionId');
+      .populate('sousDirection');
 
     return res.status(200).send({
       message: "Liste des écoles récupérée avec succès",
@@ -104,7 +104,7 @@ module.exports.getEcolesBySousDirection = async (req, res) => {
 
   try {
     const ecoles = await Ecole.find({ sousDirectionId })
-      .populate('sousDirectionId').populate('createdBy');
+      .populate('sousDirection').populate('createdBy');
 
     if (ecoles.length === 0) {
       return res.status(404).send({
@@ -129,7 +129,7 @@ module.exports.getEcoleById = async (req, res) => {
   const ecoleId = req.params.id;
 
   try {
-    const ecole = await Ecole.findById(ecoleId).populate('sousDirectionId').populate('createdBy'); // Remplacez 'sousDirectionId' si un autre champ est utilisé
+    const ecole = await Ecole.findById(ecoleId).populate('sousDirection').populate('createdBy'); // Remplacez 'sousDirectionId' si un autre champ est utilisé
 
     if (!ecole) {
       return res.status(404).send({
