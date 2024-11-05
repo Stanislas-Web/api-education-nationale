@@ -29,6 +29,7 @@ const { Schema, model } = require('mongoose');
  */
 const EleveSchema = new Schema({
   nom: { type: String, required: true },
+  createdBy: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   prenom: { type: String, required: true },
   age: { type: Number, required: true },
   sexe: { type: String, enum: ['M', 'F'], required: true },

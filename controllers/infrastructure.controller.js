@@ -14,7 +14,7 @@ exports.createInfrastructure = async (req, res) => {
 // Récupérer toutes les infrastructures
 exports.getAllInfrastructures = async (req, res) => {
   try {
-    const infrastructures = await Infrastructure.find().populate('schoolId');
+    const infrastructures = await Infrastructure.find().populate('schoolId').populate('createdBy');
     res.status(200).json(infrastructures);
   } catch (error) {
     res.status(500).json({ message: 'Erreur lors de la récupération des infrastructures', error });

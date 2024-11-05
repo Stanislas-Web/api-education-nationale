@@ -1,10 +1,10 @@
 const { Personnel } = require('../models/personnel.model');
 
 module.exports.createPersonnel = async (req, res) => {
-  const { nom, prenom, role, qualification, ecole, presences } = req.body;
+  const { nom, prenom, role, qualification, ecole, createdBy } = req.body;
 
   try {
-    const personnel = new Personnel({ nom, prenom, role, qualification, ecole, presences });
+    const personnel = new Personnel({ nom, prenom, role, qualification, ecole, createdBy });
     const result = await personnel.save();
 
     return res.status(201).send({
@@ -21,7 +21,7 @@ module.exports.createPersonnel = async (req, res) => {
 
 module.exports.getAllPersonnel = async (req, res) => {
   try {
-    const personnel = await Personnel.find().populate('ecole');
+    const personnel = await Personnel.find().populate('ecole').populate('createdBy');
     
     return res.status(200).send({
       message: "Liste du personnel récupérée avec succès",

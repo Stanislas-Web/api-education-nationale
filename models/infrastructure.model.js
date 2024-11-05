@@ -28,6 +28,7 @@ const { Schema, model } = require('mongoose');
  */
 
 const infrastructureSchema = new Schema({
+  createdBy: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   name: { type: String, required: true },
   type: {
     type: String,

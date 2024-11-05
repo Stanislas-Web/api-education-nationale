@@ -2,10 +2,10 @@ const { Eleve } = require('../models/eleve.model');
 
 // Création d'un nouvel élève
 module.exports.createEleve = async (req, res) => {
-  const { nom, prenom, age, sexe, classe, ecole } = req.body;
+  const { nom, prenom, age, sexe, classe, ecole, createdBy } = req.body;
 
   try {
-    const eleve = new Eleve({ nom, prenom, age, sexe, classe, ecole });
+    const eleve = new Eleve({ nom, prenom, age, sexe, classe, ecole, createdBy });
     const result = await eleve.save();
 
     return res.status(201).send({
@@ -23,7 +23,7 @@ module.exports.createEleve = async (req, res) => {
 // Récupérer tous les élèves
 module.exports.getAllEleves = async (req, res) => {
   try {
-    const eleves = await Eleve.find().populate('ecole');
+    const eleves = await Eleve.find().populate('ecole').populate('createdBy');
     return res.status(200).send({
       message: "Liste des élèves récupérée avec succès",
       data: eleves,

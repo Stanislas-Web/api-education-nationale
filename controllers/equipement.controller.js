@@ -16,7 +16,7 @@ exports.createEquipement = async (req, res) => {
 // Get all equipment
 exports.getAllEquipements = async (req, res) => {
   try {
-    const equipements = await Equipement.find().populate('ecoleId');
+    const equipements = await Equipement.find().populate('ecoleId').populate('createdBy');
     res.status(200).json(equipements);
   } catch (error) {
     res.status(500).json({ message: error.message });

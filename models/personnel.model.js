@@ -27,6 +27,7 @@ const { Schema, model } = require('mongoose');
  *           description: Nombre de jours de présence
  */
 const PersonnelSchema = new Schema({
+  createdBy: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   nom: { type: String, required: true },
   prenom: { type: String, required: true },
   role: { type: String, required: true }, // Rôle du personnel

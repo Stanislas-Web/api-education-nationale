@@ -28,16 +28,21 @@ const { Schema, model } = require('mongoose');
  *         sousDirection:
  *           type: string
  *           description: Référence vers la sous-direction de l'école
+ *         createdBy
+ *           type: string
+ *           description: user Created
  */
 const EcoleSchema = new Schema({
   nom: { type: String, required: true },
+  createdBy: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   adresse: { type: String, required: true }, // Nouveau champ pour l'adresse de l'école
   localisation: {
     latitude: { type: Number, required: true },
     longitude: { type: Number, required: true },
   },
   eleves: [{ type: Schema.Types.ObjectId, ref: 'Eleve' }], // Référence vers les élèves
-  sousDirection: { type: Schema.Types.ObjectId, ref: 'SousDirection', required: true } // Référence vers SousDirection
+  sousDirection: { type: Schema.Types.ObjectId, ref: 'SousDirection', required: true },
+
 }, { 
   toJSON: { virtuals: true },
   toObject: { virtuals: true }

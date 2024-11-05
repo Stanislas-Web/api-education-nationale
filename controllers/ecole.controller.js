@@ -1,7 +1,7 @@
 const { Ecole } = require('../models/ecole.model');
 
 module.exports.createEcole = async (req, res) => {
-  const { nom, adresse, localisation, sousDirectionId } = req.body;
+  const { nom, adresse, localisation, sousDirectionId, createdBy } = req.body;
 
   try {
     // Vérification des champs requis
@@ -14,6 +14,7 @@ module.exports.createEcole = async (req, res) => {
     // Création de l'école
     const ecole = new Ecole({
       nom,
+      createdBy,
       adresse,
       localisation,
       sousDirectionId
@@ -103,7 +104,7 @@ module.exports.getEcolesBySousDirection = async (req, res) => {
 
   try {
     const ecoles = await Ecole.find({ sousDirectionId })
-      .populate('sousDirectionId');
+      .populate('sousDirectionId').populate('createdBy');
 
     if (ecoles.length === 0) {
       return res.status(404).send({
@@ -128,7 +129,7 @@ module.exports.getEcoleById = async (req, res) => {
   const ecoleId = req.params.id;
 
   try {
-    const ecole = await Ecole.findById(ecoleId).populate('sousDirectionId'); // Remplacez 'sousDirectionId' si un autre champ est utilisé
+    const ecole = await Ecole.findById(ecoleId).populate('sousDirectionId').populate('createdBy'); // Remplacez 'sousDirectionId' si un autre champ est utilisé
 
     if (!ecole) {
       return res.status(404).send({
