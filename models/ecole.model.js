@@ -28,10 +28,11 @@ const { Schema, model } = require('mongoose');
  *         sousDirection:
  *           type: string
  *           description: Référence vers la sous-direction de l'école
- *         createdBy
+ *         createdBy:
  *           type: string
  *           description: user Created
  */
+
 const EcoleSchema = new Schema({
   nom: { type: String, required: true },
   createdBy: { type: Schema.Types.ObjectId, ref: 'User', required: true },

@@ -1,6 +1,7 @@
 // models/equipement.model.js
 
 const mongoose = require('mongoose');
+// const { Schema, model } = require('mongoose');
 
 /**
  * @swagger
@@ -28,7 +29,7 @@ const mongoose = require('mongoose');
  *           description: ID de l'école associée à cet équipement
  */
 const EquipementSchema = new mongoose.Schema({
-  createdBy: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   nom: { type: String, required: true },
   quantite: { type: Number, required: true },
   categorie: { type: String, required: true },
