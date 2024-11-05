@@ -1,6 +1,6 @@
 const Effectif = require('../models/effectif.model');
-const Eleve = require('../models/eleve.model');
-const Personnel = require('../models/personnel.model');
+const {Eleve} = require('../models/eleve.model');
+const {Personnel} = require('../models/personnel.model');
 
 module.exports.createEffectif = async (req, res) => {
   const { ecoleId } = req.body;
