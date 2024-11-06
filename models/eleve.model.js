@@ -35,6 +35,6 @@ const EleveSchema = new Schema({
   sexe: { type: String, enum: ['M', 'F'], required: true },
   classe: { type: String, required: true }, // Classe de l'élève
   ecole: { type: Schema.Types.ObjectId, ref: 'Ecole', required: true } // Référence vers l'école
-}, { timestamps: true });
+}, { timestamps: true, versionKey: false });
 
 module.exports.Eleve = model('Eleve', EleveSchema);

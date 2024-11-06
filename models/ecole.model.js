@@ -45,7 +45,7 @@ const EcoleSchema = new Schema({
   sousDirection: { type: Schema.Types.ObjectId, ref: 'SousDirection', required: true },
   effectifs: { type: Number, default: 0 },
 
-});
+}, { timestamps: true, versionKey: false });
 
 
 module.exports.Ecole = model('Ecole', EcoleSchema);
