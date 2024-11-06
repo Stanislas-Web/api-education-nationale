@@ -43,15 +43,11 @@ const EcoleSchema = new Schema({
   },
   eleves: [{ type: Schema.Types.ObjectId, ref: 'Eleve' }], // Référence vers les élèves
   sousDirection: { type: Schema.Types.ObjectId, ref: 'SousDirection', required: true },
+  effectifs: { type: Number, default: 0 },
 
-}, { 
-  toJSON: { virtuals: true },
-  toObject: { virtuals: true }
 });
 
-// Champ virtuel pour calculer automatiquement le total des effectifs
-EcoleSchema.virtual('effectifs').get(function() {
-  return this.eleves ? this.eleves.length : 0;
-});
 
 module.exports.Ecole = model('Ecole', EcoleSchema);
+
+

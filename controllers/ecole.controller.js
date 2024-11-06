@@ -67,6 +67,32 @@ module.exports.getAllEcoles = async (req, res) => {
   }
 };
 
+// module.exports.getAllEcoles = async (req, res) => {
+//   try {
+//     const ecoles = await Ecole.find()
+//       .populate('sousDirection')  // Remplir la référence 'sousDirection'
+//       .populate('createdBy');     // Remplir la référence 'createdBy'
+
+//     // Calculer l'effectif pour chaque école
+//     const ecolesWithEffectifs = await Promise.all(ecoles.map(async (ecole) => {
+//       const effectifs = ecole.eleves.length + ecole.personnel.length;  // Calcul de l'effectif
+//       ecole.effectifs = effectifs;  // Mise à jour de l'effectif dans l'école
+//       return ecole;
+//     }));
+
+//     return res.status(200).send({
+//       message: "Liste des écoles récupérée avec succès",
+//       data: ecolesWithEffectifs,
+//     });
+//   } catch (error) {
+//     return res.status(500).send({
+//       message: "Erreur lors de la récupération des écoles",
+//       error: error.message,
+//     });
+//   }
+// };
+
+
 module.exports.updateEcole = async (req, res) => {
   const ecoleId = req.params.id;
   const updateData = req.body;
