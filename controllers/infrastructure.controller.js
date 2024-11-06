@@ -12,7 +12,7 @@ exports.createInfrastructure = async (req, res) => {
 };
 
 module.exports.createManyInfrastructures = async (req, res) => {
-  const infrastructures = req.body.infrastructure; 
+  const infrastructures = req.body.infrastructures; 
   try {
     const result = await Infrastructure.insertMany(infrastructures);
     return res.status(200).send({
