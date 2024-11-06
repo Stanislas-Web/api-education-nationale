@@ -11,6 +11,22 @@ exports.createInfrastructure = async (req, res) => {
   }
 };
 
+module.exports.createManyInfrastructures = async (req, res) => {
+  const infrastructures = req.body.infrastructure; 
+  try {
+    const result = await Infrastructure.insertMany(infrastructures);
+    return res.status(200).send({
+      message: "All infrastructures inserted successfully",
+      data: result,
+    });
+  } catch (error) {
+    return res.status(500).send({
+      message: "Error inserting infrastructures",
+      error: error.message,
+    });
+  }
+};
+
 // Récupérer toutes les infrastructures
 exports.getAllInfrastructures = async (req, res) => {
   try {

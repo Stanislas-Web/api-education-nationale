@@ -6,7 +6,8 @@ const {
   getElevesByEcole,
   getElevesBySousDirection,
   updateEleve, 
-  deleteEleve 
+  deleteEleve,
+  createManyEleves
 } = require('../controllers/eleve.controller');
 const { isLoggedIn } = require('../middleware');
 
@@ -27,6 +28,30 @@ const { isLoggedIn } = require('../middleware');
  *         description: Élève créé avec succès
  */
 router.route('/eleves').post(isLoggedIn, createEleve);
+/**
+ * @swagger
+ * /eleves/many:
+ *   post:
+ *     summary: Création de plusieurs eleves
+ *     tags: [Élèves]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               eleves:
+ *                 type: array
+ *                 items:
+ *                   $ref: '#/components/schemas/Eleve'
+ *     responses:
+ *       200:
+ *         description: Toutes les eleves ont été insérées avec succès
+ *       500:
+ *         description: Erreur lors de l'insertion des elevess
+ */
+router.route('/eleves/many').post(isLoggedIn,createManyEleves);
 
 /**
  * @swagger

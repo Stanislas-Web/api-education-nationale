@@ -2,7 +2,15 @@
 
 const express = require('express');
 const router = express.Router();
-const { createEquipement, getAllEquipements, getEquipementById, updateEquipement, deleteEquipement } = require('../controllers/equipement.controller');
+const { isLoggedIn } = require('../middleware');
+const { 
+  createEquipement, 
+  getAllEquipements, 
+  getEquipementById, 
+  updateEquipement, 
+  deleteEquipement, 
+  createManyEquipements 
+} = require('../controllers/equipement.controller');
 
 /**
  * @swagger
@@ -20,7 +28,30 @@ const { createEquipement, getAllEquipements, getEquipementById, updateEquipement
  *       201:
  *         description: Équipement créé avec succès
  */
-router.post('/equipements', createEquipement);
+router.route('/equipements').post(isLoggedIn, createEquipement);
+
+/**
+ * @swagger
+ * /equipements/many:
+ *   post:
+ *     summary: Créer plusieurs équipements
+ *     tags: [Equipements]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               equipements:
+ *                 type: array
+ *                 items:
+ *                   $ref: '#/components/schemas/Equipement'
+ *     responses:
+ *       200:
+ *         description: Tous les équipements ont été créés avec succès
+ */
+router.route('/equipements/many').post(isLoggedIn, createManyEquipements);
 
 /**
  * @swagger
@@ -38,7 +69,7 @@ router.post('/equipements', createEquipement);
  *               items:
  *                 $ref: '#/components/schemas/Equipement'
  */
-router.get('/equipements', getAllEquipements);
+router.route('/equipements').get(isLoggedIn, getAllEquipements);
 
 /**
  * @swagger
@@ -61,7 +92,7 @@ router.get('/equipements', getAllEquipements);
  *             schema:
  *               $ref: '#/components/schemas/Equipement'
  */
-router.get('/equipements/:id', getEquipementById);
+router.route('/equipements/:id').get(isLoggedIn, getEquipementById);
 
 /**
  * @swagger
@@ -86,7 +117,7 @@ router.get('/equipements/:id', getEquipementById);
  *       200:
  *         description: Équipement mis à jour avec succès
  */
-router.put('/equipements/:id', updateEquipement);
+router.route('/equipements/:id').put(isLoggedIn, updateEquipement);
 
 /**
  * @swagger
@@ -105,6 +136,6 @@ router.put('/equipements/:id', updateEquipement);
  *       200:
  *         description: Équipement supprimé avec succès
  */
-router.delete('/equipements/:id', deleteEquipement);
+router.route('/equipements/:id').delete(isLoggedIn, deleteEquipement);
 
 module.exports = router;

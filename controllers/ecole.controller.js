@@ -34,6 +34,22 @@ module.exports.createEcole = async (req, res) => {
   }
 };
 
+module.exports.createManyEcoles = async (req, res) => {
+  const ecoles = req.body.ecoles; 
+  try {
+    const result = await Ecole.insertMany(ecoles);
+    return res.status(200).send({
+      message: "All ecoles inserted successfully",
+      data: result,
+    });
+  } catch (error) {
+    return res.status(500).send({
+      message: "Error inserting ecoles",
+      error: error.message,
+    });
+  }
+};
+
 module.exports.getAllEcoles = async (req, res) => {
   try {
     const ecoles = await Ecole.find()

@@ -5,7 +5,8 @@ const {
   getEcoleById,
   getEcolesBySousDirection, 
   updateEcole, 
-  deleteEcole
+  deleteEcole,
+  createManyEcoles
 } = require('../controllers/ecole.controller');
 const { isLoggedIn } = require('../middleware');
 
@@ -26,6 +27,30 @@ const { isLoggedIn } = require('../middleware');
  *         description: École créée avec succès
  */
 router.route('/ecoles').post(isLoggedIn, createEcole);
+/**
+ * @swagger
+ * /ecoles/many:
+ *   post:
+ *     summary: Création de plusieurs écoles
+ *     tags: [Ecoles]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               ecoles:
+ *                 type: array
+ *                 items:
+ *                   $ref: '#/components/schemas/Ecole'
+ *     responses:
+ *       200:
+ *         description: Toutes les écoles ont été insérées avec succès
+ *       500:
+ *         description: Erreur lors de l'insertion des écoles
+ */
+router.route('/ecoles/many').post(isLoggedIn, createManyEcoles);
 
 /**
  * @swagger

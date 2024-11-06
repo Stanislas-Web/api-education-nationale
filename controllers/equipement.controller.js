@@ -13,6 +13,22 @@ exports.createEquipement = async (req, res) => {
   }
 };
 
+module.exports.createManyEquipements = async (req, res) => {
+  const equipements = req.body.equipements; 
+  try {
+    const result = await Equipement.insertMany(equipements);
+    return res.status(200).send({
+      message: "All equipements inserted successfully",
+      data: result,
+    });
+  } catch (error) {
+    return res.status(500).send({
+      message: "Error inserting equipements",
+      error: error.message,
+    });
+  }
+};
+
 // Get all equipment
 exports.getAllEquipements = async (req, res) => {
   try {

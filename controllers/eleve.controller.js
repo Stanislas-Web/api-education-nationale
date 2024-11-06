@@ -20,6 +20,22 @@ module.exports.createEleve = async (req, res) => {
   }
 };
 
+module.exports.createManyEleves = async (req, res) => {
+  const eleves = req.body.eleves; 
+  try {
+    const result = await Eleve.insertMany(eleves);
+    return res.status(200).send({
+      message: "All eleves inserted successfully",
+      data: result,
+    });
+  } catch (error) {
+    return res.status(500).send({
+      message: "Error inserting eleves",
+      error: error.message,
+    });
+  }
+};
+
 // Récupérer tous les élèves
 module.exports.getAllEleves = async (req, res) => {
   try {
