@@ -53,7 +53,7 @@ module.exports.createManyEcoles = async (req, res) => {
 module.exports.getAllEcoles = async (req, res) => {
   try {
     const ecoles = await Ecole.find()
-      .populate('sousDirection');
+      .populate('sousDirection').populate('createdBy');
 
     return res.status(200).send({
       message: "Liste des écoles récupérée avec succès",
