@@ -1,4 +1,3 @@
-// controllers/typeFormulaire.controller.js
 const { TypeFormulaire } = require('../models/typeFormulaire.model');
 
 // Créer un nouveau type de formulaire
@@ -28,20 +27,42 @@ const createTypeFormulaire = async (req, res) => {
   }
 };
 
-// Récupérer tous les types de formulaires
+// Récupérer tous les types de formulaires avec les destinateurs peuplés
 const getAllTypeFormulaires = async (req, res) => {
-  try {
-    const typeFormulaires = await TypeFormulaire.find();
-    res.status(200).json(typeFormulaires);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
+    try {
+      const typeFormulaires = await TypeFormulaire.find()
+        .populate({
+          path: 'destinateurs', // Peuple le champ destinateurs avec les utilisateurs
+          select: 'nom postnom prenom grade fonction email direction sousDirection service', // Sélectionne les champs nécessaires
+          populate: [
+            {
+              path: 'direction', // Peuple le champ direction dans les utilisateurs
+              select: 'nom', // Sélectionne uniquement le champ 'nom' de la direction
+            },
+            {
+              path: 'sousDirection', // Peuple le champ sousDirection dans les utilisateurs
+              select: 'nom', // Sélectionne uniquement le champ 'nom' de la sousDirection
+            },
+            {
+              path: 'service', // Peuple le champ service dans les utilisateurs
+              select: 'nom', // Sélectionne uniquement le champ 'nom' du service
+            }
+          ]
+        });
+  
+      res.status(200).json(typeFormulaires);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  };
+  
 
-// Récupérer un type de formulaire par ID
+// Récupérer un type de formulaire par ID avec les destinateurs peuplés
 const getTypeFormulaireById = async (req, res) => {
   try {
-    const typeFormulaire = await TypeFormulaire.findById(req.params.id);
+    const typeFormulaire = await TypeFormulaire.findById(req.params.id)
+      .populate('destinateurs', 'nom email');  // Peuplé avec les champs 'nom' et 'email' des utilisateurs
+    
     if (!typeFormulaire) {
       return res.status(404).json({ message: 'Type de formulaire non trouvé' });
     }
@@ -65,7 +86,8 @@ const updateTypeFormulaire = async (req, res) => {
       req.params.id,
       { code, nom, destinateurs, champs, createdBy },
       { new: true, runValidators: true }
-    );
+    )
+    .populate('destinateurs', 'nom email');  // Peuplé avec les champs 'nom' et 'email' des utilisateurs
     
     if (!typeFormulaire) {
       return res.status(404).json({ message: 'Type de formulaire non trouvé' });
