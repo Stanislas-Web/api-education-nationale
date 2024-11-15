@@ -182,11 +182,11 @@ const ficheAdministrativeSchema = new Schema({
       qualif: { type: String },
       cin: { type: String },
       fonction: { type: String },
-      dateEntree: { type: Date },
-      dateSortie: { type: Date },
+      dateEntree: { type: String, required: true},
+      dateSortie: { type: String, required: true},
       autresInfos: {
-        dernierAncien: { type: String },
-        motifMutation: { type: String },
+        dernierAncien: { type: String, required: true},
+        motifMutation: { type: String, required: true},
         autres: { type: String }
       }
     }

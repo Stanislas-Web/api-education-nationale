@@ -53,8 +53,8 @@ const swaggerOptions = {
     },
     servers: [
       {
-        // url: 'http://134.122.23.150/api/v1',
-        url: 'http://localhost/api/v1',
+        url: 'http://134.122.23.150/api/v1',
+        // url: 'http://localhost/api/v1',
         description: 'Serveur de développement',
       },
     ],
