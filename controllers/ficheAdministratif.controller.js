@@ -35,7 +35,7 @@ const getAllFichesAdministratives = async (req, res) => {
     const fichesAdministratives = await FicheAdministrative.find()
       .populate({
         path: 'destinateurs',
-        select: 'nom postnom prenom email',
+        select: 'nom postnom prenom role email',
       })
       .populate({
         path: 'createdBy',
