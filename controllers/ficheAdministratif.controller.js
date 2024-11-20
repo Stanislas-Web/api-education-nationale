@@ -3,7 +3,7 @@ const { FicheAdministrative } = require('../models/ficheAdministrative.model');
 // Créer une nouvelle fiche administrative
 const createFicheAdministrative = async (req, res) => {
   try {
-    const { etablissement, destinateurs, createdBy, structureEtPeuplement, personnel, miseEnPlace } = req.body;
+    const { etablissement,idSousDirection, idDirection, destinateurs, createdBy, structureEtPeuplement, personnel, miseEnPlace } = req.body;
 
     // Vérification si les données nécessaires sont présentes
     if (!etablissement || !structureEtPeuplement) {
@@ -18,8 +18,10 @@ const createFicheAdministrative = async (req, res) => {
       code: 'A1',
       structureEtPeuplement,
       personnel,
-      miseEnPlace
-    });
+      miseEnPlace,
+      idDirection,
+      idSousDirection
+    });    
 
     // Sauvegarder la fiche administrative dans la base de données
     await ficheAdministrative.save();
@@ -33,18 +35,24 @@ const createFicheAdministrative = async (req, res) => {
 const getAllFichesAdministratives = async (req, res) => {
   try {
     const fichesAdministratives = await FicheAdministrative.find()
-      .populate({
-        path: 'destinateurs',
-        select: 'nom postnom prenom role email',
-      })
-      .populate({
-        path: 'createdBy',
-        select: 'nom postnom prenom role email',
-      })
-      .populate({
-        path: 'etablissement',
-        select: 'nom adresse',
-      });
+      .populate("idSousDirection")
+      .populate("idDirection")
+      .populate('createdBy')
+      .populate('etablissement')
+      .populate({destinateurs})
+      // .populate({
+      //   path: 'destinateurs',
+      //   select: 'nom postnom prenom role email',
+      // })
+      // .populate({
+      //   path: 'createdBy',
+      //   select: 'nom postnom prenom role email',
+      // })
+    //   .populate({
+    //     path: 'etablissement',
+    //     select: 'nom adresse',
+    //   }
+    // );
 
     res.status(200).json(fichesAdministratives);
   } catch (error) {

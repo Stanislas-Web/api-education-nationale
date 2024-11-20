@@ -9,7 +9,15 @@ const { Schema, model } = require('mongoose');
  *       required:
  *         - etablissement
  *         - structureEtPeuplement
+ *         - idDirection
+ *         - idSousDirection
  *       properties:
+ *         idSousDirection:
+ *           type: string
+ *           description: id de la sous direction 
+ *         idDirection:
+ *           type: string
+ *           description: id de la direction
  *         etablissement:
  *           type: string
  *           description: Référence à l'ID de l'école.
@@ -106,10 +114,10 @@ const { Schema, model } = require('mongoose');
  *                 type: string
  *                 description: Fonction générale à l'école.
  *               dateEntree:
- *                 type: date
+ *                 type: string
  *                 description: Date d'entrée en fonction.
  *               dateSortie:
- *                 type: date
+ *                 type: string
  *                 description: Date de sortie.
  *               autresInfos:
  *                 type: object
@@ -125,6 +133,16 @@ const { Schema, model } = require('mongoose');
  *                     description: Autres informations.
  */
 const ficheAdministrativeSchema = new Schema({
+  idSousDirection: {
+    type: Schema.Types.ObjectId,
+    ref: 'SousDirection',
+    required: true,
+  },
+  idDirection: {
+    type: Schema.Types.ObjectId,
+    ref: 'Direction',
+    required: true,
+  },
   etablissement: {
     type: Schema.Types.ObjectId,
     ref: 'Ecole',
