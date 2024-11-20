@@ -39,7 +39,7 @@ const getAllFichesAdministratives = async (req, res) => {
       .populate("idDirection")
       .populate('createdBy')
       .populate('etablissement')
-      .populate({destinateurs})
+      .populate("destinateurs")
       // .populate({
       //   path: 'destinateurs',
       //   select: 'nom postnom prenom role email',
