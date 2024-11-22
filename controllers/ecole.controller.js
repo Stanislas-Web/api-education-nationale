@@ -16,7 +16,9 @@ module.exports.createEcole = async (req, res) => {
     ville,
     village,
     province,
-    secteur
+    secteur,
+    bp,
+    matricule
   } = req.body;
 
   try {
@@ -44,6 +46,8 @@ module.exports.createEcole = async (req, res) => {
       village,
       province,
       secteur,
+      bp,
+      matricule
     });
 
     const result = await ecole.save();

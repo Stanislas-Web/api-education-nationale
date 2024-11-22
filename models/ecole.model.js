@@ -64,6 +64,12 @@
  *         secteur:
  *           type: string
  *           description: Secteur de l'école (optionnel)
+ *         bp:
+ *           type: string
+ *           description: Boîte postale de l'école
+ *         matricule:
+ *           type: string
+ *           description: Matricule de l'école
  *       required:
  *         - nom
  *         - adresse
@@ -96,6 +102,8 @@
  *         village: "Village Example"
  *         province: "Kinshasa"
  *         secteur: "Secteur 7"
+ *         bp: "BP 12345"
+ *         matricule: "MAT56789"
  */
 
 const { Schema, model } = require('mongoose');
@@ -120,6 +128,8 @@ const EcoleSchema = new Schema({
   village: { type: String },
   province: { type: String, required: true },
   secteur: { type: String },
+  bp: { type: String },
+  matricule: { type: String }
 }, { timestamps: true, versionKey: false });
 
 module.exports.Ecole = model('Ecole', EcoleSchema);

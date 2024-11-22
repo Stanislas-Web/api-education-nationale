@@ -65,6 +65,9 @@ const { Schema, model } = require('mongoose');
  *         phone:
  *           type: string
  *           description: Numéro de téléphone de l'utilisateur
+ *         niveauOuDiscipline: 
+ *           type: string
+ *           description: niveau de l'inspecteur ou sa descipline
  *         isActive:
  *           type: boolean
  *           description: Indicateur d'activité de l'utilisateur
@@ -89,6 +92,7 @@ const userSchema = new Schema({
   phone: { type: String, required: true },
   grade: { type: String, required: true },
   fonction: { type: String, required: true },
+  niveauOuDiscipline: { type: String, required: true },
   isActive: { type: Boolean, default: true },
 }, { timestamps: true, versionKey: false });
 
