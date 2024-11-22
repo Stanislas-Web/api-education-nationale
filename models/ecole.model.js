@@ -23,11 +23,6 @@
  *           required:
  *             - latitude
  *             - longitude
- *         eleves:
- *           type: array
- *           items:
- *             type: string
- *           description: Liste des références des élèves de l'école
  *         sousDirection:
  *           type: string
  *           description: Référence vers la sous-direction de l'école
@@ -70,6 +65,12 @@
  *         matricule:
  *           type: string
  *           description: Matricule de l'école
+ *         tel:
+ *           type: string
+ *           description: Numéro de télephone de l'école
+ *         n:
+ *           type: string
+ *           description: numero d'adresse de l'école
  *       required:
  *         - nom
  *         - adresse
@@ -83,13 +84,14 @@
  *         - district
  *         - ville
  *         - province
+ *         - n
+ *         - tel
  *       example:
  *         nom: "Ecole Primaire Le Savoir"
  *         adresse: "123 Avenue des Nations"
  *         localisation:
  *           latitude: -1.28333
  *           longitude: 36.81667
- *         eleves: ["64bca7a2e5d12c0012345678", "64bca7a2e5d12c0012345679"]
  *         sousDirection: "64bca7a2e5d12c0012345671"
  *         effectifs: 350
  *         secope: "SEC12345"
@@ -104,6 +106,8 @@
  *         secteur: "Secteur 7"
  *         bp: "BP 12345"
  *         matricule: "MAT56789"
+ *         tel: "+243826016607"
+ *         n: "12 A/Bis"
  */
 
 const { Schema, model } = require('mongoose');
@@ -129,7 +133,9 @@ const EcoleSchema = new Schema({
   province: { type: String, required: true },
   secteur: { type: String },
   bp: { type: String },
-  matricule: { type: String }
+  matricule: { type: String },
+  tel: { type: String, required: true },
+  n: { type: String, required: true }
 }, { timestamps: true, versionKey: false });
 
 module.exports.Ecole = model('Ecole', EcoleSchema);

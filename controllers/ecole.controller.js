@@ -47,7 +47,9 @@ module.exports.createEcole = async (req, res) => {
       province,
       secteur,
       bp,
-      matricule
+      matricule,
+      tel,
+      n
     });
 
     const result = await ecole.save();
