@@ -37,28 +37,23 @@ const getAllFichesAdministratives = async (req, res) => {
     const fichesAdministratives = await FicheAdministrative.find()
       .populate("idSousDirection")
       .populate("idDirection")
-      .populate('createdBy')
-      .populate('etablissement')
-      .populate("destinateurs")
-      // .populate({
-      //   path: 'destinateurs',
-      //   select: 'nom postnom prenom role email',
-      // })
-      // .populate({
-      //   path: 'createdBy',
-      //   select: 'nom postnom prenom role email',
-      // })
-    //   .populate({
-    //     path: 'etablissement',
-    //     select: 'nom adresse',
-    //   }
-    // );
+      .populate("createdBy")
+      .populate({
+        path: "etablissement",
+        populate: {
+          path: "denomination", // Champ dans le modèle Etablissement qui fait référence aux dénominations
+          select: "appellation sigle code", // Sélectionnez uniquement les champs nécessaires
+        },
+        select: "nom adresse", // Sélectionnez uniquement les champs nécessaires pour l'établissement
+      })
+      .populate("destinateurs");
 
     res.status(200).json(fichesAdministratives);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
+
 
 // Récupérer une fiche administrative par ID avec les destinateurs peuplés
 const getFicheAdministrativeById = async (req, res) => {

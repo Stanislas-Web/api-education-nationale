@@ -1,13 +1,29 @@
 const { Ecole } = require('../models/ecole.model');
 
 module.exports.createEcole = async (req, res) => {
-  const { nom, adresse, localisation, sousDirection, createdBy } = req.body;
+  const {
+    nom,
+    adresse,
+    localisation,
+    sousDirection,
+    createdBy,
+    secope,
+    denomination,
+    rueOuAvenue,
+    quartier,
+    communeOuTerritoire,
+    district,
+    ville,
+    village,
+    province,
+    secteur
+  } = req.body;
 
   try {
     // Vérification des champs requis
-    if (!sousDirection) {
+    if (!sousDirection || !nom || !adresse || !denomination || !province) {
       return res.status(400).send({
-        message: "Le champ sousDirection est requis pour créer une école."
+        message: "Certains champs obligatoires sont manquants.",
       });
     }
 
@@ -17,7 +33,17 @@ module.exports.createEcole = async (req, res) => {
       createdBy,
       adresse,
       localisation,
-      sousDirection
+      sousDirection,
+      secope,
+      denomination,
+      rueOuAvenue,
+      quartier,
+      communeOuTerritoire,
+      district,
+      ville,
+      village,
+      province,
+      secteur,
     });
 
     const result = await ecole.save();
@@ -33,6 +59,7 @@ module.exports.createEcole = async (req, res) => {
     });
   }
 };
+
 
 module.exports.createManyEcoles = async (req, res) => {
   const ecoles = req.body.ecoles; 
@@ -53,7 +80,9 @@ module.exports.createManyEcoles = async (req, res) => {
 module.exports.getAllEcoles = async (req, res) => {
   try {
     const ecoles = await Ecole.find()
-      .populate('sousDirection').populate('createdBy');
+      .populate('sousDirection')
+      .populate('createdBy')
+      .populate('denomination'); // Peupler la dénomination si nécessaire
 
     return res.status(200).send({
       message: "Liste des écoles récupérée avec succès",
@@ -66,6 +95,7 @@ module.exports.getAllEcoles = async (req, res) => {
     });
   }
 };
+
 
 // module.exports.getAllEcoles = async (req, res) => {
 //   try {
@@ -98,7 +128,9 @@ module.exports.updateEcole = async (req, res) => {
   const updateData = req.body;
 
   try {
-    const updatedEcole = await Ecole.findByIdAndUpdate(ecoleId, updateData, { new: true });
+    const updatedEcole = await Ecole.findByIdAndUpdate(ecoleId, updateData, {
+      new: true,
+    });
 
     if (!updatedEcole) {
       return res.status(404).send({
@@ -117,6 +149,7 @@ module.exports.updateEcole = async (req, res) => {
     });
   }
 };
+
 
 module.exports.deleteEcole = async (req, res) => {
   const ecoleId = req.params.id;

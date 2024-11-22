@@ -3,16 +3,16 @@ const cors = require('cors');
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 const path = require('path');
-const UserRouter = require('./routers/user.router');
-const ProvinceRouter = require('./routers/province.router');
+const UserRouter = require('./routers/user.route.js');
+const ProvinceRouter = require('./routers/province.route.js');
 const DirectionRouter = require('./routers/direction.route');
-const SousDirectionRouter = require('./routers/sousDirection.js');
+const SousDirectionRouter = require('./routers/sousDirection.route.js');
 const ServiceRouter = require('./routers/service.route');
-const EcoleRouter = require('./routers/ecole.router');
+const EcoleRouter = require('./routers/ecole.route');
 const EleveRouter = require('./routers/eleve.route');
 const PersonnelRouter = require('./routers/personnel.route.js');
 const BesoinRessourceRouter = require('./routers/besoinRessource.route.js');
-const EffectifRouter = require('./routers/effectif.router.js');
+const EffectifRouter = require('./routers/effectif.route.js');
 const PresenceRouter = require('./routers/presence.route.js');
 const ResultatScolaireRouter = require('./routers/resultatScolaire.route.js');
 const PermissionRouter = require('./routers/permission.route.js');
@@ -20,9 +20,10 @@ const InfrastructureRouter = require('./routers/infras.route.js');
 const EquipementRouter = require('./routers/equipement.route.js');
 const CommissionRouter = require('./routers/commission.route.js');
 const AnnonceRouter = require('./routers/annonce.route.js');
-const TypeFormulaireRouter = require('./routers/typeFormulaire.router.js');
+const TypeFormulaireRouter = require('./routers/typeFormulaire.route.js');
 const FormulaireRouter = require('./routers/formulaire.route.js');
-const ficheAdministrativeRouter = require('./routers/ficheAdministrative.router.js');
+const ficheAdministrativeRouter = require('./routers/ficheAdministrative.route.js');
+const denominationRouter = require('./routers/denomination.route.js');
 
 
 const app = express();
@@ -86,7 +87,7 @@ app.get('/image/:filename', (req, res) => {
 });
 
 
-app.use('/api/v1/', UserRouter, ProvinceRouter, DirectionRouter, SousDirectionRouter, ServiceRouter, EcoleRouter, EleveRouter, PersonnelRouter, BesoinRessourceRouter, EffectifRouter, PresenceRouter, ResultatScolaireRouter, PermissionRouter, InfrastructureRouter, EquipementRouter, CommissionRouter, AnnonceRouter, TypeFormulaireRouter, FormulaireRouter, ficheAdministrativeRouter);
+app.use('/api/v1/', UserRouter, ProvinceRouter, DirectionRouter, SousDirectionRouter, ServiceRouter, EcoleRouter, EleveRouter, PersonnelRouter, BesoinRessourceRouter, EffectifRouter, PresenceRouter, ResultatScolaireRouter, PermissionRouter, InfrastructureRouter, EquipementRouter, CommissionRouter, AnnonceRouter, TypeFormulaireRouter, FormulaireRouter, ficheAdministrativeRouter, denominationRouter);
 
 // Middleware Swagger Docs
 app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
