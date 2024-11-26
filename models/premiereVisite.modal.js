@@ -8,7 +8,9 @@ const { Schema, model } = require('mongoose');
  *       type: object
  *       required:
  *         - codeFormulaire
- *         - postes
+ *         - inspecteur
+ *         - etablissement
+ *         - signature
  *       properties:
  *         codeFormulaire:
  *           type: string
@@ -16,10 +18,12 @@ const { Schema, model } = require('mongoose');
  *           description: Code du formulaire (C1)
  *         inspecteur:
  *           type: string
- *           description: Nom de l'inspecteur
+ *           format: uuid
+ *           description: ID de l'inspecteur (référence à User)
  *         etablissement:
  *           type: string
- *           description: Nom de l'établissement
+ *           format: uuid
+ *           description: ID de l'établissement (référence à Ecole)
  *         nomChefEtablissement:
  *           type: string
  *           description: Nom du chef d'établissement
@@ -30,86 +34,42 @@ const { Schema, model } = require('mongoose');
  *           type: object
  *           properties:
  *             parcelle:
- *               type: object
- *               properties:
- *                 constatsProblemes:
- *                   type: string
- *                 solutionsProposees:
- *                   type: string
+ *               $ref: '#/components/schemas/Poste'
  *             batiments:
- *               type: object
- *               properties:
- *                 constatsProblemes:
- *                   type: string
- *                 solutionsProposees:
- *                   type: string
+ *               $ref: '#/components/schemas/Poste'
  *             equipements:
- *               type: object
- *               properties:
- *                 constatsProblemes:
- *                   type: string
- *                 solutionsProposees:
- *                   type: string
+ *               $ref: '#/components/schemas/Poste'
  *             moyensEnseignement:
- *               type: object
- *               properties:
- *                 constatsProblemes:
- *                   type: string
- *                 solutionsProposees:
- *                   type: string
+ *               $ref: '#/components/schemas/Poste'
  *             personnel:
- *               type: object
- *               properties:
- *                 constatsProblemes:
- *                   type: string
- *                 solutionsProposees:
- *                   type: string
+ *               $ref: '#/components/schemas/Poste'
  *             apprenants:
- *               type: object
- *               properties:
- *                 constatsProblemes:
- *                   type: string
- *                 solutionsProposees:
- *                   type: string
+ *               $ref: '#/components/schemas/Poste'
  *             administration:
- *               type: object
- *               properties:
- *                 constatsProblemes:
- *                   type: string
- *                 solutionsProposees:
- *                   type: string
+ *               $ref: '#/components/schemas/Poste'
  *             organisationPedagogique:
- *               type: object
- *               properties:
- *                 constatsProblemes:
- *                   type: string
- *                 solutionsProposees:
- *                   type: string
+ *               $ref: '#/components/schemas/Poste'
  *             finances:
- *               type: object
- *               properties:
- *                 constatsProblemes:
- *                   type: string
- *                 solutionsProposees:
- *                   type: string
+ *               $ref: '#/components/schemas/Poste'
  *             internet:
- *               type: object
- *               properties:
- *                 constatsProblemes:
- *                   type: string
- *                 solutionsProposees:
- *                   type: string
+ *               $ref: '#/components/schemas/Poste'
  *         rapportCirconstancie:
  *           type: string
  *           description: Rapport circonstancié pour complément d'information
  *         signature:
  *           type: object
+ *           required:
+ *             - lieu
+ *             - date
+ *             - chefEtablissementSignature
+ *             - inspecteurSignature
  *           properties:
  *             lieu:
  *               type: string
  *               description: Lieu de signature
  *             date:
- *               type: date
+ *               type: string
+ *               format: date
  *               description: Date de signature
  *             chefEtablissementSignature:
  *               type: string
@@ -119,8 +79,31 @@ const { Schema, model } = require('mongoose');
  *               description: Signature de l'inspecteur
  *             sceauEtablissement:
  *               type: boolean
+ *               default: false
  *               description: Présence du sceau de l'établissement
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *           description: Date de création
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *           description: Date de dernière modification
+ *     Poste:
+ *       type: object
+ *       properties:
+ *         constatsProblemes:
+ *           type: string
+ *           description: Constatations et problèmes identifiés
+ *         solutionsProposees:
+ *           type: string
+ *           description: Solutions proposées
  */
+
+const posteSchema = new Schema({
+  constatsProblemes: { type: String },
+  solutionsProposees: { type: String }
+});
 
 const premiereVisiteSchema = new Schema({
   codeFormulaire: {
@@ -128,51 +111,29 @@ const premiereVisiteSchema = new Schema({
     default: "C1",
     immutable: true
   },
-  inspecteur: { type: String },
-  etablissement: { type: String },
+  inspecteur: { 
+    type: Schema.Types.ObjectId, 
+    ref: 'User', 
+    required: true 
+  },
+  etablissement: { 
+    type: Schema.Types.ObjectId, 
+    ref: 'Ecole', 
+    required: true 
+  },
   nomChefEtablissement: { type: String },
   telephone: { type: String },
   postes: {
-    parcelle: {
-      constatsProblemes: { type: String },
-      solutionsProposees: { type: String }
-    },
-    batiments: {
-      constatsProblemes: { type: String },
-      solutionsProposees: { type: String }
-    },
-    equipements: {
-      constatsProblemes: { type: String },
-      solutionsProposees: { type: String }
-    },
-    moyensEnseignement: {
-      constatsProblemes: { type: String },
-      solutionsProposees: { type: String }
-    },
-    personnel: {
-      constatsProblemes: { type: String },
-      solutionsProposees: { type: String }
-    },
-    apprenants: {
-      constatsProblemes: { type: String },
-      solutionsProposees: { type: String }
-    },
-    administration: {
-      constatsProblemes: { type: String },
-      solutionsProposees: { type: String }
-    },
-    organisationPedagogique: {
-      constatsProblemes: { type: String },
-      solutionsProposees: { type: String }
-    },
-    finances: {
-      constatsProblemes: { type: String },
-      solutionsProposees: { type: String }
-    },
-    internet: {
-      constatsProblemes: { type: String },
-      solutionsProposees: { type: String }
-    }
+    parcelle: posteSchema,
+    batiments: posteSchema,
+    equipements: posteSchema,
+    moyensEnseignement: posteSchema,
+    personnel: posteSchema,
+    apprenants: posteSchema,
+    administration: posteSchema,
+    organisationPedagogique: posteSchema,
+    finances: posteSchema,
+    internet: posteSchema
   },
   rapportCirconstancie: { type: String },
   signature: {
@@ -187,4 +148,4 @@ const premiereVisiteSchema = new Schema({
   versionKey: false
 });
 
-module.exports.PremiereVisite = model('PremiereVisite', premiereVisiteSchema);
+module.exports = model('PremiereVisite', premiereVisiteSchema);
