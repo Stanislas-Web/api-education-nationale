@@ -53,9 +53,6 @@
  *         village:
  *           type: string
  *           description: Village de l'école (optionnel)
- *         province:
- *           type: string
- *           description: Province où se trouve l'école
  *         secteur:
  *           type: string
  *           description: Secteur de l'école (optionnel)
@@ -83,7 +80,6 @@
  *         - communeOuTerritoire
  *         - district
  *         - ville
- *         - province
  *         - n
  *         - tel
  *       example:
@@ -130,7 +126,6 @@ const EcoleSchema = new Schema({
   district: { type: String, required: true },
   ville: { type: String, required: true },
   village: { type: String },
-  province: { type: String, required: true },
   secteur: { type: String },
   bp: { type: String },
   matricule: { type: String },

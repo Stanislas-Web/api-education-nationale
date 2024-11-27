@@ -15,7 +15,6 @@ module.exports.createEcole = async (req, res) => {
     district,
     ville,
     village,
-    province,
     secteur,
     bp,
     matricule
@@ -23,7 +22,7 @@ module.exports.createEcole = async (req, res) => {
 
   try {
     // Vérification des champs requis
-    if (!sousDirection || !nom || !adresse || !denomination || !province) {
+    if (!sousDirection || !nom || !adresse || !denomination ) {
       return res.status(400).send({
         message: "Certains champs obligatoires sont manquants.",
       });
@@ -44,7 +43,6 @@ module.exports.createEcole = async (req, res) => {
       district,
       ville,
       village,
-      province,
       secteur,
       bp,
       matricule,
