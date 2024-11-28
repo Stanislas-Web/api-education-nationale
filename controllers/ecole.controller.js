@@ -16,6 +16,7 @@ module.exports.createEcole = async (req, res) => {
     village,
     secteur,
     bp,
+    n,
     tel,
     matricule
   } = req.body;
