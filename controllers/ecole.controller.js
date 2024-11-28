@@ -3,7 +3,6 @@ const { Ecole } = require('../models/ecole.model');
 module.exports.createEcole = async (req, res) => {
   const {
     nom,
-    adresse,
     localisation,
     sousDirection,
     createdBy,
@@ -22,7 +21,7 @@ module.exports.createEcole = async (req, res) => {
 
   try {
     // Vérification des champs requis
-    if (!sousDirection || !nom || !adresse || !denomination ) {
+    if (!sousDirection || !nom || !denomination ) {
       return res.status(400).send({
         message: "Certains champs obligatoires sont manquants.",
       });
@@ -32,7 +31,6 @@ module.exports.createEcole = async (req, res) => {
     const ecole = new Ecole({
       nom,
       createdBy,
-      adresse,
       localisation,
       sousDirection,
       secope,

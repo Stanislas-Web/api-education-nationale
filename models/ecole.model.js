@@ -70,7 +70,6 @@
  *           description: numero d'adresse de l'école
  *       required:
  *         - nom
- *         - adresse
  *         - localisation
  *         - sousDirection
  *         - denomination
@@ -83,7 +82,6 @@
  *         - tel
  *       example:
  *         nom: "Ecole Primaire Le Savoir"
- *         adresse: "123 Avenue des Nations"
  *         localisation:
  *           latitude: -1.28333
  *           longitude: 36.81667
@@ -110,7 +108,6 @@ const { Schema, model } = require('mongoose');
 const EcoleSchema = new Schema({
   nom: { type: String, required: true },
   createdBy: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-  adresse: { type: String, required: true },
   localisation: {
     latitude: { type: Number, required: true },
     longitude: { type: Number, required: true },
