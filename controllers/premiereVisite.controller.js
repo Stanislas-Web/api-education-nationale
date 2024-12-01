@@ -39,6 +39,22 @@ const createPremiereVisite = async (req, res) => {
   }
 };
 
+const createManyPremiereVisite = async (req, res) => {
+  const premieresVisites = req.body.premieresVisites; 
+  try {
+    const result = await PremiereVisite.insertMany(premieresVisites);
+    return res.status(200).send({
+      message: "All premieresVisites inserted successfully",
+      data: result,
+    });
+  } catch (error) {
+    return res.status(500).send({
+      message: "Error inserting premieresVisites",
+      error: error.message,
+    });
+  }
+};
+
 // Récupérer toutes les premières visites
 const getAllPremieresVisites = async (req, res) => {
   try {
@@ -139,5 +155,6 @@ module.exports = {
   getAllPremieresVisites,
   getPremiereVisiteById,
   updatePremiereVisite,
-  deletePremiereVisite
+  deletePremiereVisite,
+  createManyPremiereVisite
 };

@@ -5,7 +5,8 @@ const {
   getAllPremieresVisites,
   getPremiereVisiteById,
   updatePremiereVisite,
-  deletePremiereVisite
+  deletePremiereVisite,
+  createManyPremiereVisite
 } = require('../controllers/premiereVisite.controller');
 const { isLoggedIn } = require('../middleware');
 
@@ -36,6 +37,31 @@ const { isLoggedIn } = require('../middleware');
  *         description: Non autorisé
  */
 router.post('/premieres-visites', isLoggedIn, createPremiereVisite);
+
+/**
+ * @swagger
+ * /premieres-visites/many:
+ *   post:
+ *     summary: Création de plusieurs Premières visites
+ *     tags: [Premières Visites]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               premieresVisites:
+ *                 type: array
+ *                 items:
+ *                   $ref: '#/components/schemas/PremiereVisite'
+ *     responses:
+ *       200:
+ *         description: Toutes les Fiches C1 ont été insérées avec succès
+ *       500:
+ *         description: Erreur lors de l'insertion des les Fiches C1
+ */
+router.post('/premieres-visites/many', isLoggedIn, createManyPremiereVisite);
 
 /**
  * @swagger

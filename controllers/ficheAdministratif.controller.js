@@ -31,6 +31,23 @@ const createFicheAdministrative = async (req, res) => {
   }
 };
 
+
+const createManyFicheAdministrative = async (req, res) => {
+  const ficheAdministratives = req.body.ficheAdministratives; 
+  try {
+    const result = await FicheAdministrative.insertMany(ficheAdministratives);
+    return res.status(200).send({
+      message: "All ficheAdministratives inserted successfully",
+      data: result,
+    });
+  } catch (error) {
+    return res.status(500).send({
+      message: "Error inserting ficheAdministratives",
+      error: error.message,
+    });
+  }
+};
+
 // Récupérer toutes les fiches administratives avec les destinateurs peuplés
 const getAllFichesAdministratives = async (req, res) => {
   try {
@@ -114,5 +131,6 @@ module.exports = {
   getAllFichesAdministratives,
   getFicheAdministrativeById,
   updateFicheAdministrative,
-  deleteFicheAdministrative
+  deleteFicheAdministrative,
+  createManyFicheAdministrative
 };

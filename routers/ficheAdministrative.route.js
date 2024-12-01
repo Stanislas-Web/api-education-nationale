@@ -5,7 +5,8 @@ const {
   getAllFichesAdministratives,
   getFicheAdministrativeById,
   updateFicheAdministrative,
-  deleteFicheAdministrative
+  deleteFicheAdministrative,
+  createManyFicheAdministrative
 } = require('../controllers/ficheAdministratif.controller');
 const { isLoggedIn } = require('../middleware');
 
@@ -32,6 +33,30 @@ const { isLoggedIn } = require('../middleware');
  *         description: Données invalides
  */
 router.post('/fiches-administratives', isLoggedIn, createFicheAdministrative);
+/**
+ * @swagger
+ * /fiches-administratives/many:
+ *   post:
+ *     summary: Création de plusieurs Fiche A1
+ *     tags: [Fiches Administratives]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               ficheAdministratives:
+ *                 type: array
+ *                 items:
+ *                   $ref: '#/components/schemas/FicheAdministrative'
+ *     responses:
+ *       200:
+ *         description: Toutes les fiches ont été insérées avec succès
+ *       500:
+ *         description: Erreur lors de l'insertion des fiches
+ */
+router.post('/fiches-administratives/many', isLoggedIn, createManyFicheAdministrative);
 
 /**
  * @swagger
