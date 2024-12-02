@@ -25,6 +25,7 @@ const FormulaireRouter = require('./routers/formulaire.route.js');
 const ficheAdministrativeRouter = require('./routers/ficheAdministrative.route.js');
 const denominationRouter = require('./routers/denomination.route.js');
 const premiereVisiteRouter = require('./routers/premiereVisite.route.js');
+const inspectionPedagogiqueRouter = require('./routers/inspectionPedagogique.route.js');
 
 
 const app = express();
@@ -88,7 +89,7 @@ app.get('/image/:filename', (req, res) => {
 });
 
 
-app.use('/api/v1/', UserRouter, ProvinceRouter, DirectionRouter, SousDirectionRouter, ServiceRouter, EcoleRouter, EleveRouter, PersonnelRouter, BesoinRessourceRouter, EffectifRouter, PresenceRouter, ResultatScolaireRouter, PermissionRouter, InfrastructureRouter, EquipementRouter, CommissionRouter, AnnonceRouter, TypeFormulaireRouter, FormulaireRouter, ficheAdministrativeRouter, denominationRouter, premiereVisiteRouter);
+app.use('/api/v1/', UserRouter, ProvinceRouter, DirectionRouter, SousDirectionRouter, ServiceRouter, EcoleRouter, EleveRouter, PersonnelRouter, BesoinRessourceRouter, EffectifRouter, PresenceRouter, ResultatScolaireRouter, PermissionRouter, InfrastructureRouter, EquipementRouter, CommissionRouter, AnnonceRouter, TypeFormulaireRouter, FormulaireRouter, ficheAdministrativeRouter, denominationRouter, premiereVisiteRouter, inspectionPedagogiqueRouter);
 
 // Middleware Swagger Docs
 app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));

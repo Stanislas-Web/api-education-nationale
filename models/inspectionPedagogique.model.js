@@ -28,9 +28,17 @@ const { Schema, model } = require('mongoose');
  *           format: uuid
  *           description: Référence à l'établissement
  *         enseignant:
- *           type: string
- *           format: uuid
- *           description: Référence à l'enseignant inspecté
+ *           type: object
+ *           properties:
+ *             nom:
+ *               type: string
+ *               description: Nom de l'enseignant
+ *             postnom:
+ *               type: string
+ *               description: Postnom de l'enseignant
+ *             prenom:
+ *               type: string
+ *               description: Prénom de l'enseignant
  *         activitesInspectees:
  *           type: array
  *           items:
@@ -51,25 +59,25 @@ const { Schema, model } = require('mongoose');
  *               type: object
  *               properties:
  *                 presentation:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 autorite:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 elocution:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 attitude:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 tenueSalle:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 tenueTableau:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 presenceEsprit:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 conseils:
  *                   type: string
@@ -77,19 +85,19 @@ const { Schema, model } = require('mongoose');
  *               type: object
  *               properties:
  *                 competence:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 conformite:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 progression:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 adaptationMilieu:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 decomposition:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 conseils:
  *                   type: string
@@ -97,19 +105,19 @@ const { Schema, model } = require('mongoose');
  *               type: object
  *               properties:
  *                 connaissanceMatiere:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 exactitude:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 dosage:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 formulation:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 adaptation:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 conseils:
  *                   type: string
@@ -117,25 +125,25 @@ const { Schema, model } = require('mongoose');
  *               type: object
  *               properties:
  *                 preparation:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 motivation:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 verificationJournal:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 developpement:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 evaluation:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 synthese:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 application:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 conseils:
  *                   type: string
@@ -143,16 +151,16 @@ const { Schema, model } = require('mongoose');
  *               type: object
  *               properties:
  *                 didactiqueGenerale:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 distribution:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 integrationPedagogique:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 facilitePedagogique:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 conseils:
  *                   type: string
@@ -160,13 +168,13 @@ const { Schema, model } = require('mongoose');
  *               type: object
  *               properties:
  *                 materielDidactique:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 materielSpecifique:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 utilisationTableau:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 conseils:
  *                   type: string
@@ -174,13 +182,13 @@ const { Schema, model } = require('mongoose');
  *               type: object
  *               properties:
  *                 cahierLecons:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 cahierExercices:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 fiches:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 conseils:
  *                   type: string
@@ -188,22 +196,22 @@ const { Schema, model } = require('mongoose');
  *               type: object
  *               properties:
  *                 previsions:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 journalClasse:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 fichesPrep:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 cahierTextes:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 cahierPoints:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 documentationEcrite:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 conseils:
  *                   type: string
@@ -211,19 +219,19 @@ const { Schema, model } = require('mongoose');
  *               type: object
  *               properties:
  *                 assiduite:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 evaluationDiagnostique:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 evaluationFormative:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 rattrapage:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 evaluationSommative:
- *                   type: number
+ *                   type: integer
  *                   enum: [0, 1, 2, 3, 4]
  *                 conseils:
  *                   type: string
@@ -241,22 +249,26 @@ const { Schema, model } = require('mongoose');
  *                     type: number
  *                   max:
  *                     type: number
- *             total:
- *               type: number
- *         signatureEnseignant:
+ *                   notes:
+ *                     type: string
+ *             conclusion:
+ *               type: string
+ *             recommandations:
+ *               type: string
+ *         dateInscription:
  *           type: string
- *           description: Signature de l'enseignant
- *         signatureChefEtablissement:
+ *           format: date
+ *           description: Date d'inscription
+ *         dateRapport:
  *           type: string
- *           description: Signature du chef d'établissement
- *         signatureInspecteur:
+ *           format: date
+ *           description: Date du rapport
+ *         statut:
  *           type: string
- *           description: Signature de l'inspecteur
- *         dateInspection:
- *           type: Date
- *           default: Date.now
- *           description: Date de l'inspection
+ *           enum: [complete, incomplete]
+ *           description: Statut de l'inspection (complet ou incomplet)
  */
+
 
 const inspectionPedagogiqueSchema = new Schema({
   numeroRapport: {
@@ -279,9 +291,9 @@ const inspectionPedagogiqueSchema = new Schema({
     required: true
   },
   enseignant: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
+    nom: { type: String, required: true },
+    postnom: { type: String, required: true },
+    prenom: { type: String, required: true },
   },
   activitesInspectees: [{
     discipline: String,
