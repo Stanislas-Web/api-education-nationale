@@ -6,6 +6,7 @@ const {
   getInspectionById,
   updateInspection,
   deleteInspection,
+  createManyInspectionsPedagogiques
 } = require('../controllers/inspectionPedagogique.controller');
 const { isLoggedIn } = require('../middleware');
 
@@ -48,6 +49,31 @@ router.post('/inspections-pedagogique', isLoggedIn, createInspection);
  *         description: Erreur lors de la récupération des inspections pédagogiques
  */
 router.get('/inspections-pedagogique', getAllInspections);
+
+/**
+ * @swagger
+ * /inspections-pedagogique/many:
+ *   post:
+ *     summary: Création de plusieurs Fiche C3
+ *     tags: [Inspections Pédagogiques]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               inspectionsPedagogiques:
+ *                 type: array
+ *                 items:
+ *                   $ref: '#/components/schemas/InspectionPedagogique'
+ *     responses:
+ *       200:
+ *         description: Toutes les fiches ont été insérées avec succès
+ *       500:
+ *         description: Erreur lors de l'insertion des fiches
+ */
+router.post('/inspections-pedagogique/many', isLoggedIn,createManyInspectionsPedagogiques);
 
 /**
  * @swagger

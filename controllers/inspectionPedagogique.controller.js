@@ -12,6 +12,23 @@ exports.createInspection = async (req, res) => {
   }
 };
 
+exports.createManyInspectionsPedagogiques = async (req, res) => {
+  const inspectionsPedagogiques = req.body.inspectionsPedagogiques; 
+  try {
+    const result = await InspectionPedagogique.insertMany(inspectionsPedagogiques);
+    return res.status(200).send({
+      message: "All Inspections pedagogique inserted successfully",
+      data: result,
+    });
+  } catch (error) {
+    return res.status(500).send({
+      message: "Error inserting Inspections pedagogique",
+      error: error.message,
+    });
+  }
+};
+
+
 // Récupérer toutes les inspections pédagogiques
 exports.getAllInspections = async (req, res) => {
   try {
