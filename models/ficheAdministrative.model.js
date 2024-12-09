@@ -33,6 +33,29 @@ const { Schema, model } = require('mongoose');
  *           type: string
  *           description: Code du formulaire, toujours "A1".
  *           default: "A1"
+ *         locaux:
+ *           type: object
+ *           properties:
+ *             classes:
+ *               type: integer
+ *               description: Nombre de classes.
+ *               default: 0
+ *             bureaux:
+ *               type: integer
+ *               description: Nombre de bureaux.
+ *               default: 0
+ *             ateliers:
+ *               type: integer
+ *               description: Nombre d'ateliers.
+ *               default: 0
+ *             labo:
+ *               type: integer
+ *               description: Nombre de laboratoires.
+ *               default: 0
+ *             autres:
+ *               type: integer
+ *               description: Nombre d'autres locaux.
+ *               default: 0
  *         structureEtPeuplement:
  *           type: array
  *           items:
@@ -110,6 +133,9 @@ const { Schema, model } = require('mongoose');
  *               cin:
  *                 type: string
  *                 description: CIN de la personne.
+ *               diplomePrincipal:
+ *                 type: boolean
+ *                 description: visualisation du diplôme 
  *               fonction:
  *                 type: string
  *                 description: Fonction générale à l'école.
@@ -137,6 +163,13 @@ const ficheAdministrativeSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'SousDirection',
     required: true,
+  },
+  locaux: {
+    classes: { type: Number, default: 0 },
+    bureaux: { type: Number, default: 0 },
+    ateliers: { type: Number, default: 0 },
+    labo: { type: Number, default: 0 },
+    autres: { type: Number, default: 0 },
   },
   idDirection: {
     type: Schema.Types.ObjectId,
@@ -199,12 +232,13 @@ const ficheAdministrativeSchema = new Schema({
       secope: { type: String },
       qualif: { type: String },
       cin: { type: String },
+      diplomePrincipal: {type: Boolean, default: false},
       fonction: { type: String },
-      dateEntree: { type: String, required: true},
-      dateSortie: { type: String, required: true},
+      dateEntree: { type: String, required: true },
+      dateSortie: { type: String, required: true },
       autresInfos: {
-        dernierAncien: { type: String, required: true},
-        motifMutation: { type: String, required: true},
+        dernierAncien: { type: String, required: true },
+        motifMutation: { type: String, required: true },
         autres: { type: String }
       }
     }

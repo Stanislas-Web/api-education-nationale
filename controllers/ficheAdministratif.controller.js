@@ -3,7 +3,7 @@ const { FicheAdministrative } = require('../models/ficheAdministrative.model');
 // Créer une nouvelle fiche administrative
 const createFicheAdministrative = async (req, res) => {
   try {
-    const { etablissement,idSousDirection, idDirection, destinateurs, createdBy, structureEtPeuplement, personnel, miseEnPlace } = req.body;
+    const { etablissement,idSousDirection, idDirection, destinateurs, createdBy, structureEtPeuplement, personnel, locaux, miseEnPlace } = req.body;
 
     // Vérification si les données nécessaires sont présentes
     if (!etablissement || !structureEtPeuplement) {
@@ -17,6 +17,7 @@ const createFicheAdministrative = async (req, res) => {
       createdBy,
       code: 'A1',
       structureEtPeuplement,
+      locaux,
       personnel,
       miseEnPlace,
       idDirection,
@@ -92,11 +93,11 @@ const getFicheAdministrativeById = async (req, res) => {
 // Mettre à jour une fiche administrative par ID
 const updateFicheAdministrative = async (req, res) => {
   try {
-    const { structureEtPeuplement, personnel, miseEnPlace } = req.body;
+    const { structureEtPeuplement, personnel, miseEnPlace, locaux } = req.body;
 
     const ficheAdministrative = await FicheAdministrative.findByIdAndUpdate(
       req.params.id,
-      { structureEtPeuplement, personnel, miseEnPlace },
+      { structureEtPeuplement, personnel, miseEnPlace, locaux },
       { new: true, runValidators: true }
     )
     .populate('destinateurs', 'nom email')
