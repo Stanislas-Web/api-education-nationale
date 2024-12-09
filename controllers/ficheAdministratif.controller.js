@@ -62,7 +62,7 @@ const getAllFichesAdministratives = async (req, res) => {
           path: "denomination", // Champ dans le modèle Etablissement qui fait référence aux dénominations
           select: "appellation sigle code", // Sélectionnez uniquement les champs nécessaires
         },
-        select: "nom adresse", // Sélectionnez uniquement les champs nécessaires pour l'établissement
+        select: "nom adresse secope rueOuAvenue quartier communeOuTerritoire district ville village secteur bp matricule tel n", // Sélectionnez uniquement les champs nécessaires pour l'établissement
       })
       .populate("destinateurs");
 
