@@ -19,6 +19,23 @@ module.exports.createDiscipline = async (req, res) => {
   }
 };
 
+module.exports.createManyDisciplines = async (req, res) => {
+    const disciplines = req.body.disciplines; 
+    try {
+      const result = await Discipline.insertMany(disciplines);
+      return res.status(200).send({
+        message: "Toutes les disciplines insérées avec succès",
+        data: result,
+      });
+    } catch (error) {
+      return res.status(500).send({
+        message: "Erreur lors de l'insertion des disciplines",
+        error: error.message,
+      });
+    }
+  };
+  
+
 module.exports.getAllDisciplines = async (req, res) => {
   try {
     const disciplines = await Discipline.find();
