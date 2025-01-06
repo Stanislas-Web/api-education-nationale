@@ -115,6 +115,7 @@ const EcoleSchema = new Schema({
   sousDirection: { type: Schema.Types.ObjectId, ref: 'SousDirection', required: true },
   effectifs: { type: Number, default: 0 },
   secope: { type: String },
+  arreteMinisteriel: { type: String },
   denomination: { type: Schema.Types.ObjectId, ref: 'Denomination', required: true },
   rueOuAvenue: { type: String, required: true },
   quartier: { type: String, required: true },

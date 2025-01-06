@@ -4,7 +4,8 @@ const {
   getAllDisciplines, 
   getDisciplineById, 
   updateDiscipline, 
-  deleteDiscipline 
+  deleteDiscipline,
+  createManyDisciplines
 } = require('../controllers/discipline.controller');
 const { isLoggedIn } = require('../middleware');
 
@@ -25,6 +26,31 @@ const { isLoggedIn } = require('../middleware');
  *         description: Discipline créée avec succès
  */
 router.route('/disciplines').post(isLoggedIn, createDiscipline);
+/**
+ * @swagger
+ * /disciplines/many:
+ *   post:
+ *     summary: Création de plusieurs disciplines
+ *     tags: [Disciplines]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               disciplines:
+ *                 type: array
+ *                 items:
+ *                   $ref: '#/components/schemas/Discipline'
+ *     responses:
+ *       200:
+ *         description: Toutes les disciplines ont été insérées avec succès
+ *       500:
+ *         description: Erreur lors de l'insertion des disciplines
+ */
+router.route('/disciplines/many').post(isLoggedIn, createManyDisciplines);
+
 
 /**
  * @swagger
