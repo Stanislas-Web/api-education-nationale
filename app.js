@@ -27,6 +27,8 @@ const denominationRouter = require('./routers/denomination.route.js');
 const premiereVisiteRouter = require('./routers/premiereVisite.route.js');
 const inspectionPedagogiqueRouter = require('./routers/inspectionPedagogique.route.js');
 const disciplineRouter = require('./routers/discipline.route.js');
+const rapportActiviteRouter = require('./routers/rapportActivite.route.js');
+const identificationProvedRouter = require('./routers/identificationProved.route.js');
 
 
 const app = express();
@@ -57,8 +59,8 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: 'http://134.122.23.150/api/v1',
-        // url: 'http://localhost/api/v1',
+        // url: 'http://134.122.23.150/api/v1',
+        url: 'http://localhost/api/v1',
         description: 'Serveur de développement',
       },
     ],
@@ -90,9 +92,9 @@ app.get('/image/:filename', (req, res) => {
 });
 
 
-app.use('/api/v1/', UserRouter, ProvinceRouter, DirectionRouter, SousDirectionRouter, ServiceRouter, EcoleRouter, EleveRouter, PersonnelRouter, BesoinRessourceRouter, EffectifRouter, PresenceRouter, ResultatScolaireRouter, PermissionRouter, InfrastructureRouter, EquipementRouter, CommissionRouter, AnnonceRouter, TypeFormulaireRouter, FormulaireRouter, ficheAdministrativeRouter, denominationRouter, premiereVisiteRouter, inspectionPedagogiqueRouter, disciplineRouter);
-
-// Middleware Swagger Docs
+// Middleware Swagger Docs (doit être avant les routes protégées)
 app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
+
+app.use('/api/v1/', UserRouter, ProvinceRouter, DirectionRouter, SousDirectionRouter, ServiceRouter, EcoleRouter, EleveRouter, PersonnelRouter, BesoinRessourceRouter, EffectifRouter, PresenceRouter, ResultatScolaireRouter, PermissionRouter, InfrastructureRouter, EquipementRouter, CommissionRouter, AnnonceRouter, TypeFormulaireRouter, FormulaireRouter, ficheAdministrativeRouter, denominationRouter, premiereVisiteRouter, inspectionPedagogiqueRouter, disciplineRouter, rapportActiviteRouter, identificationProvedRouter);
 
 module.exports = app;
