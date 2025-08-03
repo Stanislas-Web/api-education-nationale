@@ -29,6 +29,7 @@ const inspectionPedagogiqueRouter = require('./routers/inspectionPedagogique.rou
 const disciplineRouter = require('./routers/discipline.route.js');
 const rapportActiviteRouter = require('./routers/rapportActivite.route.js');
 const identificationProvedRouter = require('./routers/identificationProved.route.js');
+const provedAuthRouter = require('./routers/provedAuth.route.js');
 
 
 const app = express();
@@ -96,5 +97,6 @@ app.get('/image/:filename', (req, res) => {
 app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
 
 app.use('/api/v1/', UserRouter, ProvinceRouter, DirectionRouter, SousDirectionRouter, ServiceRouter, EcoleRouter, EleveRouter, PersonnelRouter, BesoinRessourceRouter, EffectifRouter, PresenceRouter, ResultatScolaireRouter, PermissionRouter, InfrastructureRouter, EquipementRouter, CommissionRouter, AnnonceRouter, TypeFormulaireRouter, FormulaireRouter, ficheAdministrativeRouter, denominationRouter, premiereVisiteRouter, inspectionPedagogiqueRouter, disciplineRouter, rapportActiviteRouter, identificationProvedRouter);
+app.use('/api/v1/proved', provedAuthRouter);
 
 module.exports = app;

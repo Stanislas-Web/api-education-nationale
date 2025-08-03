@@ -1,4 +1,5 @@
 const { IdentificationProved } = require('../models/identificationProved.model.js');
+const bcrypt = require('bcrypt');
 
 /**
  * @swagger
@@ -24,11 +25,16 @@ const { IdentificationProved } = require('../models/identificationProved.model.j
  */
 const createIdentificationProved = async (req, res) => {
   try {
-    const identificationData = {
+    // Hasher le mot de passe si fourni
+    let identificationData = {
       ...req.body,
       createdBy: req.user._id,
       updatedBy: req.user._id
     };
+
+    if (identificationData.motDePasse) {
+      identificationData.motDePasse = await bcrypt.hash(identificationData.motDePasse, 10);
+    }
 
     const identification = new IdentificationProved(identificationData);
     await identification.save();
@@ -44,6 +50,24 @@ const createIdentificationProved = async (req, res) => {
     });
   } catch (error) {
     console.error('Erreur lors de la création de l\'identification:', error);
+    
+    // Gestion spécifique des erreurs de clé dupliquée
+    if (error.code === 11000) {
+      const field = Object.keys(error.keyPattern)[0];
+      let message = 'Une identification avec ces informations existe déjà';
+      
+      if (field === 'provinceAdministrative') {
+        message = `Une identification pour la province administrative "${req.body.provinceAdministrative}" existe déjà`;
+      }
+      
+      return res.status(409).json({
+        success: false,
+        message: message,
+        error: 'DUPLICATE_KEY_ERROR',
+        field: field
+      });
+    }
+    
     res.status(400).json({
       success: false,
       message: 'Erreur lors de la création de l\'identification',
@@ -258,6 +282,24 @@ const updateIdentificationProved = async (req, res) => {
     });
   } catch (error) {
     console.error('Erreur lors de la mise à jour de l\'identification:', error);
+    
+    // Gestion spécifique des erreurs de clé dupliquée
+    if (error.code === 11000) {
+      const field = Object.keys(error.keyPattern)[0];
+      let message = 'Une identification avec ces informations existe déjà';
+      
+      if (field === 'provinceAdministrative') {
+        message = `Une identification pour la province administrative "${req.body.provinceAdministrative}" existe déjà`;
+      }
+      
+      return res.status(409).json({
+        success: false,
+        message: message,
+        error: 'DUPLICATE_KEY_ERROR',
+        field: field
+      });
+    }
+    
     res.status(400).json({
       success: false,
       message: 'Erreur lors de la mise à jour de l\'identification',

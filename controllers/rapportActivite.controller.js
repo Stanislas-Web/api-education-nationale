@@ -25,8 +25,7 @@ const { RapportActivite } = require('../models/rapportActivite.model.js');
 const createRapportActivite = async (req, res) => {
   try {
     const rapportData = {
-      ...req.body,
-      createdBy: req.user._id
+      ...req.body
     };
 
     const rapport = new RapportActivite(rapportData);
@@ -107,8 +106,7 @@ const getAllRapportsActivite = async (req, res) => {
       limit: parseInt(limit),
       sort: { createdAt: -1 },
       populate: [
-        { path: 'createdBy', select: 'nom prenom email' },
-        { path: 'updatedBy', select: 'nom prenom email' }
+        { path: 'identificationProved' }
       ]
     };
 
@@ -157,8 +155,6 @@ const getRapportActiviteById = async (req, res) => {
     const { id } = req.params;
     
     const rapport = await RapportActivite.findById(id)
-      .populate('createdBy', 'nom prenom email')
-      .populate('updatedBy', 'nom prenom email')
       .populate('identificationProved');
 
     if (!rapport) {
@@ -218,17 +214,14 @@ const updateRapportActivite = async (req, res) => {
   try {
     const { id } = req.params;
     const updateData = {
-      ...req.body,
-      updatedBy: req.user._id
+      ...req.body
     };
 
     const rapport = await RapportActivite.findByIdAndUpdate(
       id,
       updateData,
       { new: true, runValidators: true }
-    ).populate('createdBy', 'nom prenom email')
-     .populate('updatedBy', 'nom prenom email')
-     .populate('identificationProved');
+    ).populate('identificationProved');
 
     if (!rapport) {
       return res.status(404).json({
@@ -352,13 +345,10 @@ const updateStatutRapport = async (req, res) => {
     const rapport = await RapportActivite.findByIdAndUpdate(
       id,
       { 
-        statut,
-        updatedBy: req.user._id
+        statut
       },
       { new: true }
-    ).populate('createdBy', 'nom prenom email')
-     .populate('updatedBy', 'nom prenom email')
-     .populate('identificationProved');
+    ).populate('identificationProved');
 
     if (!rapport) {
       return res.status(404).json({
@@ -477,8 +467,6 @@ const exportRapportPDF = async (req, res) => {
     const { id } = req.params;
     
     const rapport = await RapportActivite.findById(id)
-      .populate('createdBy', 'nom prenom email')
-      .populate('updatedBy', 'nom prenom email')
       .populate('identificationProved');
 
     if (!rapport) {

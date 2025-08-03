@@ -44,14 +44,22 @@ const { Schema, model } = require('mongoose');
  *           type: boolean
  *           default: true
  *           description: Indique si cette identification est active
+ *         motDePasse:
+ *           type: string
+ *           description: Mot de passe pour l'accès à cette PROVED
+ *         createdBy:
+ *           type: string
+ *           description: ID de l'utilisateur qui a créé l'identification
+ *         updatedBy:
+ *           type: string
+ *           description: ID de l'utilisateur qui a modifié l'identification
 
  */
 
 const identificationProvedSchema = new Schema({
   provinceAdministrative: { 
     type: String, 
-    required: true,
-    unique: true 
+    required: true
   },
   provinceEducationnelle: { 
     type: String, 
@@ -86,6 +94,12 @@ const identificationProvedSchema = new Schema({
   isActive: { 
     type: Boolean, 
     default: true 
+  },
+  motDePasse: { 
+    type: String,
+    required: true,
+    minlength: 6,
+    description: 'Mot de passe pour l\'accès à cette PROVED'
   },
   createdBy: { 
     type: Schema.Types.ObjectId, 

@@ -23,85 +23,85 @@ const mongoosePaginate = require('mongoose-paginate-v2');
  *             niveauPrescolaire:
  *               type: object
  *               properties:
- *                 ecoleEspaceCommunautaire:
+ *                 espaceCommunautaireEveil:
  *                   type: object
  *                   properties:
- *                     nombreEcoles: { type: number }
- *                     nombreClasses: { type: number }
- *                     effectifGarcons: { type: number }
- *                     effectifFilles: { type: number }
- *                     tauxAccroissement: { type: number }
+ *                     nombreEcoles: { type: number, default: 0 }
+ *                     nombreClasses: { type: number, default: 0 }
+ *                     effectifGarcons: { type: number, default: 0 }
+ *                     effectifFilles: { type: number, default: 0 }
+ *                     tauxAccroissement: { type: number, default: 0 }
  *                 maternel:
  *                   type: object
  *                   properties:
- *                     nombreEcoles: { type: number }
- *                     nombreClasses: { type: number }
- *                     effectifGarcons: { type: number }
- *                     effectifFilles: { type: number }
- *                     tauxAccroissement: { type: number }
+ *                     nombreEcoles: { type: number, default: 0 }
+ *                     nombreClasses: { type: number, default: 0 }
+ *                     effectifGarcons: { type: number, default: 0 }
+ *                     effectifFilles: { type: number, default: 0 }
+ *                     tauxAccroissement: { type: number, default: 0 }
  *                 prePrimaire:
  *                   type: object
  *                   properties:
- *                     nombreEcoles: { type: number }
- *                     nombreClasses: { type: number }
- *                     effectifGarcons: { type: number }
- *                     effectifFilles: { type: number }
- *                     tauxAccroissement: { type: number }
+ *                     nombreEcoles: { type: number, default: 0 }
+ *                     nombreClasses: { type: number, default: 0 }
+ *                     effectifGarcons: { type: number, default: 0 }
+ *                     effectifFilles: { type: number, default: 0 }
+ *                     tauxAccroissement: { type: number, default: 0 }
  *                 special:
  *                   type: object
  *                   properties:
- *                     nombreEcoles: { type: number }
- *                     nombreClasses: { type: number }
- *                     effectifGarcons: { type: number }
- *                     effectifFilles: { type: number }
- *                     tauxAccroissement: { type: number }
+ *                     nombreEcoles: { type: number, default: 0 }
+ *                     nombreClasses: { type: number, default: 0 }
+ *                     effectifGarcons: { type: number, default: 0 }
+ *                     effectifFilles: { type: number, default: 0 }
+ *                     tauxAccroissement: { type: number, default: 0 }
  *             niveauPrimaire:
  *               type: object
  *               properties:
  *                 enseignementSpecial:
  *                   type: object
  *                   properties:
- *                     nombreClasses: { type: number }
- *                     effectifGarcons: { type: number }
- *                     effectifFilles: { type: number }
- *                     tauxAccroissement: { type: number }
+ *                     nombreClasses: { type: number, default: 0 }
+ *                     effectifGarcons: { type: number, default: 0 }
+ *                     effectifFilles: { type: number, default: 0 }
+ *                     tauxAccroissement: { type: number, default: 0 }
  *                 enseignementPrimaire:
  *                   type: object
  *                   properties:
- *                     nombreEcoles: { type: number }
- *                     nombreClasses: { type: number }
- *                     classesPlethoriques: { type: number }
- *                     effectifGarcons: { type: number }
- *                     effectifFilles: { type: number }
- *                     tauxAccroissement: { type: number }
+ *                     nombreEcoles: { type: number, default: 0 }
+ *                     nombreClasses: { type: number, default: 0 }
+ *                     classesPlethoriques: { type: number, default: 0 }
+ *                     effectifGarcons: { type: number, default: 0 }
+ *                     effectifFilles: { type: number, default: 0 }
+ *                     tauxAccroissement: { type: number, default: 0 }
  *             niveauSecondaire:
  *               type: object
  *               properties:
  *                 enseignementSpecial:
  *                   type: object
  *                   properties:
- *                     nombreClasses: { type: number }
- *                     effectifGarcons: { type: number }
- *                     effectifFilles: { type: number }
- *                     tauxAccroissement: { type: number }
+ *                     nombreClasses: { type: number, default: 0 }
+ *                     effectifGarcons: { type: number, default: 0 }
+ *                     effectifFilles: { type: number, default: 0 }
+ *                     tauxAccroissement: { type: number, default: 0 }
  *                 enseignementSecondaire:
  *                   type: object
  *                   properties:
  *                     premierCycle:
  *                       type: object
  *                       properties:
- *                         classes7emeCTEB: { type: number }
- *                         classes8emeCTEB: { type: number }
- *                         effectifGarcons: { type: number }
- *                         effectifFilles: { type: number }
- *                         tauxAccroissement: { type: number }
+ *                         classes7emeCTEB: { type: number, default: 0 }
+ *                         classes8emeCTEB: { type: number, default: 0 }
+ *                         effectifGarcons: { type: number, default: 0 }
+ *                         effectifFilles: { type: number, default: 0 }
+ *                         tauxAccroissement: { type: number, default: 0 }
  *                     deuxiemeCycle:
  *                       type: object
  *                       properties:
- *                         classesHumanites: { type: number }
- *                         effectifGarcons: { type: number }
- *                         effectifFilles: { type: number }
- *                         tauxAccroissement: { type: number }
+ *                         classesHumanites: { type: number, default: 0 }
+ *                         effectifGarcons: { type: number, default: 0 }
+ *                         effectifFilles: { type: number, default: 0 }
+ *                         tauxAccroissement: { type: number, default: 0 }
  *         personnel:
  *           type: object
  *           properties:
@@ -111,34 +111,34 @@ const mongoosePaginate = require('mongoose-paginate-v2');
  *                 prescolaire:
  *                   type: object
  *                   properties:
- *                     hommes: { type: number }
- *                     femmes: { type: number }
+ *                     hommes: { type: number, default: 0 }
+ *                     femmes: { type: number, default: 0 }
  *                 primaire:
  *                   type: object
  *                   properties:
- *                     hommes: { type: number }
- *                     femmes: { type: number }
+ *                     hommes: { type: number, default: 0 }
+ *                     femmes: { type: number, default: 0 }
  *                 secondaire:
  *                   type: object
  *                   properties:
- *                     hommes: { type: number }
- *                     femmes: { type: number }
+ *                     hommes: { type: number, default: 0 }
+ *                     femmes: { type: number, default: 0 }
  *             personnelAdministratif:
  *               type: object
  *               properties:
- *                 directionProvinciale: { type: number }
- *                 inspectionPrincipale: { type: number }
- *                 dinacope: { type: number }
- *                 sernie: { type: number }
- *                 coordinationProvinciale: { type: number }
- *                 sousDivision: { type: number }
- *                 poolsInspectionPrimaire: { type: number }
- *                 poolsInspectionSecondaire: { type: number }
- *                 antenneDinacope: { type: number }
- *                 antenneSernie: { type: number }
- *                 coordinationDiocesaine: { type: number }
- *                 sousCoordinationConventionnees: { type: number }
- *                 conseillerieResidente: { type: number }
+ *                 directionProvinciale: { type: number, default: 0 }
+ *                 inspectionPrincipale: { type: number, default: 0 }
+ *                 dinacope: { type: number, default: 0 }
+ *                 sernie: { type: number, default: 0 }
+ *                 coordinationProvinciale: { type: number, default: 0 }
+ *                 sousDivision: { type: number, default: 0 }
+ *                 poolsInspectionPrimaire: { type: number, default: 0 }
+ *                 poolsInspectionSecondaire: { type: number, default: 0 }
+ *                 antenneDinacope: { type: number, default: 0 }
+ *                 antenneSernie: { type: number, default: 0 }
+ *                 coordinationDiocesaine: { type: number, default: 0 }
+ *                 sousCoordinationConventionnees: { type: number, default: 0 }
+ *                 conseillerieResidente: { type: number, default: 0 }
  *         realisations:
  *           type: object
  *           properties:
@@ -148,190 +148,44 @@ const mongoosePaginate = require('mongoose-paginate-v2');
  *                 nouvellesSallesClasses:
  *                   type: object
  *                   properties:
- *                     prescolaire: { type: number }
- *                     primaire: { type: number }
- *                     secondaire: { type: number }
+ *                     prescolaire: { type: number, default: 0 }
+ *                     primaire: { type: number, default: 0 }
+ *                     secondaire: { type: number, default: 0 }
  *                     sourceFinancement: { type: string }
  *                 nouveauxBancsTables:
  *                   type: object
  *                   properties:
- *                     prescolaire: { type: number }
- *                     primaire: { type: number }
- *                     secondaire: { type: number }
+ *                     prescolaire: { type: number, default: 0 }
+ *                     primaire: { type: number, default: 0 }
+ *                     secondaire: { type: number, default: 0 }
  *                     sourceFinancement: { type: string }
  *                 nouvellesLatrines:
  *                   type: object
  *                   properties:
- *                     prescolaire: { type: number }
- *                     primaire: { type: number }
- *                     secondaire: { type: number }
+ *                     prescolaire: { type: number, default: 0 }
+ *                     primaire: { type: number, default: 0 }
+ *                     secondaire: { type: number, default: 0 }
  *                     sourceFinancement: { type: string }
- *                 gratuitéEnseignementPrimaire:
- *                   type: string
- *                   description: Commentaire sur la gratuité de l'enseignement primaire
+ *                 gratuitéEnseignementPrimaire: { type: string }
  *                 sensibilisation:
  *                   type: object
  *                   properties:
- *                     filles: { type: boolean }
- *                     enfantsHorsEcole: { type: boolean }
- *                     peuplesAutochtones: { type: boolean }
+ *                     filles: { type: boolean, default: false }
+ *                     enfantsHorsEcole: { type: boolean, default: false }
+ *                     peuplesAutochtones: { type: boolean, default: false }
  *                 cantinesScolaires:
  *                   type: object
  *                   properties:
- *                     prescolaire: { type: number }
- *                     primaire: { type: number }
- *                     secondaire: { type: number }
+ *                     prescolaire: { type: number, default: 0 }
+ *                     primaire: { type: number, default: 0 }
+ *                     secondaire: { type: number, default: 0 }
  *                     commentaire: { type: string }
  *                 indicateursAcces:
  *                   type: object
  *                   properties:
- *                     proportionNouveauxInscrits: { type: number }
- *                     tauxTransitionPrimaireCTEB: { type: number }
- *                     tauxTransitionCTEBHumanites: { type: number }
- *             ameliorationQualite:
- *               type: object
- *               properties:
- *                 moyensEnseignement:
- *                   type: object
- *                   properties:
- *                     programmesScolaires: { type: object }
- *                     manuelsScolaires: { type: object }
- *                     materielsDidactiques: { type: object }
- *                     laboratoires: { type: object }
- *                     equipementsAteliers: { type: object }
- *                 visitesClasses:
- *                   type: object
- *                   properties:
- *                     prescolaire: { type: string, enum: ['TRES BON', 'BON', 'ASSEZ BON'] }
- *                     primaire: { type: string, enum: ['TRES BON', 'BON', 'ASSEZ BON'] }
- *                     secondaire: { type: string, enum: ['TRES BON', 'BON', 'ASSEZ BON'] }
- *                 reunionsPedagogiques:
- *                   type: object
- *                   properties:
- *                     prescolaire: { type: string, enum: ['TRES BON', 'BON', 'ASSEZ BON'] }
- *                     primaire: { type: string, enum: ['TRES BON', 'BON', 'ASSEZ BON'] }
- *                     secondaire: { type: string, enum: ['TRES BON', 'BON', 'ASSEZ BON'] }
- *                 inspectionsPedagogiques:
- *                   type: object
- *                   properties:
- *                     nombrePrevu: { type: number }
- *                     nombreRealise: { type: number }
- *                     pourcentageRealisation: { type: number }
- *                 formationContinue:
- *                   type: object
- *                   properties:
- *                     prescolaire: { type: string, enum: ['TRES BON', 'BON', 'CARENCE'] }
- *                     primaire: { type: string, enum: ['TRES BON', 'BON', 'CARENCE'] }
- *                     secondaire: { type: string, enum: ['TRES BON', 'BON', 'CARENCE'] }
- *                     themesExploites: { type: string }
- *                 indicateursRendement:
- *                   type: object
- *                   properties:
- *                     prescolaire: { type: object }
- *                     primaire: { type: object }
- *                     secondaire: { type: object }
- *                     examensCertificatifs: { type: object }
- *         gouvernance:
- *           type: object
- *           properties:
- *             miseEnOeuvreSSEF:
- *               type: object
- *               properties:
- *                 provinceEducationnelle: { type: object }
- *                 provinceAdministrative: { type: object }
- *             inspectionsAdministratives:
- *               type: object
- *               properties:
- *                 maternel: { type: object }
- *                 primaire: { type: object }
- *                 secondaire: { type: object }
- *                 special: { type: object }
- *             comitesProvinciaux:
- *               type: object
- *               properties:
- *                 comiteProvincialEDUNC: { type: object }
- *                 comiteProvincialENAFP: { type: object }
- *                 comiteProvincialTENASOSP: { type: object }
- *                 comiteProvincialExamenEtat: { type: object }
- *             remunerationPersonnel:
- *               type: object
- *               properties:
- *                 directionProvinciale: { type: object }
- *                 inspectionPrincipale: { type: object }
- *                 dinacope: { type: object }
- *                 sernie: { type: object }
- *                 coordinationProvinciale: { type: object }
- *                 sousDivision: { type: object }
- *                 poolsInspectionPrimaire: { type: object }
- *                 poolsInspectionSecondaire: { type: object }
- *                 antenneDinacope: { type: object }
- *                 antenneSernie: { type: object }
- *                 coordinationDiocesaine: { type: object }
- *                 sousCoordinationConventionnees: { type: object }
- *                 conseillerieResidente: { type: object }
- *             vulgarisationInstructions:
- *               type: string
- *               description: Vulgarisation des instructions officielles
- *             groupesAidesPsychopedagogiques:
- *               type: object
- *               properties:
- *                 nombreGAPMisEnPlace: { type: number }
- *                 nombreGAPOperationnel: { type: number }
- *                 nombreCasPrisEnCharge: { type: number }
- *                 problemesIdentifies: { type: string }
- *                 solutionsPreconisees: { type: string }
- *             acquisitionsMateriels:
- *               type: object
- *               properties:
- *                 ecoles: { type: object }
- *                 bureauxGestionnaires: { type: object }
- *             infrastructureBureaux:
- *               type: object
- *               properties:
- *                 directionProvinciale: { type: object }
- *                 inspectionPrincipale: { type: object }
- *                 dinacope: { type: object }
- *                 sernie: { type: object }
- *                 coordinationProvinciale: { type: object }
- *                 sousDivision: { type: object }
- *                 poolsInspectionPrimaire: { type: object }
- *                 poolsInspectionSecondaire: { type: object }
- *                 antenneDinacope: { type: object }
- *                 antenneSernie: { type: object }
- *                 coordinationDiocesaine: { type: object }
- *                 sousCoordinationConventionnees: { type: object }
- *                 conseillerieResidente: { type: object }
- *             formationGestionnaires:
- *               type: object
- *               properties:
- *                 calculAnalyseIndicateurs: { type: object }
- *                 leadershipScolaire: { type: object }
- *                 managementScolaire: { type: object }
- *                 gestionEntiteEducationnelle: { type: object }
- *                 planification: { type: object }
- *         educationUrgence:
- *           type: object
- *           properties:
- *             planStockContingence:
- *               type: object
- *               properties:
- *                 plan: { type: string }
- *                 stock: { type: string }
- *                 catastrophesNaturelles: { type: string }
- *                 destructionSDC: { type: string }
- *                 solutionsLocales: { type: string }
- *                 reunionsClusterEducation: { type: string }
- *                 recommandations: { type: string }
- *             espacesTemporaires:
- *               type: object
- *               properties:
- *                 nombreEspacesConstruits: { type: number }
- *                 couts: { type: number }
- *                 nombreApprenantsScolarises: { type: number }
- *                 formationEnseignantsESU: { type: number }
- *         autresProblemes:
- *           type: string
- *           description: Autres problèmes spécifiques
+ *                     proportionNouveauxInscrits: { type: number, default: 0 }
+ *                     tauxTransitionPrimaireCTEB: { type: number, default: 0 }
+ *                     tauxTransitionCTEBHumanites: { type: number, default: 0 }
  *         conclusion:
  *           type: string
  *           description: Conclusion du rapport
@@ -356,20 +210,17 @@ const mongoosePaginate = require('mongoose-paginate-v2');
  */
 
 const rapportActiviteSchema = new Schema({
-  // Référence vers l'identification de la PROVED
-  identificationProved: { 
-    type: Schema.Types.ObjectId, 
+  identificationProved: {
+    type: Schema.Types.ObjectId,
     ref: 'IdentificationProved',
-    required: true 
+    required: true
   },
-
-  // Introduction
-  introduction: { type: String },
-
-  // Les quatre paramètres clés du système éducif
+  introduction: {
+    type: String
+  },
   parametresCles: {
     niveauPrescolaire: {
-      ecoleEspaceCommunautaire: {
+      espaceCommunautaireEveil: {
         nombreEcoles: { type: Number, default: 0 },
         nombreClasses: { type: Number, default: 0 },
         effectifGarcons: { type: Number, default: 0 },
@@ -438,8 +289,6 @@ const rapportActiviteSchema = new Schema({
       }
     }
   },
-
-  // Personnel
   personnel: {
     personnelEnseignant: {
       prescolaire: {
@@ -471,8 +320,6 @@ const rapportActiviteSchema = new Schema({
       conseillerieResidente: { type: Number, default: 0 }
     }
   },
-
-  // Réalisations par axe stratégique
   realisations: {
     accesAccessibiliteEquite: {
       nouvellesSallesClasses: {
@@ -510,155 +357,101 @@ const rapportActiviteSchema = new Schema({
         tauxTransitionPrimaireCTEB: { type: Number, default: 0 },
         tauxTransitionCTEBHumanites: { type: Number, default: 0 }
       }
-    },
-    ameliorationQualite: {
-      moyensEnseignement: {
-        programmesScolaires: { type: Object },
-        manuelsScolaires: { type: Object },
-        materielsDidactiques: { type: Object },
-        laboratoires: { type: Object },
-        equipementsAteliers: { type: Object }
-      },
-      visitesClasses: {
-        prescolaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'] },
-        primaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'] },
-        secondaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'] }
-      },
-      reunionsPedagogiques: {
-        prescolaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'] },
-        primaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'] },
-        secondaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'] }
-      },
-      inspectionsPedagogiques: {
-        nombrePrevu: { type: Number, default: 0 },
-        nombreRealise: { type: Number, default: 0 },
-        pourcentageRealisation: { type: Number, default: 0 }
-      },
-      formationContinue: {
-        prescolaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'] },
-        primaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'] },
-        secondaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'] },
-        themesExploites: { type: String }
-      },
-      indicateursRendement: {
-        prescolaire: { type: Object },
-        primaire: { type: Object },
-        secondaire: { type: Object },
-        examensCertificatifs: { type: Object }
-      }
     }
   },
-
-  // Gouvernance
-  gouvernance: {
-    miseEnOeuvreSSEF: {
-      provinceEducationnelle: { type: Object },
-      provinceAdministrative: { type: Object }
-    },
-    inspectionsAdministratives: {
-      maternel: { type: Object },
-      primaire: { type: Object },
-      secondaire: { type: Object },
-      special: { type: Object }
-    },
-    comitesProvinciaux: {
-      comiteProvincialEDUNC: { type: Object },
-      comiteProvincialENAFP: { type: Object },
-      comiteProvincialTENASOSP: { type: Object },
-      comiteProvincialExamenEtat: { type: Object }
-    },
-    remunerationPersonnel: {
-      directionProvinciale: { type: Object },
-      inspectionPrincipale: { type: Object },
-      dinacope: { type: Object },
-      sernie: { type: Object },
-      coordinationProvinciale: { type: Object },
-      sousDivision: { type: Object },
-      poolsInspectionPrimaire: { type: Object },
-      poolsInspectionSecondaire: { type: Object },
-      antenneDinacope: { type: Object },
-      antenneSernie: { type: Object },
-      coordinationDiocesaine: { type: Object },
-      sousCoordinationConventionnees: { type: Object },
-      conseillerieResidente: { type: Object }
-    },
-    vulgarisationInstructions: { type: String },
-    groupesAidesPsychopedagogiques: {
-      nombreGAPMisEnPlace: { type: Number, default: 0 },
-      nombreGAPOperationnel: { type: Number, default: 0 },
-      nombreCasPrisEnCharge: { type: Number, default: 0 },
-      problemesIdentifies: { type: String },
-      solutionsPreconisees: { type: String }
-    },
-    acquisitionsMateriels: {
-      ecoles: { type: Object },
-      bureauxGestionnaires: { type: Object }
-    },
-    infrastructureBureaux: {
-      directionProvinciale: { type: Object },
-      inspectionPrincipale: { type: Object },
-      dinacope: { type: Object },
-      sernie: { type: Object },
-      coordinationProvinciale: { type: Object },
-      sousDivision: { type: Object },
-      poolsInspectionPrimaire: { type: Object },
-      poolsInspectionSecondaire: { type: Object },
-      antenneDinacope: { type: Object },
-      antenneSernie: { type: Object },
-      coordinationDiocesaine: { type: Object },
-      sousCoordinationConventionnees: { type: Object },
-      conseillerieResidente: { type: Object }
-    },
-    formationGestionnaires: {
-      calculAnalyseIndicateurs: { type: Object },
-      leadershipScolaire: { type: Object },
-      managementScolaire: { type: Object },
-      gestionEntiteEducationnelle: { type: Object },
-      planification: { type: Object }
-    }
+  conclusion: {
+    type: String
   },
-
-  // Education en situation d'urgence
-  educationUrgence: {
-    planStockContingence: {
-      plan: { type: String },
-      stock: { type: String },
-      catastrophesNaturelles: { type: String },
-      destructionSDC: { type: String },
-      solutionsLocales: { type: String },
-      reunionsClusterEducation: { type: String },
-      recommandations: { type: String }
-    },
-    espacesTemporaires: {
-      nombreEspacesConstruits: { type: Number, default: 0 },
-      couts: { type: Number, default: 0 },
-      nombreApprenantsScolarises: { type: Number, default: 0 },
-      formationEnseignantsESU: { type: Number, default: 0 }
-    }
+  statut: {
+    type: String,
+    enum: ['brouillon', 'soumis', 'approuve', 'rejete'],
+    default: 'brouillon'
   },
-
-  // Autres problèmes
-  autresProblemes: { type: String },
-
-  // Conclusion
-  conclusion: { type: String },
-
-  // Métadonnées
-  statut: { 
-    type: String, 
-    enum: ['brouillon', 'soumis', 'approuve', 'rejete'], 
-    default: 'brouillon' 
+  annee: {
+    type: Number,
+    required: true
   },
-  annee: { type: Number, required: true },
-  fichierJoint: { type: String },
-  createdBy: { type: Schema.Types.ObjectId, ref: 'User' },
-  updatedBy: { type: Schema.Types.ObjectId, ref: 'User' }
-}, { 
-  timestamps: true, 
-  versionKey: false 
+  fichierJoint: {
+    type: String
+  }
+}, {
+  timestamps: true,
+  versionKey: false
 });
 
 // Ajouter le plugin de pagination
 rapportActiviteSchema.plugin(mongoosePaginate);
 
-module.exports.RapportActivite = model('RapportActivite', rapportActiviteSchema); 
+// Index pour améliorer les performances
+rapportActiviteSchema.index({ identificationProved: 1, annee: 1 });
+rapportActiviteSchema.index({ statut: 1 });
+rapportActiviteSchema.index({ createdBy: 1 });
+rapportActiviteSchema.index({ createdAt: -1 });
+
+// Méthodes statiques
+rapportActiviteSchema.statics.findByProvedAndYear = function(identificationProved, annee) {
+  return this.findOne({ identificationProved, annee });
+};
+
+rapportActiviteSchema.statics.findByStatus = function(statut) {
+  return this.find({ statut });
+};
+
+// Méthodes d'instance
+rapportActiviteSchema.methods.submit = function() {
+  this.statut = 'soumis';
+  return this.save();
+};
+
+rapportActiviteSchema.methods.approve = function() {
+  this.statut = 'approuve';
+  return this.save();
+};
+
+rapportActiviteSchema.methods.reject = function() {
+  this.statut = 'rejete';
+  return this.save();
+};
+
+// Middleware pre-save pour valider les données
+rapportActiviteSchema.pre('save', function(next) {
+  // Validation personnalisée si nécessaire
+  if (this.annee && this.annee < 2000) {
+    return next(new Error('L\'année doit être supérieure à 2000'));
+  }
+  next();
+});
+
+// Virtual pour calculer le total des effectifs
+rapportActiviteSchema.virtual('totalEffectifs').get(function() {
+  const prescolaire = this.parametresCles.niveauPrescolaire;
+  let total = 0;
+  
+  // Calculer le total des effectifs préscolaires
+  Object.values(prescolaire).forEach(niveau => {
+    if (niveau.effectifGarcons) total += niveau.effectifGarcons;
+    if (niveau.effectifFilles) total += niveau.effectifFilles;
+  });
+  
+  // Ajouter les effectifs primaires
+  const primaire = this.parametresCles.niveauPrimaire.enseignementPrimaire;
+  if (primaire.effectifGarcons) total += primaire.effectifGarcons;
+  if (primaire.effectifFilles) total += primaire.effectifFilles;
+  
+  // Ajouter les effectifs secondaires
+  const secondaire = this.parametresCles.niveauSecondaire.enseignementSecondaire;
+  if (secondaire.premierCycle.effectifGarcons) total += secondaire.premierCycle.effectifGarcons;
+  if (secondaire.premierCycle.effectifFilles) total += secondaire.premierCycle.effectifFilles;
+  if (secondaire.deuxiemeCycle.effectifGarcons) total += secondaire.deuxiemeCycle.effectifGarcons;
+  if (secondaire.deuxiemeCycle.effectifFilles) total += secondaire.deuxiemeCycle.effectifFilles;
+  
+  return total;
+});
+
+// Configuration pour inclure les virtuals dans les réponses JSON
+rapportActiviteSchema.set('toJSON', { virtuals: true });
+rapportActiviteSchema.set('toObject', { virtuals: true });
+
+module.exports = {
+  RapportActivite: model('RapportActivite', rapportActiviteSchema)
+}; 
