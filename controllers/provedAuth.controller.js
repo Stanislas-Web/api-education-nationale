@@ -80,6 +80,7 @@ module.exports.provedLogin = async (req, res) => {
         provinceAdministrative: proved.provinceAdministrative,
         provinceEducationnelle: proved.provinceEducationnelle,
         directeurProvincial: proved.directeurProvincial,
+        role: proved.role,
         type: 'PROVED'
       },
       "RESTFULAPIs",
@@ -251,6 +252,127 @@ module.exports.getAllProved = async (req, res) => {
     console.error('Erreur lors de la récupération des PROVED:', error);
     return res.status(500).send({
       message: "Une erreur est survenue lors de la récupération des PROVED",
+      error: error.message
+    });
+  }
+};
+
+// Créer une nouvelle PROVED (admin seulement)
+module.exports.createProved = async (req, res) => {
+  try {
+    // Vérifier que l'utilisateur est admin
+    if (req.user.role !== 'admin') {
+      return res.status(403).send({
+        message: "Accès refusé. Seuls les administrateurs peuvent créer des PROVED"
+      });
+    }
+
+    const { motDePasse, ...provedData } = req.body;
+
+    // Hasher le mot de passe
+    const hashedPassword = await bcrypt.hash(motDePasse, 10);
+
+    // Créer la nouvelle PROVED
+    const newProved = new IdentificationProved({
+      ...provedData,
+      motDePasse: hashedPassword,
+      role: 'user', // Par défaut, les nouvelles PROVED sont des utilisateurs
+      createdBy: req.user._id,
+      updatedBy: req.user._id
+    });
+
+    await newProved.save();
+
+    // Retourner la réponse sans le mot de passe
+    const provedResponse = newProved.toObject();
+    delete provedResponse.motDePasse;
+
+    return res.status(201).send({
+      message: "PROVED créée avec succès",
+      data: provedResponse
+    });
+
+  } catch (error) {
+    console.error('Erreur lors de la création de la PROVED:', error);
+    return res.status(500).send({
+      message: "Une erreur est survenue lors de la création de la PROVED",
+      error: error.message
+    });
+  }
+};
+
+// Mettre à jour une PROVED (admin seulement)
+module.exports.updateProved = async (req, res) => {
+  try {
+    // Vérifier que l'utilisateur est admin
+    if (req.user.role !== 'admin') {
+      return res.status(403).send({
+        message: "Accès refusé. Seuls les administrateurs peuvent modifier des PROVED"
+      });
+    }
+
+    const { id } = req.params;
+    const updateData = { ...req.body, updatedBy: req.user._id };
+
+    // Si un nouveau mot de passe est fourni, le hasher
+    if (updateData.motDePasse) {
+      updateData.motDePasse = await bcrypt.hash(updateData.motDePasse, 10);
+    }
+
+    const proved = await IdentificationProved.findByIdAndUpdate(
+      id,
+      updateData,
+      { new: true, runValidators: true }
+    ).select('-motDePasse');
+
+    if (!proved) {
+      return res.status(404).send({
+        message: "PROVED non trouvée"
+      });
+    }
+
+    return res.status(200).send({
+      message: "PROVED mise à jour avec succès",
+      data: proved
+    });
+
+  } catch (error) {
+    console.error('Erreur lors de la mise à jour de la PROVED:', error);
+    return res.status(500).send({
+      message: "Une erreur est survenue lors de la mise à jour de la PROVED",
+      error: error.message
+    });
+  }
+};
+
+// Supprimer une PROVED (admin seulement)
+module.exports.deleteProved = async (req, res) => {
+  try {
+    // Vérifier que l'utilisateur est admin
+    if (req.user.role !== 'admin') {
+      return res.status(403).send({
+        message: "Accès refusé. Seuls les administrateurs peuvent supprimer des PROVED"
+      });
+    }
+
+    const { id } = req.params;
+
+    const proved = await IdentificationProved.findByIdAndDelete(id);
+
+    if (!proved) {
+      return res.status(404).send({
+        message: "PROVED non trouvée"
+      });
+    }
+
+    return res.status(200).send({
+      message: "PROVED supprimée avec succès"
+    });
+
+  } catch (error) {
+    console.error('Erreur lors de la suppression de la PROVED:', error);
+    return res.status(500).send({
+      message: "Une erreur est survenue lors de la suppression de la PROVED",
       error: error.message
     });
   }

@@ -47,6 +47,11 @@ const { Schema, model } = require('mongoose');
  *         motDePasse:
  *           type: string
  *           description: Mot de passe pour l'accès à cette PROVED
+ *         role:
+ *           type: string
+ *           enum: ['admin', 'user']
+ *           default: 'user'
+ *           description: Rôle de la PROVED (admin ou utilisateur normal)
  *         createdBy:
  *           type: string
  *           description: ID de l'utilisateur qui a créé l'identification
@@ -100,6 +105,12 @@ const identificationProvedSchema = new Schema({
     required: true,
     minlength: 6,
     description: 'Mot de passe pour l\'accès à cette PROVED'
+  },
+  role: {
+    type: String,
+    enum: ['admin', 'user'],
+    default: 'user',
+    description: 'Rôle de la PROVED (admin ou utilisateur normal)'
   },
   createdBy: { 
     type: Schema.Types.ObjectId, 
