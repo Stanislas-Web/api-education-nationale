@@ -24,8 +24,10 @@ const { RapportActivite } = require('../models/rapportActivite.model.js');
  */
 const createRapportActivite = async (req, res) => {
   try {
+    // Utiliser automatiquement la PROVED de l'utilisateur connecté
     const rapportData = {
-      ...req.body
+      ...req.body,
+      identificationProved: req.user._id // ID de la PROVED connectée
     };
 
     const rapport = new RapportActivite(rapportData);
@@ -106,7 +108,10 @@ const getAllRapportsActivite = async (req, res) => {
       limit: parseInt(limit),
       sort: { createdAt: -1 },
       populate: [
-        { path: 'identificationProved' }
+        { 
+          path: 'identificationProved',
+          select: 'provinceAdministrative provinceEducationnelle chefLieuProved emailProfessionnel telephone statutOccupation nombreTerritoires nombreSousDivisions directeurProvincial isActive role createdAt updatedAt'
+        }
       ]
     };
 
@@ -155,7 +160,10 @@ const getRapportActiviteById = async (req, res) => {
     const { id } = req.params;
     
     const rapport = await RapportActivite.findById(id)
-      .populate('identificationProved');
+      .populate({
+        path: 'identificationProved',
+        select: 'provinceAdministrative provinceEducationnelle chefLieuProved emailProfessionnel telephone statutOccupation nombreTerritoires nombreSousDivisions directeurProvincial isActive role createdAt updatedAt'
+      });
 
     if (!rapport) {
       return res.status(404).json({
@@ -221,7 +229,10 @@ const updateRapportActivite = async (req, res) => {
       id,
       updateData,
       { new: true, runValidators: true }
-    ).populate('identificationProved');
+    ).populate({
+      path: 'identificationProved',
+      select: 'provinceAdministrative provinceEducationnelle chefLieuProved emailProfessionnel telephone statutOccupation nombreTerritoires nombreSousDivisions directeurProvincial isActive role createdAt updatedAt'
+    });
 
     if (!rapport) {
       return res.status(404).json({
@@ -348,7 +359,10 @@ const updateStatutRapport = async (req, res) => {
         statut
       },
       { new: true }
-    ).populate('identificationProved');
+    ).populate({
+      path: 'identificationProved',
+      select: 'provinceAdministrative provinceEducationnelle chefLieuProved emailProfessionnel telephone statutOccupation nombreTerritoires nombreSousDivisions directeurProvincial isActive role createdAt updatedAt'
+    });
 
     if (!rapport) {
       return res.status(404).json({
@@ -467,7 +481,10 @@ const exportRapportPDF = async (req, res) => {
     const { id } = req.params;
     
     const rapport = await RapportActivite.findById(id)
-      .populate('identificationProved');
+      .populate({
+        path: 'identificationProved',
+        select: 'provinceAdministrative provinceEducationnelle chefLieuProved emailProfessionnel telephone statutOccupation nombreTerritoires nombreSousDivisions directeurProvincial isActive role createdAt updatedAt'
+      });
 
     if (!rapport) {
       return res.status(404).json({
