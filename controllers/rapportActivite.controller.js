@@ -94,34 +94,138 @@ const createRapportActivite = async (req, res) => {
 const getAllRapportsActivite = async (req, res) => {
   try {
     const { page = 1, limit = 10, annee, statut, province } = req.query;
+    const currentUser = req.user;
     
-    // Construire le filtre
+    console.log('🔍 Récupération des rapports pour l\'utilisateur:', currentUser._id);
+    console.log('👤 Rôle de l\'utilisateur:', currentUser.role);
+    console.log('👤 Type de l\'utilisateur:', currentUser.type);
+    
+    // Construire le filtre de base
     const filter = {};
-    if (annee) filter.annee = parseInt(annee);
-    if (statut) filter.statut = statut;
-    if (province) {
-      filter['identification.provinceAdministrative'] = { $regex: province, $options: 'i' };
-    }
-
-    const options = {
-      page: parseInt(page),
-      limit: parseInt(limit),
-      sort: { createdAt: -1 },
-      populate: [
-        { 
-          path: 'identificationProved',
-          select: 'provinceAdministrative provinceEducationnelle chefLieuProved emailProfessionnel telephone statutOccupation nombreTerritoires nombreSousDivisions directeurProvincial isActive role createdAt updatedAt'
+    
+    // Si l'utilisateur n'est pas admin, filtrer seulement ses rapports
+    if (currentUser.role !== 'admin' && currentUser.type !== 'ADMIN') {
+      console.log('🔒 Utilisateur non-admin, filtrage des rapports personnels');
+      
+      // Méthode 1: Chercher les rapports où identificationProved = userId (comme dans createRapportActivite)
+      const rapportsDirects = await RapportActivite.find({ identificationProved: currentUser._id })
+        .populate('identificationProved', 'provinceAdministrative provinceEducationnelle chefLieuProved emailProfessionnel telephone statutOccupation nombreTerritoires nombreSousDivisions directeurProvincial isActive role createdAt updatedAt');
+      
+      console.log('📊 Rapports directs trouvés:', rapportsDirects.length);
+      
+      // Méthode 2: Chercher les identifications créées par l'utilisateur, puis les rapports associés
+      const { IdentificationProved } = require('../models/identificationProved.model.js');
+      const identifications = await IdentificationProved.find({ createdBy: currentUser._id }).select('_id provinceAdministrative createdBy');
+      console.log('📋 Identifications créées par l\'utilisateur:', identifications.length);
+      
+      let rapportsViaIdentifications = [];
+      if (identifications.length > 0) {
+        const identificationIds = identifications.map(id => id._id);
+        rapportsViaIdentifications = await RapportActivite.find({
+          identificationProved: { $in: identificationIds }
+        }).populate('identificationProved', 'provinceAdministrative provinceEducationnelle chefLieuProved emailProfessionnel telephone statutOccupation nombreTerritoires nombreSousDivisions directeurProvincial isActive role createdAt updatedAt');
+      }
+      
+      console.log('📊 Rapports via identifications trouvés:', rapportsViaIdentifications.length);
+      
+      // Combiner les deux méthodes et éliminer les doublons
+      const tousLesRapports = [...rapportsDirects, ...rapportsViaIdentifications];
+      const rapportsUniques = tousLesRapports.filter((rapport, index, self) => 
+        index === self.findIndex(r => r._id.toString() === rapport._id.toString())
+      );
+      
+      console.log('📊 Total des rapports uniques:', rapportsUniques.length);
+      
+      // Appliquer les filtres supplémentaires
+      let rapportsFiltres = rapportsUniques;
+      if (annee) {
+        rapportsFiltres = rapportsFiltres.filter(rapport => rapport.annee === parseInt(annee));
+      }
+      if (statut) {
+        rapportsFiltres = rapportsFiltres.filter(rapport => rapport.statut === statut);
+      }
+      if (province) {
+        rapportsFiltres = rapportsFiltres.filter(rapport => 
+          rapport.identificationProved && 
+          rapport.identificationProved.provinceAdministrative && 
+          rapport.identificationProved.provinceAdministrative.toLowerCase().includes(province.toLowerCase())
+        );
+      }
+      
+      console.log('📊 Rapports après filtres:', rapportsFiltres.length);
+      
+      // Pagination manuelle
+      const totalDocs = rapportsFiltres.length;
+      const totalPages = Math.ceil(totalDocs / limit);
+      const startIndex = (page - 1) * limit;
+      const endIndex = startIndex + limit;
+      const docs = rapportsFiltres.slice(startIndex, endIndex);
+      
+      const result = {
+        docs,
+        totalDocs,
+        limit: parseInt(limit),
+        page: parseInt(page),
+        totalPages,
+        hasNextPage: page < totalPages,
+        hasPrevPage: page > 1
+      };
+      
+      res.status(200).json({
+        success: true,
+        message: 'Rapports d\'activités récupérés avec succès (utilisateur)',
+        data: result,
+        debug: {
+          userId: currentUser._id,
+          role: currentUser.role,
+          type: currentUser.type,
+          rapportsDirects: rapportsDirects.length,
+          identificationsCount: identifications.length,
+          rapportsViaIdentifications: rapportsViaIdentifications.length,
+          totalRapports: tousLesRapports.length,
+          rapportsUniques: rapportsUniques.length,
+          rapportsFiltres: rapportsFiltres.length
         }
-      ]
-    };
+      });
+      
+    } else {
+      console.log('👑 Utilisateur admin, récupération de tous les rapports');
+      
+      // Pour les admins, récupérer tous les rapports
+      if (annee) filter.annee = parseInt(annee);
+      if (statut) filter.statut = statut;
+      if (province) {
+        filter['identificationProved.provinceAdministrative'] = { $regex: province, $options: 'i' };
+      }
 
-    const result = await RapportActivite.paginate(filter, options);
+      const options = {
+        page: parseInt(page),
+        limit: parseInt(limit),
+        sort: { createdAt: -1 },
+        populate: [
+          { 
+            path: 'identificationProved',
+            select: 'provinceAdministrative provinceEducationnelle chefLieuProved emailProfessionnel telephone statutOccupation nombreTerritoires nombreSousDivisions directeurProvincial isActive role createdAt updatedAt'
+          }
+        ]
+      };
 
-    res.status(200).json({
-      success: true,
-      message: 'Rapports d\'activités récupérés avec succès',
-      data: result
-    });
+      const result = await RapportActivite.paginate(filter, options);
+
+      res.status(200).json({
+        success: true,
+        message: 'Rapports d\'activités récupérés avec succès (admin)',
+        data: result,
+        debug: {
+          userId: currentUser._id,
+          role: currentUser.role,
+          type: currentUser.type,
+          filter,
+          totalRapports: result.totalDocs
+        }
+      });
+    }
+    
   } catch (error) {
     console.error('Erreur lors de la récupération des rapports:', error);
     res.status(500).json({
