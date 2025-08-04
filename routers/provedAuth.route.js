@@ -164,7 +164,7 @@ router.route('/change-password').post(isProvedLoggedIn, changeProvedPassword);
  *       500:
  *         description: Erreur du serveur
  */
-router.route('/all').get(getAllProved);
+router.route('/all').get(isProvedLoggedIn, getAllProved);
 
 /**
  * @swagger

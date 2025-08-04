@@ -204,9 +204,22 @@ module.exports.changeProvedPassword = async (req, res) => {
 // Récupérer le profil PROVED
 module.exports.getProvedProfile = async (req, res) => {
   try {
-    const provedId = req.user._id;
+    // Vérifier que l'utilisateur est authentifié
+    if (!req.user) {
+      return res.status(401).send({
+        message: "Utilisateur non authentifié"
+      });
+    }
     
-    const proved = await IdentificationProved.findById(provedId).select('-motDePasse');
+    const provedId = req.user._id;
+    const userRole = req.user.role;
+    
+    console.log('Récupération du profil PROVED:', { provedId, userRole });
+    
+    const proved = await IdentificationProved.findById(provedId)
+      .select('-motDePasse')
+      .populate('createdBy', 'nom prenom email')
+      .populate('updatedBy', 'nom prenom email');
     
     if (!proved) {
       return res.status(404).send({
@@ -216,6 +229,7 @@ module.exports.getProvedProfile = async (req, res) => {
 
     return res.status(200).send({
       message: "Profil PROVED récupéré avec succès",
+      userRole: userRole,
       data: proved
     });
 
@@ -233,18 +247,45 @@ module.exports.getAllProved = async (req, res) => {
   try {
     const { isActive } = req.query;
     
+    // Vérifier que l'utilisateur est authentifié
+    if (!req.user) {
+      return res.status(401).send({
+        message: "Utilisateur non authentifié"
+      });
+    }
+    
+    const userRole = req.user.role;
+    const userId = req.user._id;
+    
+    console.log('Utilisateur connecté:', { role: userRole, id: userId });
+    
     const filter = {};
+    
+    // Filtre par statut actif si spécifié
     if (isActive !== undefined) {
       filter.isActive = isActive === 'true';
+    }
+    
+    // Si l'utilisateur n'est pas admin, il ne voit que les PROVED qu'il a créées
+    if (userRole !== 'admin') {
+      filter.createdBy = userId;
+      console.log('Filtre appliqué: PROVED créées par l\'utilisateur');
+    } else {
+      console.log('Admin: accès à toutes les PROVED');
     }
 
     const provedList = await IdentificationProved.find(filter)
       .select('-motDePasse')
+      .populate('createdBy', 'nom prenom email')
+      .populate('updatedBy', 'nom prenom email')
       .sort({ createdAt: -1 });
 
     return res.status(200).send({
-      message: "Liste des PROVED récupérée avec succès",
+      message: userRole === 'admin' 
+        ? "Liste de toutes les PROVED récupérée avec succès" 
+        : "Liste de vos PROVED récupérée avec succès",
       count: provedList.length,
+      userRole: userRole,
       data: provedList
     });
 
@@ -260,8 +301,20 @@ module.exports.getAllProved = async (req, res) => {
 // Créer une nouvelle PROVED (admin seulement)
 module.exports.createProved = async (req, res) => {
   try {
+    // Vérifier que l'utilisateur est authentifié
+    if (!req.user) {
+      return res.status(401).send({
+        message: "Utilisateur non authentifié"
+      });
+    }
+    
+    const userRole = req.user.role;
+    const userId = req.user._id;
+    
+    console.log('Tentative de création PROVED:', { userRole, userId });
+    
     // Vérifier que l'utilisateur est admin
-    if (req.user.role !== 'admin') {
+    if (userRole !== 'admin') {
       return res.status(403).send({
         message: "Accès refusé. Seuls les administrateurs peuvent créer des PROVED"
       });
@@ -277,11 +330,15 @@ module.exports.createProved = async (req, res) => {
       ...provedData,
       motDePasse: hashedPassword,
       role: 'user', // Par défaut, les nouvelles PROVED sont des utilisateurs
-      createdBy: req.user._id,
-      updatedBy: req.user._id
+      createdBy: userId,
+      updatedBy: userId
     });
 
     await newProved.save();
+
+    // Populate les informations de l'admin créateur
+    await newProved.populate('createdBy', 'nom prenom email');
+    await newProved.populate('updatedBy', 'nom prenom email');
 
     // Retourner la réponse sans le mot de passe
     const provedResponse = newProved.toObject();
@@ -289,6 +346,7 @@ module.exports.createProved = async (req, res) => {
 
     return res.status(201).send({
       message: "PROVED créée avec succès",
+      createdBy: req.user,
       data: provedResponse
     });
 
