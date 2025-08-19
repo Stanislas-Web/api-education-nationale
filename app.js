@@ -60,8 +60,8 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: 'http://134.122.23.150/api/v1',
-        // url: 'http://localhost/api/v1',
+        // url: 'http://134.122.23.150/api/v1',
+        url: 'http://localhost:3000/api/v1',
         description: 'Serveur de développement',
       },
     ],
@@ -92,6 +92,19 @@ app.get('/image/:filename', (req, res) => {
   });
 });
 
+
+// Route racine pour tester l'API
+app.get('/', (req, res) => {
+  res.json({
+    message: 'API Education Nationale - Serveur opérationnel',
+    version: '1.0.0',
+    status: 'online',
+    endpoints: {
+      docs: '/api/v1/docs',
+      api: '/api/v1/'
+    }
+  });
+});
 
 // Middleware Swagger Docs (doit être avant les routes protégées)
 app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
