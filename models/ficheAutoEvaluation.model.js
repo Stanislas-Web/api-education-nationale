@@ -19,13 +19,6 @@ const mongoosePaginate = require('mongoose-paginate-v2');
  *         intituleFormation:
  *           type: string
  *           description: Intitulé de la formation
- *         noms:
- *           type: string
- *           description: Noms du participant
- *         provenance:
- *           type: string
- *           enum: ['Proved', 'IPP']
- *           description: Provenance du participant (Proved ou IPP)
  *         contenuComprehension:
  *           type: object
  *           properties:
@@ -97,16 +90,6 @@ const ficheAutoEvaluationSchema = new Schema({
   },
   intituleFormation: {
     type: String,
-    required: true
-  },
-
-  noms: {
-    type: String,
-    required: true
-  },
-  provenance: {
-    type: String,
-    enum: ['Proved', 'IPP'],
     required: true
   },
   contenuComprehension: {

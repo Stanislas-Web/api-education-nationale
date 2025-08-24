@@ -39,7 +39,11 @@ const createFicheAutoEvaluation = async (req, res) => {
     
     // Utiliser l'ID de l'IdentificationProved trouvée
     const ficheData = {
-      ...req.body,
+      intituleFormation: req.body.intituleFormation,
+      contenuComprehension: req.body.contenuComprehension,
+      participationImplication: req.body.participationImplication,
+      pertinenceUtilite: req.body.pertinenceUtilite,
+      suggestionsCommentaires: req.body.suggestionsCommentaires,
       identificationProved: identificationProved._id
     };
 
@@ -359,7 +363,11 @@ const updateFicheAutoEvaluation = async (req, res) => {
   try {
     const { id } = req.params;
     const updateData = {
-      ...req.body
+      intituleFormation: req.body.intituleFormation,
+      contenuComprehension: req.body.contenuComprehension,
+      participationImplication: req.body.participationImplication,
+      pertinenceUtilite: req.body.pertinenceUtilite,
+      suggestionsCommentaires: req.body.suggestionsCommentaires
     };
 
     const fiche = await FicheAutoEvaluation.findByIdAndUpdate(
@@ -712,6 +720,59 @@ const checkFicheToday = async (req, res) => {
   }
 };
 
+/**
+ * @swagger
+ * /fiche-auto-evaluation/my-proved:
+ *   get:
+ *     summary: Récupérer l'identification PROVED de l'utilisateur connecté
+ *     tags: [FicheAutoEvaluation]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Identification PROVED récupérée avec succès
+ *       404:
+ *         description: Aucune PROVED trouvée pour cet utilisateur
+ *       401:
+ *         description: Non autorisé
+ */
+const getMyIdentificationProved = async (req, res) => {
+  try {
+    const currentUser = req.user;
+    
+    console.log('🔍 Récupération de l\'identification PROVED pour l\'utilisateur:', currentUser._id);
+    
+    // Chercher l'IdentificationProved créée par cet utilisateur
+    const { IdentificationProved } = require('../models/identificationProved.model.js');
+    const identificationProved = await IdentificationProved.findOne({ 
+      createdBy: currentUser._id 
+    }).select('provinceAdministrative provinceEducationnelle chefLieuProved emailProfessionnel telephone statutOccupation nombreTerritoires nombreSousDivisions directeurProvincial isActive role createdAt updatedAt');
+    
+    if (!identificationProved) {
+      return res.status(404).json({
+        success: false,
+        message: 'Aucune PROVED trouvée pour cet utilisateur. Veuillez d\'abord créer une PROVED.'
+      });
+    }
+    
+    console.log('✅ PROVED trouvée:', identificationProved.directeurProvincial);
+    
+    res.status(200).json({
+      success: true,
+      message: 'Identification PROVED récupérée avec succès',
+      data: identificationProved
+    });
+    
+  } catch (error) {
+    console.error('Erreur lors de la récupération de l\'identification PROVED:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Erreur lors de la récupération de l\'identification PROVED',
+      error: error.message
+    });
+  }
+};
+
 module.exports = {
   createFicheAutoEvaluation,
   getAllFichesAutoEvaluation,
@@ -720,5 +781,6 @@ module.exports = {
   deleteFicheAutoEvaluation,
   updateStatutFiche,
   getStatistiquesFiches,
-  checkFicheToday
+  checkFicheToday,
+  getMyIdentificationProved
 };
