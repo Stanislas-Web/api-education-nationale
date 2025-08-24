@@ -10,7 +10,6 @@ const mongoosePaginate = require('mongoose-paginate-v2');
  *       required:
  *         - identificationProved
  *         - intituleFormation
- *         - date
  *         - noms
  *         - provenance
  *       properties:
@@ -20,10 +19,6 @@ const mongoosePaginate = require('mongoose-paginate-v2');
  *         intituleFormation:
  *           type: string
  *           description: Intitulé de la formation
- *         date:
- *           type: string
- *           format: date
- *           description: Date de la formation
  *         noms:
  *           type: string
  *           description: Noms du participant
@@ -104,10 +99,7 @@ const ficheAutoEvaluationSchema = new Schema({
     type: String,
     required: true
   },
-  date: {
-    type: Date,
-    required: true
-  },
+
   noms: {
     type: String,
     required: true
@@ -181,7 +173,7 @@ const ficheAutoEvaluationSchema = new Schema({
 ficheAutoEvaluationSchema.plugin(mongoosePaginate);
 
 // Index pour améliorer les performances
-ficheAutoEvaluationSchema.index({ identificationProved: 1, date: 1 });
+ficheAutoEvaluationSchema.index({ identificationProved: 1 });
 ficheAutoEvaluationSchema.index({ statut: 1 });
 ficheAutoEvaluationSchema.index({ provenance: 1 });
 ficheAutoEvaluationSchema.index({ createdAt: -1 });
@@ -189,7 +181,13 @@ ficheAutoEvaluationSchema.index({ createdAt: -1 });
 
 // Méthodes statiques
 ficheAutoEvaluationSchema.statics.findByProvedAndDate = function(identificationProved, date) {
-  return this.findOne({ identificationProved, date });
+  return this.findOne({ 
+    identificationProved, 
+    createdAt: {
+      $gte: new Date(date),
+      $lt: new Date(new Date(date).setDate(new Date(date).getDate() + 1))
+    }
+  });
 };
 
 ficheAutoEvaluationSchema.statics.findByStatus = function(statut) {
@@ -221,9 +219,6 @@ ficheAutoEvaluationSchema.methods.reject = function() {
 // Middleware pre-save pour valider les données
 ficheAutoEvaluationSchema.pre('save', function(next) {
   // Validation personnalisée si nécessaire
-  if (this.date && this.date > new Date()) {
-    return next(new Error('La date ne peut pas être dans le futur'));
-  }
   next();
 });
 

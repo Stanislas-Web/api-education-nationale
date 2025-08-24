@@ -161,7 +161,7 @@ const getAllFichesAutoEvaluation = async (req, res) => {
       if (date) {
         const dateFilter = new Date(date);
         fichesFiltrees = fichesFiltrees.filter(fiche => 
-          fiche.date.toDateString() === dateFilter.toDateString()
+          fiche.createdAt.toDateString() === dateFilter.toDateString()
         );
       }
       if (statut) {
@@ -220,7 +220,7 @@ const getAllFichesAutoEvaluation = async (req, res) => {
       // Pour les admins, récupérer toutes les fiches
       if (date) {
         const dateFilter = new Date(date);
-        filter.date = {
+        filter.createdAt = {
           $gte: new Date(dateFilter.setHours(0, 0, 0, 0)),
           $lt: new Date(dateFilter.setHours(23, 59, 59, 999))
         };
@@ -551,7 +551,7 @@ const getStatistiquesFiches = async (req, res) => {
     
     if (date) {
       const dateFilter = new Date(date);
-      filter.date = {
+      filter.createdAt = {
         $gte: new Date(dateFilter.setHours(0, 0, 0, 0)),
         $lt: new Date(dateFilter.setHours(23, 59, 59, 999))
       };
@@ -588,7 +588,7 @@ const getStatistiquesFiches = async (req, res) => {
       ]),
       FicheAutoEvaluation.aggregate([
         { $match: filter },
-        { $group: { _id: { $dateToString: { format: '%Y-%m-%d', date: '$date' } }, count: { $sum: 1 } } },
+        { $group: { _id: { $dateToString: { format: '%Y-%m-%d', date: '$createdAt' } }, count: { $sum: 1 } } },
         { $sort: { _id: -1 } }
       ])
     ]);
@@ -668,7 +668,7 @@ const checkFicheToday = async (req, res) => {
     // Chercher une fiche créée aujourd'hui pour cette IdentificationProved
     const existingFiche = await FicheAutoEvaluation.findOne({
       identificationProved: identificationProved._id,
-      date: {
+      createdAt: {
         $gte: startOfDay,
         $lte: endOfDay
       }
