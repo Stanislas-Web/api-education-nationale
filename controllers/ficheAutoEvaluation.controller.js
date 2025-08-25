@@ -184,6 +184,9 @@ const getAllFichesAutoEvaluation = async (req, res) => {
       
       console.log('📊 Fiches après filtres:', fichesFiltrees.length);
       
+      // Trier par date de création décroissante (plus récentes en premier)
+      fichesFiltrees.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      
       // Pagination manuelle
       const totalDocs = fichesFiltrees.length;
       const totalPages = Math.ceil(totalDocs / limit);
