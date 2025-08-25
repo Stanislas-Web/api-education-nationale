@@ -26,9 +26,22 @@ const createFicheAutoEvaluation = async (req, res) => {
   try {
     const currentUser = req.user;
     
-    // Chercher l'IdentificationProved créée par cet utilisateur
+    console.log('🔍 Création fiche pour utilisateur:', currentUser._id);
+    console.log('👤 Type utilisateur:', currentUser.type);
+    console.log('👤 Rôle utilisateur:', currentUser.role);
+    
     const { IdentificationProved } = require('../models/identificationProved.model.js');
-    const identificationProved = await IdentificationProved.findOne({ createdBy: currentUser._id });
+    let identificationProved;
+    
+    // Si c'est un utilisateur PROVED (type: 'PROVED'), utiliser directement son ID
+    if (currentUser.type === 'PROVED') {
+      console.log('🏢 Utilisateur PROVED détecté, utilisation directe de l\'ID');
+      identificationProved = await IdentificationProved.findById(currentUser._id);
+    } else {
+      // Sinon, chercher l'IdentificationProved créée par cet utilisateur (cas admin)
+      console.log('👑 Utilisateur admin détecté, recherche de PROVED créée');
+      identificationProved = await IdentificationProved.findOne({ createdBy: currentUser._id });
+    }
     
     if (!identificationProved) {
       return res.status(400).json({
@@ -36,6 +49,8 @@ const createFicheAutoEvaluation = async (req, res) => {
         message: 'Aucune PROVED trouvée pour cet utilisateur. Veuillez d\'abord créer une PROVED.'
       });
     }
+    
+    console.log('✅ PROVED trouvée:', identificationProved.provinceAdministrative);
     
     // Utiliser l'ID de l'IdentificationProved trouvée
     const ficheData = {
@@ -656,9 +671,21 @@ const checkFicheToday = async (req, res) => {
   try {
     const currentUser = req.user;
     
-    // Chercher l'IdentificationProved créée par cet utilisateur
+    console.log('🔍 Vérification fiche pour utilisateur:', currentUser._id);
+    console.log('👤 Type utilisateur:', currentUser.type);
+    
     const { IdentificationProved } = require('../models/identificationProved.model.js');
-    const identificationProved = await IdentificationProved.findOne({ createdBy: currentUser._id });
+    let identificationProved;
+    
+    // Si c'est un utilisateur PROVED (type: 'PROVED'), utiliser directement son ID
+    if (currentUser.type === 'PROVED') {
+      console.log('🏢 Utilisateur PROVED détecté, utilisation directe de l\'ID');
+      identificationProved = await IdentificationProved.findById(currentUser._id);
+    } else {
+      // Sinon, chercher l'IdentificationProved créée par cet utilisateur (cas admin)
+      console.log('👑 Utilisateur admin détecté, recherche de PROVED créée');
+      identificationProved = await IdentificationProved.findOne({ createdBy: currentUser._id });
+    }
     
     if (!identificationProved) {
       return res.status(400).json({
@@ -744,12 +771,23 @@ const getMyIdentificationProved = async (req, res) => {
     const currentUser = req.user;
     
     console.log('🔍 Récupération de l\'identification PROVED pour l\'utilisateur:', currentUser._id);
+    console.log('👤 Type utilisateur:', currentUser.type);
     
-    // Chercher l'IdentificationProved créée par cet utilisateur
     const { IdentificationProved } = require('../models/identificationProved.model.js');
-    const identificationProved = await IdentificationProved.findOne({ 
-      createdBy: currentUser._id 
-    }).select('provinceAdministrative provinceEducationnelle chefLieuProved emailProfessionnel telephone statutOccupation nombreTerritoires nombreSousDivisions directeurProvincial isActive role createdAt updatedAt');
+    let identificationProved;
+    
+    // Si c'est un utilisateur PROVED (type: 'PROVED'), utiliser directement son ID
+    if (currentUser.type === 'PROVED') {
+      console.log('🏢 Utilisateur PROVED détecté, utilisation directe de l\'ID');
+      identificationProved = await IdentificationProved.findById(currentUser._id)
+        .select('provinceAdministrative provinceEducationnelle chefLieuProved emailProfessionnel telephone statutOccupation nombreTerritoires nombreSousDivisions directeurProvincial isActive role createdAt updatedAt');
+    } else {
+      // Sinon, chercher l'IdentificationProved créée par cet utilisateur (cas admin)
+      console.log('👑 Utilisateur admin détecté, recherche de PROVED créée');
+      identificationProved = await IdentificationProved.findOne({ 
+        createdBy: currentUser._id 
+      }).select('provinceAdministrative provinceEducationnelle chefLieuProved emailProfessionnel telephone statutOccupation nombreTerritoires nombreSousDivisions directeurProvincial isActive role createdAt updatedAt');
+    }
     
     if (!identificationProved) {
       return res.status(404).json({
