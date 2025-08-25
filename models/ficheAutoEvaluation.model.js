@@ -145,7 +145,7 @@ const ficheAutoEvaluationSchema = new Schema({
   statut: {
     type: String,
     enum: ['brouillon', 'soumis', 'approuve', 'rejete'],
-    default: 'brouillon'
+    default: 'soumis'
   }
 }, {
   timestamps: true, // Ajoute automatiquement createdAt et updatedAt
