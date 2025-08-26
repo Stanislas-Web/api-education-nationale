@@ -219,105 +219,214 @@ const rapportActiviteSchema = new Schema({
     type: String
   },
   parametresCles: {
-    niveauPrescolaire: {
-      espaceCommunautaireEveil: {
-        nombreEcoles: { type: Number, default: 0 },
-        nombreClasses: { type: Number, default: 0 },
-        effectifGarcons: { type: Number, default: 0 },
-        effectifFilles: { type: Number, default: 0 },
-        tauxAccroissement: { type: Number, default: 0 }
-      },
-      maternel: {
-        nombreEcoles: { type: Number, default: 0 },
-        nombreClasses: { type: Number, default: 0 },
-        effectifGarcons: { type: Number, default: 0 },
-        effectifFilles: { type: Number, default: 0 },
-        tauxAccroissement: { type: Number, default: 0 }
-      },
-      prePrimaire: {
-        nombreEcoles: { type: Number, default: 0 },
-        nombreClasses: { type: Number, default: 0 },
-        effectifGarcons: { type: Number, default: 0 },
-        effectifFilles: { type: Number, default: 0 },
-        tauxAccroissement: { type: Number, default: 0 }
-      },
-      special: {
-        nombreEcoles: { type: Number, default: 0 },
-        nombreClasses: { type: Number, default: 0 },
-        effectifGarcons: { type: Number, default: 0 },
-        effectifFilles: { type: Number, default: 0 },
-        tauxAccroissement: { type: Number, default: 0 }
-      }
-    },
-    niveauPrimaire: {
-      enseignementSpecial: {
-        nombreClasses: { type: Number, default: 0 },
-        effectifGarcons: { type: Number, default: 0 },
-        effectifFilles: { type: Number, default: 0 },
-        tauxAccroissement: { type: Number, default: 0 }
-      },
-      enseignementPrimaire: {
-        nombreEcoles: { type: Number, default: 0 },
-        nombreClasses: { type: Number, default: 0 },
-        classesPlethoriques: { type: Number, default: 0 },
-        effectifGarcons: { type: Number, default: 0 },
-        effectifFilles: { type: Number, default: 0 },
-        tauxAccroissement: { type: Number, default: 0 }
-      }
-    },
-    niveauSecondaire: {
-      enseignementSpecial: {
-        nombreClasses: { type: Number, default: 0 },
-        effectifGarcons: { type: Number, default: 0 },
-        effectifFilles: { type: Number, default: 0 },
-        tauxAccroissement: { type: Number, default: 0 }
-      },
-      enseignementSecondaire: {
-        premierCycle: {
-          classes7emeCTEB: { type: Number, default: 0 },
-          classes8emeCTEB: { type: Number, default: 0 },
-          effectifGarcons: { type: Number, default: 0 },
-          effectifFilles: { type: Number, default: 0 },
-          tauxAccroissement: { type: Number, default: 0 }
+    // 1.1. Nbre d'Ecole / Nbre de Classe
+    nombreEcolesClasses: {
+      niveauPrescolaire: {
+        espaceCommunautaireEveil: {
+          nombreEcoles: { type: Number, default: 0 },
+          nombreClasses: { type: Number, default: 0 }
         },
-        deuxiemeCycle: {
-          classesHumanites: { type: Number, default: 0 },
+        maternel: {
+          nombreEcoles: { type: Number, default: 0 },
+          nombreClasses: { type: Number, default: 0 }
+        },
+        prePrimaire: {
+          nombreEcoles: { type: Number, default: 0 },
+          nombreClasses: { type: Number, default: 0 }
+        },
+        special: {
+          nombreEcoles: { type: Number, default: 0 },
+          nombreClasses: { type: Number, default: 0 }
+        }
+      },
+      niveauPrimaire: {
+        enseignementSpecial: {
+          nombreEcoles: { type: Number, default: 0 },
+          totalClassesSpecialesPrim: { type: Number, default: 0 }
+        },
+        enseignementPrimaire: {
+          nombreEcoles: { type: Number, default: 0 },
+          totalClassesPrimaire: { type: Number, default: 0 },
+          classesPlethoriques: { type: String, default: '-' }
+        }
+      },
+      niveauSecondaire: {
+        enseignementSpecial: {
+          nombreEcoles: { type: Number, default: 0 },
+          totalClassesSpecialesSec: { type: Number, default: 0 }
+        },
+        enseignementSecondaire: {
+          nombreEcoles: { type: Number, default: 0 },
+          premierCycle: {
+            classes7emeCTEB: { type: Number, default: 0 },
+            classes8emeCTEB: { type: Number, default: 0 }
+          },
+          deuxiemeCycle: {
+            totalClassesHumanites: { type: Number, default: 0 }
+          },
+          totalClasses1er2emeCycle: { type: Number, default: 0 }
+        }
+      }
+    },
+    // 1.2. Effectif Scolaire et Taux d'accroissement
+    effectifScolaire: {
+      niveauPrescolaire: {
+        espaceCommunautaireEveil: {
+          effectifGarconsFilles: { type: Number, default: 0 },
+          effectifFilles: { type: Number, default: 0 },
+          tauxAccroissementGarconsFilles: { type: Number, default: 0 },
+          tauxAccroissementFilles: { type: Number, default: 0 }
+        },
+        maternel: {
+          effectifGarconsFilles: { type: Number, default: 0 },
+          effectifFilles: { type: Number, default: 0 },
+          tauxAccroissementGarconsFilles: { type: Number, default: 0 },
+          tauxAccroissementFilles: { type: Number, default: 0 }
+        },
+        prePrimaire: {
+          effectifGarconsFilles: { type: Number, default: 0 },
+          effectifFilles: { type: Number, default: 0 },
+          tauxAccroissementGarconsFilles: { type: Number, default: 0 },
+          tauxAccroissementFilles: { type: Number, default: 0 }
+        },
+        special: {
+          effectifGarconsFilles: { type: Number, default: 0 },
+          effectifFilles: { type: Number, default: 0 },
+          tauxAccroissementGarconsFilles: { type: Number, default: 0 },
+          tauxAccroissementFilles: { type: Number, default: 0 }
+        }
+      },
+      niveauPrimaire: {
+        enseignementSpecial: {
+          effectifGarconsFilles: { type: Number, default: 0 },
+          effectifFilles: { type: Number, default: 0 },
+          tauxAccroissementGarconsFilles: { type: Number, default: 0 },
+          tauxAccroissementFilles: { type: Number, default: 0 }
+        },
+        enseignementPrimaire: {
+          effectifGarconsFilles: { type: Number, default: 0 },
+          effectifFilles: { type: Number, default: 0 },
+          tauxAccroissementGarconsFilles: { type: Number, default: 0 },
+          tauxAccroissementFilles: { type: Number, default: 0 }
+        }
+      },
+      niveauSecondaire: {
+        enseignementSpecial: {
           effectifGarcons: { type: Number, default: 0 },
           effectifFilles: { type: Number, default: 0 },
-          tauxAccroissement: { type: Number, default: 0 }
+          tauxGarcons: { type: Number, default: 0 },
+          tauxFilles: { type: Number, default: 0 }
+        },
+        enseignementSecondaire: {
+          septiemeCTEB: {
+            effectifGarcons: { type: Number, default: 0 },
+            effectifFilles: { type: Number, default: 0 },
+            tauxGarcons: { type: Number, default: 0 },
+            tauxFilles: { type: Number, default: 0 }
+          },
+          huitiemeCTEB: {
+            effectifGarcons: { type: Number, default: 0 },
+            effectifFilles: { type: Number, default: 0 },
+            tauxGarcons: { type: Number, default: 0 },
+            tauxFilles: { type: Number, default: 0 }
+          },
+          premiereHumanite: {
+            effectifGarcons: { type: Number, default: 0 },
+            effectifFilles: { type: Number, default: 0 },
+            tauxGarcons: { type: Number, default: 0 },
+            tauxFilles: { type: Number, default: 0 }
+          },
+          quatriemeHumanite: {
+            effectifGarcons: { type: Number, default: 0 },
+            effectifFilles: { type: Number, default: 0 },
+            tauxGarcons: { type: Number, default: 0 },
+            tauxFilles: { type: Number, default: 0 }
+          }
         }
       }
     }
   },
+
+
+  
   personnel: {
     personnelEnseignant: {
-      prescolaire: {
-        hommes: { type: Number, default: 0 },
-        femmes: { type: Number, default: 0 }
+      niveauPrescolaire: {
+        enseignementPrescolaireSpecial: {
+          hommes: { type: Number, default: 0 },
+          femmes: { type: Number, default: 0 }
+        },
+        enseignementPrescolaire: {
+          hommes: { type: Number, default: 0 },
+          femmes: { type: Number, default: 0 }
+        }
       },
-      primaire: {
-        hommes: { type: Number, default: 0 },
-        femmes: { type: Number, default: 0 }
+      niveauPrimaire: {
+        enseignementPrescolaireSpecial: {
+          hommes: { type: Number, default: 0 },
+          femmes: { type: Number, default: 0 }
+        },
+        enseignementPrimaire: {
+          hommes: { type: Number, default: 0 },
+          femmes: { type: Number, default: 0 }
+        }
       },
-      secondaire: {
-        hommes: { type: Number, default: 0 },
-        femmes: { type: Number, default: 0 }
+      niveauSecondaire: {
+        enseignementPrescolaireSpecial: {
+          hommes: { type: Number, default: 0 },
+          femmes: { type: Number, default: 0 }
+        },
+        enseignementSecondaire: {
+          hommes: { type: Number, default: 0 },
+          femmes: { type: Number, default: 0 }
+        }
       }
     },
     personnelAdministratif: {
-      directionProvinciale: { type: Number, default: 0 },
-      inspectionPrincipale: { type: Number, default: 0 },
-      dinacope: { type: Number, default: 0 },
-      sernie: { type: Number, default: 0 },
-      coordinationProvinciale: { type: Number, default: 0 },
-      sousDivision: { type: Number, default: 0 },
-      poolsInspectionPrimaire: { type: Number, default: 0 },
-      poolsInspectionSecondaire: { type: Number, default: 0 },
-      antenneDinacope: { type: Number, default: 0 },
-      antenneSernie: { type: Number, default: 0 },
-      coordinationDiocesaine: { type: Number, default: 0 },
-      sousCoordinationConventionnees: { type: Number, default: 0 },
-      conseillerieResidente: { type: Number, default: 0 }
+      directionProvinciale: {
+        hommes: { type: Number, default: 0 },
+        femmes: { type: Number, default: 0 }
+      },
+      inspectionPrincipale: {
+        hommes: { type: Number, default: 0 },
+        femmes: { type: Number, default: 0 }
+      },
+      dinacope: {
+        hommes: { type: Number, default: 0 },
+        femmes: { type: Number, default: 0 }
+      },
+      sernie: {
+        hommes: { type: Number, default: 0 },
+        femmes: { type: Number, default: 0 }
+      },
+      coordinationProvinciale: {
+        hommes: { type: Number, default: 0 },
+        femmes: { type: Number, default: 0 }
+      },
+      sousDivision: {
+        hommes: { type: Number, default: 0 },
+        femmes: { type: Number, default: 0 }
+      },
+      poolsInspectionPrimaire: {
+        hommes: { type: Number, default: 0 },
+        femmes: { type: Number, default: 0 }
+      },
+      poolsInspectionSecondaire: {
+        hommes: { type: Number, default: 0 },
+        femmes: { type: Number, default: 0 }
+      },
+      antenneDinacope: {
+        hommes: { type: Number, default: 0 },
+        femmes: { type: Number, default: 0 }
+      },
+      antenneSernie: {
+        hommes: { type: Number, default: 0 },
+        femmes: { type: Number, default: 0 }
+      },
+      coordinationDiocesaine: {
+        hommes: { type: Number, default: 0 },
+        femmes: { type: Number, default: 0 }
+      }
     }
   },
   realisations: {
@@ -358,6 +467,360 @@ const rapportActiviteSchema = new Schema({
         tauxTransitionCTEBHumanites: { type: Number, default: 0 }
       }
     }
+  },
+  ameliorationQualite: {
+    disponibiliteMoyensEnseignement: {
+      programmesScolaires: {
+        prescolaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
+        primaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
+        secondaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' }
+      },
+      manuelsScolaires: {
+        prescolaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
+        primaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
+        secondaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' }
+      },
+      materielsDidactiques: {
+        prescolaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
+        primaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
+        secondaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' }
+      },
+      laboratoires: {
+        chimie: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
+        biologie: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
+        physique: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' }
+      },
+      equipementsAteliers: {
+        humanitesTechniques: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' }
+      }
+    },
+    visitesEtReunions: {
+      visitesClasses: {
+        prescolaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: 'BON' },
+        primaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: 'BON' },
+        secondaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: 'BON' },
+        special: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: 'BON' }
+      },
+      reunionsPedagogiques: {
+        prescolaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: 'BON' },
+        primaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: 'BON' },
+        secondaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: 'BON' }
+      },
+      fonctionnementCelluleBase: {
+        prescolaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: 'BON' },
+        primaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: 'BON' },
+        secondaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: 'BON' },
+        special: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: 'BON' }
+      }
+    },
+    activitesInspectorales: {
+      inspectionsPedagogiquesC3: {
+        prescolaire: {
+          nombrePrevu: { type: Number, default: 0 },
+          nombreRealise: { type: Number, default: 0 },
+          pourcentageRealisation: { type: Number, default: 0 }
+        },
+        primaire: {
+          nombrePrevu: { type: Number, default: 0 },
+          nombreRealise: { type: Number, default: 0 },
+          pourcentageRealisation: { type: Number, default: 0 }
+        },
+        secondaire: {
+          nombrePrevu: { type: Number, default: 0 },
+          nombreRealise: { type: Number, default: 0 },
+          pourcentageRealisation: { type: Number, default: 0 }
+        },
+        special: {
+          nombrePrevu: { type: Number, default: 0 },
+          nombreRealise: { type: Number, default: 0 },
+          pourcentageRealisation: { type: Number, default: 0 }
+        }
+      },
+      inspectionsFormation: {
+        prescolaire: {
+          nombrePrevu: { type: Number, default: 0 },
+          nombreRealise: { type: Number, default: 0 },
+          pourcentageRealisation: { type: Number, default: 0 }
+        },
+        primaire: {
+          nombrePrevu: { type: Number, default: 0 },
+          nombreRealise: { type: Number, default: 0 },
+          pourcentageRealisation: { type: Number, default: 0 }
+        },
+        secondaire: {
+          nombrePrevu: { type: Number, default: 0 },
+          nombreRealise: { type: Number, default: 0 },
+          pourcentageRealisation: { type: Number, default: 0 }
+        },
+        special: {
+          nombrePrevu: { type: Number, default: 0 },
+          nombreRealise: { type: Number, default: 0 },
+          pourcentageRealisation: { type: Number, default: 0 }
+        }
+      },
+      formationContinue: {
+        prescolaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
+        primaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
+        secondaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
+        special: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' }
+      }
+    },
+    indicateursRendement: {
+      rendementInterne: {
+        prescolaire: {
+          tauxAbandon: { type: Number, default: 0 },
+          tauxReussite: { type: Number, default: 0 },
+          tauxEchec: { type: Number, default: 0 }
+        },
+        primaire: {
+          tauxAbandon: { type: Number, default: 0 },
+          tauxReussite: { type: Number, default: 0 },
+          tauxEchec: { type: Number, default: 0 }
+        },
+        secondaire: {
+          tauxAbandon: { type: Number, default: 0 },
+          tauxReussite: { type: Number, default: 0 },
+          tauxEchec: { type: Number, default: 0 }
+        }
+      },
+      rendementExterne: {
+        examensCertificatifs: {
+          tauxDiplomes: { type: Number, default: 0 },
+          tauxHumanitesScientifiques: { type: Number, default: 0 },
+          tauxHumanitesTechniques: { type: Number, default: 0 }
+        }
+      }
+    }
+  },
+  gouvernance: {
+    miseEnOeuvreSSEF: {
+      niveauProvinceEducationnelle: {
+        elaborationPAO: { type: String },
+        miseEnOeuvre: { type: String },
+        evaluationMiParcours: { type: String },
+        evaluationFinale: { type: String }
+      },
+      niveauProvinceAdministrative: {
+        elaborationPAO: { type: String },
+        miseEnOeuvre: { type: String },
+        evaluationMiParcours: { type: String },
+        evaluationFinale: { type: String }
+      }
+    },
+    inspectionsAdministrativesC2B: {
+      prescolaire: {
+        nombrePrevu: { type: Number, default: 0 },
+        nombreRealise: { type: Number, default: 0 },
+        pourcentageRealisation: { type: Number, default: 0 }
+      },
+      primaire: {
+        nombrePrevu: { type: Number, default: 0 },
+        nombreRealise: { type: Number, default: 0 },
+        pourcentageRealisation: { type: Number, default: 0 }
+      },
+      secondaire: {
+        nombrePrevu: { type: Number, default: 0 },
+        nombreRealise: { type: Number, default: 0 },
+        pourcentageRealisation: { type: Number, default: 0 }
+      },
+      special: {
+        nombrePrevu: { type: Number, default: 0 },
+        nombreRealise: { type: Number, default: 0 },
+        pourcentageRealisation: { type: Number, default: 0 }
+      }
+    },
+    comitesProvinciaux: {
+      comiteEDUNC: {
+        frequenceReunions: { type: String },
+        pointsTraites: { type: String }
+      },
+      comiteENAFP: {
+        frequenceReunions: { type: String },
+        pointsTraites: { type: String }
+      },
+      comiteTENASOSP: {
+        frequenceReunions: { type: String },
+        pointsTraites: { type: String }
+      },
+      comiteExamenEtat: {
+        frequenceReunions: { type: String },
+        pointsTraites: { type: String }
+      }
+    },
+    remunerationPersonnel: {
+      directionProvinciale: {
+        totalAgents: { type: Number, default: 0 },
+        nonPayes: { type: Number, default: 0 }
+      },
+      inspectionPrincipale: {
+        totalAgents: { type: Number, default: 0 },
+        nonPayes: { type: Number, default: 0 }
+      },
+      dinacope: {
+        totalAgents: { type: Number, default: 0 },
+        nonPayes: { type: Number, default: 0 }
+      },
+      sernie: {
+        totalAgents: { type: Number, default: 0 },
+        nonPayes: { type: Number, default: 0 }
+      },
+      coordinationProvinciale: {
+        totalAgents: { type: Number, default: 0 },
+        nonPayes: { type: Number, default: 0 }
+      },
+      sousDivision: {
+        totalAgents: { type: Number, default: 0 },
+        nonPayes: { type: Number, default: 0 }
+      },
+      poolsInspectionPrimaire: {
+        totalAgents: { type: Number, default: 0 },
+        nonPayes: { type: Number, default: 0 }
+      },
+      poolsInspectionSecondaire: {
+        totalAgents: { type: Number, default: 0 },
+        nonPayes: { type: Number, default: 0 }
+      },
+      antenneDinacope: {
+        totalAgents: { type: Number, default: 0 },
+        nonPayes: { type: Number, default: 0 }
+      },
+      antenneSernie: {
+        totalAgents: { type: Number, default: 0 },
+        nonPayes: { type: Number, default: 0 }
+      },
+      coordinationDiocesaine: {
+        totalAgents: { type: Number, default: 0 },
+        nonPayes: { type: Number, default: 0 }
+      },
+      sousCoordinationConventionnees: {
+        totalAgents: { type: Number, default: 0 },
+        nonPayes: { type: Number, default: 0 }
+      },
+      conseillerieResidente: {
+        totalAgents: { type: Number, default: 0 },
+        nonPayes: { type: Number, default: 0 }
+      }
+    },
+    vulgarisationInstructions: {
+      instructionsOfficielles: { type: String },
+      nouvelleCitoyennete: { type: String }
+    },
+    groupesAidesPsychopedagogiques: {
+      nombreGAPMisEnPlace: { type: Number, default: 0 },
+      nombreGAPOperationnel: { type: Number, default: 0 },
+      nombreCasPrisEnCharge: { type: Number, default: 0 },
+      problemesIdentifies: { type: String },
+      solutionsPreconisees: { type: String }
+    },
+    acquisitionsMateriels: {
+      ecoles: {
+        nature: { type: String },
+        sourceFinancement: {
+          gvt: { type: Number, default: 0 },
+          projet: { type: Number, default: 0 },
+          ptfs: { type: Number, default: 0 },
+          ong: { type: Number, default: 0 }
+        }
+      },
+      bureauxGestionnaires: {
+        nature: { type: String },
+        sourceFinancement: {
+          gvt: { type: Number, default: 0 },
+          projet: { type: Number, default: 0 },
+          ptfs: { type: Number, default: 0 },
+          ong: { type: Number, default: 0 }
+        }
+      }
+    },
+    infrastructureBureaux: {
+      directionProvinciale: {
+        proprietaire: { type: Number, default: 0 },
+        locataire: { type: Number, default: 0 }
+      },
+      inspectionPrincipale: {
+        proprietaire: { type: Number, default: 0 },
+        locataire: { type: Number, default: 0 }
+      },
+      dinacope: {
+        proprietaire: { type: Number, default: 0 },
+        locataire: { type: Number, default: 0 }
+      },
+      sernie: {
+        proprietaire: { type: Number, default: 0 },
+        locataire: { type: Number, default: 0 }
+      },
+      coordinationProvinciale: {
+        proprietaire: { type: Number, default: 0 },
+        locataire: { type: Number, default: 0 }
+      },
+      sousDivision: {
+        proprietaire: { type: Number, default: 0 },
+        locataire: { type: Number, default: 0 }
+      },
+      poolsInspectionPrimaire: {
+        proprietaire: { type: Number, default: 0 },
+        locataire: { type: Number, default: 0 }
+      },
+      poolsInspectionSecondaire: {
+        proprietaire: { type: Number, default: 0 },
+        locataire: { type: Number, default: 0 }
+      },
+      antenneDinacope: {
+        proprietaire: { type: Number, default: 0 },
+        locataire: { type: Number, default: 0 }
+      },
+      antenneSernie: {
+        proprietaire: { type: Number, default: 0 },
+        locataire: { type: Number, default: 0 }
+      },
+      coordinationDiocesaine: {
+        proprietaire: { type: Number, default: 0 },
+        locataire: { type: Number, default: 0 }
+      },
+      sousCoordinationConventionnees: {
+        proprietaire: { type: Number, default: 0 },
+        locataire: { type: Number, default: 0 }
+      },
+      conseillerieResidente: {
+        proprietaire: { type: Number, default: 0 },
+        locataire: { type: Number, default: 0 }
+      }
+    },
+    totalInfrastructureBureaux: {
+      totalProprietaire: { type: Number, default: 0 },
+      totalLocataire: { type: Number, default: 0 }
+    }
+  },
+  educationUrgence: {
+    planStockContingence: {
+      plan: { type: String },
+      stock: { type: String }
+    },
+    catastrophesNaturelles: {
+      nature: { type: String },
+      effetsNegatifs: { type: String }
+    },
+    destructionSDC: {
+      forcesNegatives: { type: String }
+    },
+    solutionsLocales: { type: String },
+    reunionsClusterEducation: {
+      frequence: { type: String },
+      pointsTraites: { type: String }
+    },
+    recommandations: {
+      espacesTemporairesApprentissage: {
+        nombre: { type: Number, default: 0 },
+        couts: { type: String }
+      },
+      apprenantsScolarises: {
+        cible: { type: Number, default: 0 }
+      },
+      formationEnseignantsESU: { type: String }
+    }
+  },
+  autresProblemes: {
+    problemesSpecifiques: { type: String }
   },
   conclusion: {
     type: String
@@ -413,39 +876,84 @@ rapportActiviteSchema.methods.reject = function() {
   return this.save();
 };
 
-// Middleware pre-save pour valider les données
+// Middleware pre-save pour valider les données et calculer les totaux
 rapportActiviteSchema.pre('save', function(next) {
   // Validation personnalisée si nécessaire
   if (this.annee && this.annee < 2000) {
     return next(new Error('L\'année doit être supérieure à 2000'));
   }
+  
+  // Calculer les totaux des infrastructures bureaux
+  if (this.gouvernance && this.gouvernance.infrastructureBureaux) {
+    let totalProprietaire = 0;
+    let totalLocataire = 0;
+    
+    Object.values(this.gouvernance.infrastructureBureaux).forEach(bureau => {
+      if (bureau.proprietaire) totalProprietaire += bureau.proprietaire;
+      if (bureau.locataire) totalLocataire += bureau.locataire;
+    });
+    
+    // Initialiser totalInfrastructureBureaux s'il n'existe pas
+    if (!this.gouvernance.totalInfrastructureBureaux) {
+      this.gouvernance.totalInfrastructureBureaux = {};
+    }
+    
+    this.gouvernance.totalInfrastructureBureaux.totalProprietaire = totalProprietaire;
+    this.gouvernance.totalInfrastructureBureaux.totalLocataire = totalLocataire;
+  }
+  
   next();
 });
 
 // Virtual pour calculer le total des effectifs
 rapportActiviteSchema.virtual('totalEffectifs').get(function() {
-  const prescolaire = this.parametresCles.niveauPrescolaire;
   let total = 0;
   
   // Calculer le total des effectifs préscolaires
-  Object.values(prescolaire).forEach(niveau => {
-    if (niveau.effectifGarcons) total += niveau.effectifGarcons;
-    if (niveau.effectifFilles) total += niveau.effectifFilles;
-  });
+  if (this.parametresCles && this.parametresCles.effectifScolaire && this.parametresCles.effectifScolaire.niveauPrescolaire) {
+    const prescolaire = this.parametresCles.effectifScolaire.niveauPrescolaire;
+    Object.values(prescolaire).forEach(niveau => {
+      if (niveau.effectifGarconsFilles) total += niveau.effectifGarconsFilles;
+    });
+  }
   
   // Ajouter les effectifs primaires
-  const primaire = this.parametresCles.niveauPrimaire.enseignementPrimaire;
-  if (primaire.effectifGarcons) total += primaire.effectifGarcons;
-  if (primaire.effectifFilles) total += primaire.effectifFilles;
+  if (this.parametresCles && this.parametresCles.effectifScolaire && this.parametresCles.effectifScolaire.niveauPrimaire) {
+    const primaire = this.parametresCles.effectifScolaire.niveauPrimaire.enseignementPrimaire;
+    if (primaire.effectifGarconsFilles) total += primaire.effectifGarconsFilles;
+  }
   
   // Ajouter les effectifs secondaires
-  const secondaire = this.parametresCles.niveauSecondaire.enseignementSecondaire;
-  if (secondaire.premierCycle.effectifGarcons) total += secondaire.premierCycle.effectifGarcons;
-  if (secondaire.premierCycle.effectifFilles) total += secondaire.premierCycle.effectifFilles;
-  if (secondaire.deuxiemeCycle.effectifGarcons) total += secondaire.deuxiemeCycle.effectifGarcons;
-  if (secondaire.deuxiemeCycle.effectifFilles) total += secondaire.deuxiemeCycle.effectifFilles;
+  if (this.parametresCles && this.parametresCles.effectifScolaire && this.parametresCles.effectifScolaire.niveauSecondaire) {
+    const secondaire = this.parametresCles.effectifScolaire.niveauSecondaire.enseignementSecondaire;
+    if (secondaire.septiemeCTEB.effectifGarcons) total += secondaire.septiemeCTEB.effectifGarcons;
+    if (secondaire.septiemeCTEB.effectifFilles) total += secondaire.septiemeCTEB.effectifFilles;
+    if (secondaire.huitiemeCTEB.effectifGarcons) total += secondaire.huitiemeCTEB.effectifGarcons;
+    if (secondaire.huitiemeCTEB.effectifFilles) total += secondaire.huitiemeCTEB.effectifFilles;
+    if (secondaire.premiereHumanite.effectifGarcons) total += secondaire.premiereHumanite.effectifGarcons;
+    if (secondaire.premiereHumanite.effectifFilles) total += secondaire.premiereHumanite.effectifFilles;
+    if (secondaire.quatriemeHumanite.effectifGarcons) total += secondaire.quatriemeHumanite.effectifGarcons;
+    if (secondaire.quatriemeHumanite.effectifFilles) total += secondaire.quatriemeHumanite.effectifFilles;
+  }
   
   return total;
+});
+
+// Virtual pour calculer le total des infrastructures bureaux
+rapportActiviteSchema.virtual('totalInfrastructureBureaux').get(function() {
+  if (!this.gouvernance || !this.gouvernance.infrastructureBureaux) {
+    return { totalProprietaire: 0, totalLocataire: 0 };
+  }
+  
+  let totalProprietaire = 0;
+  let totalLocataire = 0;
+  
+  Object.values(this.gouvernance.infrastructureBureaux).forEach(bureau => {
+    if (bureau.proprietaire) totalProprietaire += bureau.proprietaire;
+    if (bureau.locataire) totalLocataire += bureau.locataire;
+  });
+  
+  return { totalProprietaire, totalLocataire };
 });
 
 // Configuration pour inclure les virtuals dans les réponses JSON
