@@ -627,6 +627,90 @@ async function creerRapportActivite() {
     }
   } catch (error) {
     console.error('❌ Erreur réseau:', error);
+  }
+}
+
+// Test de l'endpoint de modification du profil utilisateur
+async function testUpdateUserProfile() {
+  try {
+    console.log('\n🧪 Test de l\'endpoint PUT /users/:id');
+    
+    // D'abord, on se connecte pour obtenir un token
+    const loginResponse = await fetch('http://localhost:3000/api/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: 'admin@example.com',
+        password: 'admin123'
+      })
+    });
+
+    if (!loginResponse.ok) {
+      console.error('❌ Échec de la connexion pour le test');
+      return;
+    }
+
+    const loginData = await loginResponse.json();
+    const token = loginData.token;
+    const userId = loginData.user._id;
+
+    console.log('✅ Connexion réussie, token obtenu');
+
+    // Test de modification du profil
+    const updateData = {
+      nom: 'Nom Modifié',
+      prenom: 'Prénom Modifié',
+      phone: '123456789',
+      email: 'nouveau@email.com'
+    };
+
+    console.log('📝 Données à envoyer:', updateData);
+
+    const response = await fetch(`http://localhost:3000/api/users/${userId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify(updateData)
+    });
+
+    const result = await response.json();
+    
+    if (response.ok) {
+      console.log('✅ Profil modifié avec succès:', result);
+      console.log('📊 Données mises à jour:', result.data);
+    } else {
+      console.error('❌ Erreur lors de la modification:', result);
+    }
+
+    // Test avec un mot de passe
+    console.log('\n🔐 Test de modification du mot de passe');
+    const passwordUpdateData = {
+      password: 'nouveauMotDePasse123'
+    };
+
+    const passwordResponse = await fetch(`http://localhost:3000/api/users/${userId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify(passwordUpdateData)
+    });
+
+    const passwordResult = await passwordResponse.json();
+    
+    if (passwordResponse.ok) {
+      console.log('✅ Mot de passe modifié avec succès');
+    } else {
+      console.error('❌ Erreur lors de la modification du mot de passe:', passwordResult);
+    }
+
+  } catch (error) {
+    console.error('❌ Erreur lors du test:', error);
     throw error;
   }
 }
@@ -805,3 +889,6 @@ module.exports = {
 
 console.log('📋 Exemples de requêtes POST pour rapport d\'activité créés !');
 console.log('🚀 Utilise ces exemples selon ton framework frontend !');
+
+// Test de l'endpoint de modification du profil
+testUpdateUserProfile();

@@ -179,7 +179,22 @@ module.exports.updateUser = async (req, res) => {
   const updateData = req.body;
 
   try {
-    const updatedUser = await User.findByIdAndUpdate(userId, updateData, { new: true });
+    // Si un nouveau mot de passe est fourni, le hasher
+    if (updateData.password) {
+      updateData.password = await bcrypt.hash(updateData.password, 10);
+    }
+
+    // Filtrer les champs autorisés pour la mise à jour
+    const allowedFields = ['nom', 'postnom', 'prenom', 'email', 'phone', 'photo', 'password', 'direction', 'service', 'grade', 'fonction', 'provinces', 'niveauOuDiscipline', 'isActive'];
+    const filteredData = {};
+    
+    allowedFields.forEach(field => {
+      if (updateData[field] !== undefined) {
+        filteredData[field] = updateData[field];
+      }
+    });
+
+    const updatedUser = await User.findByIdAndUpdate(userId, filteredData, { new: true });
 
     if (!updatedUser) {
       return res.status(404).send({
@@ -187,7 +202,7 @@ module.exports.updateUser = async (req, res) => {
       });
     }
 
-    return res.status(201).send({
+    return res.status(200).send({
       message: "Utilisateur mis à jour avec succès",
       data: updatedUser,
     });
