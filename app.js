@@ -31,6 +31,7 @@ const rapportActiviteRouter = require('./routers/rapportActivite.route.js');
 const identificationProvedRouter = require('./routers/identificationProved.route.js');
 const provedAuthRouter = require('./routers/provedAuth.route.js');
 const ficheAutoEvaluationRouter = require('./routers/ficheAutoEvaluation.route.js');
+const effectifAnnuelRouter = require('./routers/effectifAnnuel.route.js');
 
 
 const app = express();
@@ -110,7 +111,7 @@ app.get('/', (req, res) => {
 // Middleware Swagger Docs (doit être avant les routes protégées)
 app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
 
-app.use('/api/v1/', UserRouter, ProvinceRouter, DirectionRouter, SousDirectionRouter, ServiceRouter, EcoleRouter, EleveRouter, PersonnelRouter, BesoinRessourceRouter, EffectifRouter, PresenceRouter, ResultatScolaireRouter, PermissionRouter, InfrastructureRouter, EquipementRouter, CommissionRouter, AnnonceRouter, TypeFormulaireRouter, FormulaireRouter, ficheAdministrativeRouter, denominationRouter, premiereVisiteRouter, inspectionPedagogiqueRouter, disciplineRouter, rapportActiviteRouter, identificationProvedRouter, ficheAutoEvaluationRouter);
+app.use('/api/v1/', UserRouter, ProvinceRouter, DirectionRouter, SousDirectionRouter, ServiceRouter, EcoleRouter, EleveRouter, PersonnelRouter, BesoinRessourceRouter, EffectifRouter, PresenceRouter, ResultatScolaireRouter, PermissionRouter, InfrastructureRouter, EquipementRouter, CommissionRouter, AnnonceRouter, TypeFormulaireRouter, FormulaireRouter, ficheAdministrativeRouter, denominationRouter, premiereVisiteRouter, inspectionPedagogiqueRouter, disciplineRouter, rapportActiviteRouter, identificationProvedRouter, ficheAutoEvaluationRouter, effectifAnnuelRouter);
 app.use('/api/v1/proved', provedAuthRouter);
 
 module.exports = app;

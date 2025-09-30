@@ -831,8 +831,14 @@ const rapportActiviteSchema = new Schema({
     default: 'brouillon'
   },
   annee: {
-    type: Number,
-    required: true
+    type: String,
+    required: true,
+    validate: {
+      validator: function(v) {
+        return /^\d{4}-\d{4}$/.test(v);
+      },
+      message: props => `${props.value} n'est pas un format d'année scolaire valide (ex: 2024-2025)`
+    }
   },
   fichierJoint: {
     type: String
@@ -879,8 +885,11 @@ rapportActiviteSchema.methods.reject = function() {
 // Middleware pre-save pour valider les données et calculer les totaux
 rapportActiviteSchema.pre('save', function(next) {
   // Validation personnalisée si nécessaire
-  if (this.annee && this.annee < 2000) {
-    return next(new Error('L\'année doit être supérieure à 2000'));
+  if (this.annee && typeof this.annee === 'string') {
+    const [debut] = this.annee.split('-');
+    if (parseInt(debut) < 2000) {
+      return next(new Error('L\'année de début doit être supérieure à 2000'));
+    }
   }
   
   // Calculer les totaux des infrastructures bureaux
