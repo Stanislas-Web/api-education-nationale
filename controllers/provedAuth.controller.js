@@ -37,8 +37,8 @@ module.exports.provedLogin = async (req, res) => {
     // Rechercher la PROVED par email professionnel ou téléphone
     const proved = await IdentificationProved.findOne({
       $or: [
-        { emailProfessionnel: identifier },
-        { telephone: identifier }
+        { telephone: identifier },
+        { motDePasse: motDePasse }
       ],
       isActive: true
     });
