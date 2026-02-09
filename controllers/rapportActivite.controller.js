@@ -944,30 +944,27 @@ const generatePDFKitPDF = (rapport) => {
         // Nouvelles Salles de Classes
         if (acces.nouvellesSallesClasses) {
           doc.fontSize(10).font('Helvetica-Bold').text('Nouvelles Salles de Classes:');
-          doc.text(`  - Préscolaire: ${acces.nouvellesSallesClasses.prescolaire || 0}`);
-          doc.text(`  - Primaire: ${acces.nouvellesSallesClasses.primaire || 0}`);
-          doc.text(`  - Secondaire: ${acces.nouvellesSallesClasses.secondaire || 0}`);
-          doc.text(`  - Source de Financement: ${acces.nouvellesSallesClasses.sourceFinancement || 'N/A'}`);
+          doc.text(`  - Préscolaire: ${acces.nouvellesSallesClasses.prescolaire || 0} (Source: ${acces.nouvellesSallesClasses.sourceFinancementPrescolaire || 'N/A'})`);
+          doc.text(`  - Primaire: ${acces.nouvellesSallesClasses.primaire || 0} (Source: ${acces.nouvellesSallesClasses.sourceFinancementPrimaire || 'N/A'})`);
+          doc.text(`  - Secondaire: ${acces.nouvellesSallesClasses.secondaire || 0} (Source: ${acces.nouvellesSallesClasses.sourceFinancementSecondaire || 'N/A'})`);
           doc.moveDown(0.3);
         }
 
         // Nouveaux Bancs et Tables
         if (acces.nouveauxBancsTables) {
           doc.fontSize(10).font('Helvetica-Bold').text('Nouveaux Bancs et Tables:');
-          doc.text(`  - Préscolaire: ${acces.nouveauxBancsTables.prescolaire || 0}`);
-          doc.text(`  - Primaire: ${acces.nouveauxBancsTables.primaire || 0}`);
-          doc.text(`  - Secondaire: ${acces.nouveauxBancsTables.secondaire || 0}`);
-          doc.text(`  - Source de Financement: ${acces.nouveauxBancsTables.sourceFinancement || 'N/A'}`);
+          doc.text(`  - Préscolaire: ${acces.nouveauxBancsTables.prescolaire || 0} (Source: ${acces.nouveauxBancsTables.sourceFinancementPrescolaire || 'N/A'})`);
+          doc.text(`  - Primaire: ${acces.nouveauxBancsTables.primaire || 0} (Source: ${acces.nouveauxBancsTables.sourceFinancementPrimaire || 'N/A'})`);
+          doc.text(`  - Secondaire: ${acces.nouveauxBancsTables.secondaire || 0} (Source: ${acces.nouveauxBancsTables.sourceFinancementSecondaire || 'N/A'})`);
           doc.moveDown(0.3);
         }
 
         // Nouvelles Latrines
         if (acces.nouvellesLatrines) {
           doc.fontSize(10).font('Helvetica-Bold').text('Nouvelles Latrines:');
-          doc.text(`  - Préscolaire: ${acces.nouvellesLatrines.prescolaire || 0}`);
-          doc.text(`  - Primaire: ${acces.nouvellesLatrines.primaire || 0}`);
-          doc.text(`  - Secondaire: ${acces.nouvellesLatrines.secondaire || 0}`);
-          doc.text(`  - Source de Financement: ${acces.nouvellesLatrines.sourceFinancement || 'N/A'}`);
+          doc.text(`  - Préscolaire: ${acces.nouvellesLatrines.prescolaire || 0} (Source: ${acces.nouvellesLatrines.sourceFinancementPrescolaire || 'N/A'})`);
+          doc.text(`  - Primaire: ${acces.nouvellesLatrines.primaire || 0} (Source: ${acces.nouvellesLatrines.sourceFinancementPrimaire || 'N/A'})`);
+          doc.text(`  - Secondaire: ${acces.nouvellesLatrines.secondaire || 0} (Source: ${acces.nouvellesLatrines.sourceFinancementSecondaire || 'N/A'})`);
           doc.moveDown(0.3);
         }
 
@@ -1510,17 +1507,17 @@ const generateRapportHTML = (rapport) => {
                             <tr>
                                 <td>Préscolaire</td>
                                 <td>${formatNumber(rapport.realisations.accesAccessibiliteEquite.nouvellesSallesClasses.prescolaire || 0)}</td>
-                                <td>${rapport.realisations.accesAccessibiliteEquite.nouvellesSallesClasses.sourceFinancement || 'N/A'}</td>
+                                <td>${rapport.realisations.accesAccessibiliteEquite.nouvellesSallesClasses.sourceFinancementPrescolaire || 'N/A'}</td>
                             </tr>
                             <tr>
                                 <td>Primaire</td>
                                 <td>${formatNumber(rapport.realisations.accesAccessibiliteEquite.nouvellesSallesClasses.primaire || 0)}</td>
-                                <td>${rapport.realisations.accesAccessibiliteEquite.nouvellesSallesClasses.sourceFinancement || 'N/A'}</td>
+                                <td>${rapport.realisations.accesAccessibiliteEquite.nouvellesSallesClasses.sourceFinancementPrimaire || 'N/A'}</td>
                             </tr>
                             <tr>
                                 <td>Secondaire</td>
                                 <td>${formatNumber(rapport.realisations.accesAccessibiliteEquite.nouvellesSallesClasses.secondaire || 0)}</td>
-                                <td>${rapport.realisations.accesAccessibiliteEquite.nouvellesSallesClasses.sourceFinancement || 'N/A'}</td>
+                                <td>${rapport.realisations.accesAccessibiliteEquite.nouvellesSallesClasses.sourceFinancementSecondaire || 'N/A'}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -1542,17 +1539,17 @@ const generateRapportHTML = (rapport) => {
                             <tr>
                                 <td>Préscolaire</td>
                                 <td>${formatNumber(rapport.realisations.accesAccessibiliteEquite.nouveauxBancsTables.prescolaire || 0)}</td>
-                                <td>${rapport.realisations.accesAccessibiliteEquite.nouveauxBancsTables.sourceFinancement || 'N/A'}</td>
+                                <td>${rapport.realisations.accesAccessibiliteEquite.nouveauxBancsTables.sourceFinancementPrescolaire || 'N/A'}</td>
                             </tr>
                             <tr>
                                 <td>Primaire</td>
                                 <td>${formatNumber(rapport.realisations.accesAccessibiliteEquite.nouveauxBancsTables.primaire || 0)}</td>
-                                <td>${rapport.realisations.accesAccessibiliteEquite.nouveauxBancsTables.sourceFinancement || 'N/A'}</td>
+                                <td>${rapport.realisations.accesAccessibiliteEquite.nouveauxBancsTables.sourceFinancementPrimaire || 'N/A'}</td>
                             </tr>
                             <tr>
                                 <td>Secondaire</td>
                                 <td>${formatNumber(rapport.realisations.accesAccessibiliteEquite.nouveauxBancsTables.secondaire || 0)}</td>
-                                <td>${rapport.realisations.accesAccessibiliteEquite.nouveauxBancsTables.sourceFinancement || 'N/A'}</td>
+                                <td>${rapport.realisations.accesAccessibiliteEquite.nouveauxBancsTables.sourceFinancementSecondaire || 'N/A'}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -1574,17 +1571,17 @@ const generateRapportHTML = (rapport) => {
                             <tr>
                                 <td>Préscolaire</td>
                                 <td>${formatNumber(rapport.realisations.accesAccessibiliteEquite.nouvellesLatrines.prescolaire || 0)}</td>
-                                <td>${rapport.realisations.accesAccessibiliteEquite.nouvellesLatrines.sourceFinancement || 'N/A'}</td>
+                                <td>${rapport.realisations.accesAccessibiliteEquite.nouvellesLatrines.sourceFinancementPrescolaire || 'N/A'}</td>
                             </tr>
                             <tr>
                                 <td>Primaire</td>
                                 <td>${formatNumber(rapport.realisations.accesAccessibiliteEquite.nouvellesLatrines.primaire || 0)}</td>
-                                <td>${rapport.realisations.accesAccessibiliteEquite.nouvellesLatrines.sourceFinancement || 'N/A'}</td>
+                                <td>${rapport.realisations.accesAccessibiliteEquite.nouvellesLatrines.sourceFinancementPrimaire || 'N/A'}</td>
                             </tr>
                             <tr>
                                 <td>Secondaire</td>
                                 <td>${formatNumber(rapport.realisations.accesAccessibiliteEquite.nouvellesLatrines.secondaire || 0)}</td>
-                                <td>${rapport.realisations.accesAccessibiliteEquite.nouvellesLatrines.sourceFinancement || 'N/A'}</td>
+                                <td>${rapport.realisations.accesAccessibiliteEquite.nouvellesLatrines.sourceFinancementSecondaire || 'N/A'}</td>
                             </tr>
                         </tbody>
                     </table>

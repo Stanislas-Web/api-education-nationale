@@ -435,19 +435,25 @@ const rapportActiviteSchema = new Schema({
         prescolaire: { type: Number, default: 0 },
         primaire: { type: Number, default: 0 },
         secondaire: { type: Number, default: 0 },
-        sourceFinancement: { type: String }
+        sourceFinancementPrescolaire: { type: String },
+        sourceFinancementPrimaire: { type: String },
+        sourceFinancementSecondaire: { type: String }
       },
       nouveauxBancsTables: {
         prescolaire: { type: Number, default: 0 },
         primaire: { type: Number, default: 0 },
         secondaire: { type: Number, default: 0 },
-        sourceFinancement: { type: String }
+        sourceFinancementPrescolaire: { type: String },
+        sourceFinancementPrimaire: { type: String },
+        sourceFinancementSecondaire: { type: String }
       },
       nouvellesLatrines: {
         prescolaire: { type: Number, default: 0 },
         primaire: { type: Number, default: 0 },
         secondaire: { type: Number, default: 0 },
-        sourceFinancement: { type: String }
+        sourceFinancementPrescolaire: { type: String },
+        sourceFinancementPrimaire: { type: String },
+        sourceFinancementSecondaire: { type: String }
       },
       gratuitéEnseignementPrimaire: { type: String },
       sensibilisation: {
