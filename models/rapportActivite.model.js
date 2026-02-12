@@ -477,19 +477,28 @@ const rapportActiviteSchema = new Schema({
   ameliorationQualite: {
     disponibiliteMoyensEnseignement: {
       programmesScolaires: {
-        prescolaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
+        ece: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
+        preprimaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
+        maternel: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
         primaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
-        secondaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' }
+        secondaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
+        prescolaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' }
       },
       manuelsScolaires: {
-        prescolaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
+        ece: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
+        preprimaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
+        maternel: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
         primaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
-        secondaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' }
+        secondaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
+        prescolaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' }
       },
       materielsDidactiques: {
-        prescolaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
+        ece: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
+        preprimaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
+        maternel: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
         primaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
-        secondaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' }
+        secondaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
+        prescolaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' }
       },
       laboratoires: {
         chimie: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
@@ -826,7 +835,13 @@ const rapportActiviteSchema = new Schema({
     }
   },
   autresProblemes: {
-    problemesSpecifiques: { type: String }
+    // VI. AUTRES PRINCIPAUX PROBLEMES SPECIFIQUES
+    // VI.1. Autres principaux problèmes spécifiques (10 lignes maximum)
+    problemesSpecifiques: { 
+      type: String,
+      maxlength: 1000,
+      description: "VI.1. Autres principaux problèmes spécifiques (10 lignes maximum)"
+    }
   },
   conclusion: {
     type: String
