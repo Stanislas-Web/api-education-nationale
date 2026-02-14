@@ -637,10 +637,45 @@ const rapportActiviteSchema = new Schema({
         }
       },
       rendementExterne: {
-        examensCertificatifs: {
-          tauxDiplomes: { type: Number, default: 0 },
-          tauxHumanitesScientifiques: { type: Number, default: 0 },
-          tauxHumanitesTechniques: { type: Number, default: 0 }
+        prescolaire: {
+          tauxGF: { type: Number, min: 0, max: 100, default: 0 },
+          tauxFilles: { type: Number, min: 0, max: 100, default: 0 }
+        },
+        espaceCommunautaireEveil: {
+          tauxGF: { type: Number, min: 0, max: 100, default: 0 },
+          tauxFilles: { type: Number, min: 0, max: 100, default: 0 }
+        },
+        classePreprimaire: {
+          tauxGF: { type: Number, min: 0, max: 100, default: 0 },
+          tauxFilles: { type: Number, min: 0, max: 100, default: 0 }
+        },
+        maternel: {
+          tauxGF: { type: Number, min: 0, max: 100, default: 0 },
+          tauxFilles: { type: Number, min: 0, max: 100, default: 0 }
+        },
+        primaire: {
+          tauxGF: { type: Number, min: 0, max: 100, default: 0 },
+          tauxFilles: { type: Number, min: 0, max: 100, default: 0 }
+        },
+        enseignementSpecialPrimaire: {
+          tauxGF: { type: Number, min: 0, max: 100, default: 0 },
+          tauxFilles: { type: Number, min: 0, max: 100, default: 0 }
+        },
+        enseignementPrimaire: {
+          tauxGF: { type: Number, min: 0, max: 100, default: 0 },
+          tauxFilles: { type: Number, min: 0, max: 100, default: 0 }
+        },
+        secondaire: {
+          tauxGF: { type: Number, min: 0, max: 100, default: 0 },
+          tauxFilles: { type: Number, min: 0, max: 100, default: 0 }
+        },
+        enseignementSpecialSecondaire: {
+          tauxGF: { type: Number, min: 0, max: 100, default: 0 },
+          tauxFilles: { type: Number, min: 0, max: 100, default: 0 }
+        },
+        enseignementSecondaireNormal: {
+          tauxGF: { type: Number, min: 0, max: 100, default: 0 },
+          tauxFilles: { type: Number, min: 0, max: 100, default: 0 }
         }
       }
     }
