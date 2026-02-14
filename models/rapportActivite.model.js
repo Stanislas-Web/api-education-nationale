@@ -489,9 +489,12 @@ const rapportActiviteSchema = new Schema({
         }
       },
       indicateursAcces: {
-        proportionNouveauxInscrits: { type: Number, default: 0 },
-        tauxTransitionPrimaireCTEB: { type: Number, default: 0 },
-        tauxTransitionCTEBHumanites: { type: Number, default: 0 }
+        proportionNouveauxInscrits: { type: Number, default: null },
+        proportionNouveauxInscrits_Filles: { type: Number, default: null },
+        tauxTransitionPrimaireCTEB: { type: Number, default: null },
+        tauxTransitionPrimaireCTEB_Filles: { type: Number, default: null },
+        tauxTransitionCTEBHumanites: { type: Number, default: null },
+        tauxTransitionCTEBHumanites_Filles: { type: Number, default: null }
       }
     }
   },
