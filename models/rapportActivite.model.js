@@ -610,20 +610,30 @@ const rapportActiviteSchema = new Schema({
     },
     indicateursRendement: {
       rendementInterne: {
-        prescolaire: {
-          tauxAbandon: { type: Number, default: 0 },
-          tauxReussite: { type: Number, default: 0 },
-          tauxEchec: { type: Number, default: 0 }
+        sixiemePrimaire: {
+          abandon: { type: Number, min: 0, max: 100, default: 0 },
+          reussite: { type: Number, min: 0, max: 100, default: 0 },
+          echec: { type: Number, min: 0, max: 100, default: 0 }
         },
-        primaire: {
-          tauxAbandon: { type: Number, default: 0 },
-          tauxReussite: { type: Number, default: 0 },
-          tauxEchec: { type: Number, default: 0 }
+        huitiemeCETB: {
+          abandon: { type: Number, min: 0, max: 100, default: 0 },
+          reussite: { type: Number, min: 0, max: 100, default: 0 },
+          echec: { type: Number, min: 0, max: 100, default: 0 }
         },
-        secondaire: {
-          tauxAbandon: { type: Number, default: 0 },
-          tauxReussite: { type: Number, default: 0 },
-          tauxEchec: { type: Number, default: 0 }
+        quatriemeHumanite: {
+          abandon: { type: Number, min: 0, max: 100, default: 0 },
+          reussite: { type: Number, min: 0, max: 100, default: 0 },
+          echec: { type: Number, min: 0, max: 100, default: 0 }
+        },
+        diplomesMathematiques: {
+          abandon: { type: Number, min: 0, max: 100, default: 0 },
+          reussite: { type: Number, min: 0, max: 100, default: 0 },
+          echec: { type: Number, min: 0, max: 100, default: 0 }
+        },
+        diplomesFiliereTechniques: {
+          abandon: { type: Number, min: 0, max: 100, default: 0 },
+          reussite: { type: Number, min: 0, max: 100, default: 0 },
+          echec: { type: Number, min: 0, max: 100, default: 0 }
         }
       },
       rendementExterne: {
