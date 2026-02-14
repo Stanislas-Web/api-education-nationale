@@ -745,6 +745,29 @@ const rapportActiviteSchema = new Schema({
       instructionsOfficielles: { type: String },
       nouvelleCitoyennete: { type: String }
     },
+    formationsGestionnaires: {
+      leadershipScolaire: {
+        tauxGF: { type: Number, default: 0 },
+        tauxFilles: { type: Number, default: 0 }
+      },
+      managementScolaire: {
+        tauxGF: { type: Number, default: 0 },
+        tauxFilles: { type: Number, default: 0 }
+      },
+      calculIndicateurs: {
+        tauxGF: { type: Number, default: 0 },
+        tauxFilles: { type: Number, default: 0 }
+      },
+      gestionEntiteEducationnelle: {
+        tauxGF: { type: Number, default: 0 },
+        tauxFilles: { type: Number, default: 0 }
+      },
+      planification: {
+        tauxGF: { type: Number, default: 0 },
+        tauxFilles: { type: Number, default: 0 }
+      }
+    },
+    commentaireFormations: { type: String, default: '' },
     groupesAidesPsychopedagogiques: {
       nombreGAPMisEnPlace: { type: Number, default: 0 },
       nombreGAPOperationnel: { type: Number, default: 0 },
