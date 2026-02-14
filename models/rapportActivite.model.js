@@ -677,6 +677,20 @@ const rapportActiviteSchema = new Schema({
           tauxGF: { type: Number, min: 0, max: 100, default: 0 },
           tauxFilles: { type: Number, min: 0, max: 100, default: 0 }
         }
+      },
+      efficacitePrimaire: {
+        tauxAbandon: {
+          tauxGF: { type: Number, min: 0, max: 100, default: 0 },
+          tauxFilles: { type: Number, min: 0, max: 100, default: 0 }
+        },
+        tauxReussite: {
+          tauxGF: { type: Number, min: 0, max: 100, default: 0 },
+          tauxFilles: { type: Number, min: 0, max: 100, default: 0 }
+        },
+        tauxEchec: {
+          tauxGF: { type: Number, min: 0, max: 100, default: 0 },
+          tauxFilles: { type: Number, min: 0, max: 100, default: 0 }
+        }
       }
     }
   },
