@@ -465,7 +465,28 @@ const rapportActiviteSchema = new Schema({
         prescolaire: { type: Number, default: 0 },
         primaire: { type: Number, default: 0 },
         secondaire: { type: Number, default: 0 },
-        commentaire: { type: String }
+        totalGeneralEcoles: { type: Number, default: 0 },
+        commentaire: { type: String },
+        cantinesScolairesDetail: {
+          prescolaire: {
+            gvt: { type: Number, default: 0 },
+            projet: { type: Number, default: 0 },
+            ptfs: { type: Number, default: 0 },
+            ong: { type: Number, default: 0 }
+          },
+          primaire: {
+            gvt: { type: Number, default: 0 },
+            projet: { type: Number, default: 0 },
+            ptfs: { type: Number, default: 0 },
+            ong: { type: Number, default: 0 }
+          },
+          secondaire: {
+            gvt: { type: Number, default: 0 },
+            projet: { type: Number, default: 0 },
+            ptfs: { type: Number, default: 0 },
+            ong: { type: Number, default: 0 }
+          }
+        }
       },
       indicateursAcces: {
         proportionNouveauxInscrits: { type: Number, default: 0 },
