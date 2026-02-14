@@ -2,10 +2,6 @@
   "identificationProved": "ID_PROVED_FROM_TOKEN",
   "annee": "2024-2025",
   "introduction": "Description brève de la genèse et présentation de la situation sociogéographique",
-  "themesExploites": {
-    "ece": "Développement psychomoteur et socialisation",
-    "maternel": "Apprentissage par le jeu et activités sensorielles"
-  },
   
   "parametresCles": {
     "nombreEcolesClasses": {
@@ -374,6 +370,10 @@
         "primaire": "BON",
         "secondaire": "BON",
         "special": "BON"
+      },
+      "themesExploites": {
+        "ece": "Développement psychomoteur et socialisation",
+        "maternel": "Apprentissage par le jeu et activités sensorielles"
       }
     },
     "indicateursRendement": {

@@ -17,15 +17,6 @@ const mongoosePaginate = require('mongoose-paginate-v2');
  *         introduction:
  *           type: string
  *           description: Brève description de la genèse et présentation de la situation sociogéographique
- *         themesExploites:
- *           type: object
- *           properties:
- *             ece:
- *               type: string
- *               description: Thème exploité au niveau ECE
- *             maternel:
- *               type: string
- *               description: Thème exploité au niveau Maternel
  *         parametresCles:
  *           type: object
  *           properties:
@@ -226,10 +217,6 @@ const rapportActiviteSchema = new Schema({
   },
   introduction: {
     type: String
-  },
-  themesExploites: {
-    ece: { type: String },
-    maternel: { type: String }
   },
   parametresCles: {
     // 1.1. Nbre d'Ecole / Nbre de Classe
@@ -591,6 +578,10 @@ const rapportActiviteSchema = new Schema({
         primaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
         secondaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
         special: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' }
+      },
+      themesExploites: {
+        ece: { type: String },
+        maternel: { type: String }
       }
     },
     indicateursRendement: {
