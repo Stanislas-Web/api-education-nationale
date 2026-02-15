@@ -535,18 +535,24 @@ const rapportActiviteSchema = new Schema({
     },
     visitesEtReunions: {
       visitesClasses: {
-        prescolaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: 'BON' },
+        ece: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: null },
+        preprimaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: null },
+        maternel: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: null },
         primaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: 'BON' },
         secondaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: 'BON' },
         special: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: 'BON' }
       },
       reunionsPedagogiques: {
-        prescolaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: 'BON' },
+        ece: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: null },
+        preprimaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: null },
+        maternel: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: null },
         primaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: 'BON' },
         secondaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: 'BON' }
       },
       fonctionnementCelluleBase: {
-        prescolaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: 'BON' },
+        ece: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: null },
+        preprimaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: null },
+        maternel: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: null },
         primaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: 'BON' },
         secondaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: 'BON' },
         special: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: 'BON' }
