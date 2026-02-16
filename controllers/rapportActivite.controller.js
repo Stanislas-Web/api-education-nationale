@@ -1,4 +1,5 @@
 const { RapportActivite } = require('../models/rapportActivite.model.js');
+const { validateIndicateursRendement } = require('../validators/indicateursRendement.validator');
 const puppeteer = require('puppeteer');
 const htmlPdf = require('html-pdf-node');
 const PDFDocument = require('pdfkit');
@@ -27,6 +28,19 @@ const PDFDocument = require('pdfkit');
  */
 const createRapportActivite = async (req, res) => {
   try {
+    // Validation des nouveaux indicateurs de rendement si présents
+    const indicateurs = req.body.ameliorationQualite?.indicateursRendement;
+    if (indicateurs) {
+      const validation = validateIndicateursRendement(indicateurs);
+      if (!validation.valid) {
+        return res.status(400).json({
+          success: false,
+          message: 'Données des indicateurs de rendement invalides',
+          errors: validation.errors
+        });
+      }
+    }
+
     // Utiliser automatiquement la PROVED de l'utilisateur connecté
     const rapportData = {
       ...req.body,
@@ -327,6 +341,19 @@ const getRapportActiviteById = async (req, res) => {
  */
 const updateRapportActivite = async (req, res) => {
   try {
+    // Validation des nouveaux indicateurs de rendement si présents
+    const indicateurs = req.body.ameliorationQualite?.indicateursRendement;
+    if (indicateurs) {
+      const validation = validateIndicateursRendement(indicateurs);
+      if (!validation.valid) {
+        return res.status(400).json({
+          success: false,
+          message: 'Données des indicateurs de rendement invalides',
+          errors: validation.errors
+        });
+      }
+    }
+
     const { id } = req.params;
     const updateData = {
       ...req.body

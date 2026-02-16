@@ -617,85 +617,111 @@ const rapportActiviteSchema = new Schema({
     indicateursRendement: {
       rendementInterne: {
         sixiemePrimaire: {
-          abandon: { type: Number, min: 0, max: 100, default: 0 },
-          reussite: { type: Number, min: 0, max: 100, default: 0 },
-          echec: { type: Number, min: 0, max: 100, default: 0 }
+          abandon: { type: Number,  default: 0 },
+          reussite: { type: Number,  default: 0 },
+          echec: { type: Number,  default: 0 }
         },
         huitiemeCETB: {
-          abandon: { type: Number, min: 0, max: 100, default: 0 },
-          reussite: { type: Number, min: 0, max: 100, default: 0 },
-          echec: { type: Number, min: 0, max: 100, default: 0 }
+          abandon: { type: Number,  default: 0 },
+          reussite: { type: Number,  default: 0 },
+          echec: { type: Number,  default: 0 }
         },
         quatriemeHumanite: {
-          abandon: { type: Number, min: 0, max: 100, default: 0 },
-          reussite: { type: Number, min: 0, max: 100, default: 0 },
-          echec: { type: Number, min: 0, max: 100, default: 0 }
+          abandon: { type: Number,  default: 0 },
+          reussite: { type: Number,  default: 0 },
+          echec: { type: Number,  default: 0 }
         },
         diplomesMathematiques: {
-          abandon: { type: Number, min: 0, max: 100, default: 0 },
-          reussite: { type: Number, min: 0, max: 100, default: 0 },
-          echec: { type: Number, min: 0, max: 100, default: 0 }
+          abandon: { type: Number,  default: 0 },
+          reussite: { type: Number,  default: 0 },
+          echec: { type: Number,  default: 0 }
         },
         diplomesFiliereTechniques: {
-          abandon: { type: Number, min: 0, max: 100, default: 0 },
-          reussite: { type: Number, min: 0, max: 100, default: 0 },
-          echec: { type: Number, min: 0, max: 100, default: 0 }
+          abandon: { type: Number,  default: 0 },
+          reussite: { type: Number,  default: 0 },
+          echec: { type: Number,  default: 0 }
         }
       },
       rendementExterne: {
         prescolaire: {
-          tauxGF: { type: Number, min: 0, max: 100, default: 0 },
-          tauxFilles: { type: Number, min: 0, max: 100, default: 0 }
+          tauxGF: { type: Number,  default: 0 },
+          tauxFilles: { type: Number,  default: 0 }
         },
         espaceCommunautaireEveil: {
-          tauxGF: { type: Number, min: 0, max: 100, default: 0 },
-          tauxFilles: { type: Number, min: 0, max: 100, default: 0 }
+          tauxGF: { type: Number,  default: 0 },
+          tauxFilles: { type: Number,  default: 0 }
         },
         classePreprimaire: {
-          tauxGF: { type: Number, min: 0, max: 100, default: 0 },
-          tauxFilles: { type: Number, min: 0, max: 100, default: 0 }
+          tauxGF: { type: Number,  default: 0 },
+          tauxFilles: { type: Number,  default: 0 }
         },
         maternel: {
-          tauxGF: { type: Number, min: 0, max: 100, default: 0 },
-          tauxFilles: { type: Number, min: 0, max: 100, default: 0 }
+          tauxGF: { type: Number,  default: 0 },
+          tauxFilles: { type: Number,  default: 0 }
         },
         primaire: {
-          tauxGF: { type: Number, min: 0, max: 100, default: 0 },
-          tauxFilles: { type: Number, min: 0, max: 100, default: 0 }
+          tauxGF: { type: Number,  default: 0 },
+          tauxFilles: { type: Number,  default: 0 }
         },
         enseignementSpecialPrimaire: {
-          tauxGF: { type: Number, min: 0, max: 100, default: 0 },
-          tauxFilles: { type: Number, min: 0, max: 100, default: 0 }
+          tauxGF: { type: Number,  default: 0 },
+          tauxFilles: { type: Number,  default: 0 }
         },
         enseignementPrimaire: {
-          tauxGF: { type: Number, min: 0, max: 100, default: 0 },
-          tauxFilles: { type: Number, min: 0, max: 100, default: 0 }
+          tauxGF: { type: Number,  default: 0 },
+          tauxFilles: { type: Number,  default: 0 }
         },
         secondaire: {
-          tauxGF: { type: Number, min: 0, max: 100, default: 0 },
-          tauxFilles: { type: Number, min: 0, max: 100, default: 0 }
+          tauxGF: { type: Number,  default: 0 },
+          tauxFilles: { type: Number,  default: 0 }
         },
         enseignementSpecialSecondaire: {
-          tauxGF: { type: Number, min: 0, max: 100, default: 0 },
-          tauxFilles: { type: Number, min: 0, max: 100, default: 0 }
+          tauxGF: { type: Number,  default: 0 },
+          tauxFilles: { type: Number,  default: 0 }
         },
         enseignementSecondaireNormal: {
-          tauxGF: { type: Number, min: 0, max: 100, default: 0 },
-          tauxFilles: { type: Number, min: 0, max: 100, default: 0 }
+          tauxGF: { type: Number,  default: 0 },
+          tauxFilles: { type: Number,  default: 0 }
         }
       },
       efficacitePrimaire: {
         tauxAbandon: {
-          tauxGF: { type: Number, min: 0, max: 100, default: 0 },
-          tauxFilles: { type: Number, min: 0, max: 100, default: 0 }
+          tauxGF: { type: Number,  default: 0 },
+          tauxFilles: { type: Number,  default: 0 }
         },
         tauxReussite: {
-          tauxGF: { type: Number, min: 0, max: 100, default: 0 },
-          tauxFilles: { type: Number, min: 0, max: 100, default: 0 }
+          tauxGF: { type: Number,  default: 0 },
+          tauxFilles: { type: Number,  default: 0 }
         },
         tauxEchec: {
-          tauxGF: { type: Number, min: 0, max: 100, default: 0 },
-          tauxFilles: { type: Number, min: 0, max: 100, default: 0 }
+          tauxGF: { type: Number,  default: 0 },
+          tauxFilles: { type: Number,  default: 0 }
+        }
+      },
+      // ========== EFFICACITÉ SECONDAIRE (NOUVEAU) ==========
+      efficaciteSecondaire: {
+        tauxAbandon: {
+          tauxGF: { type: Number,  default: 0 },
+          tauxFilles: { type: Number,  default: 0 }
+        },
+        tauxReussite: {
+          tauxGF: { type: Number,  default: 0 },
+          tauxFilles: { type: Number,  default: 0 }
+        },
+        tauxEchec: {
+          tauxGF: { type: Number,  default: 0 },
+          tauxFilles: { type: Number,  default: 0 }
+        }
+      },
+      // ========== TAUX DE DIPLÔMÉS OCDE (NOUVEAU) ==========
+      tauxDiplomesOCDE: {
+        humanitesScientifiques: {
+          tauxGF: { type: Number,  default: 0 },
+          tauxFilles: { type: Number,  default: 0 }
+        },
+        humanitesTechniques: {
+          tauxGF: { type: Number,  default: 0 },
+          tauxFilles: { type: Number,  default: 0 }
         }
       }
     }

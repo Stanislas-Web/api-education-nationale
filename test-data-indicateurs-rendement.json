@@ -1,0 +1,115 @@
+{
+  "annee": "2024-2025",
+  "identificationProved": "6970af4de0355a44bca8a5b9",
+  "ameliorationQualite": {
+    "indicateursRendement": {
+      "rendementInterne": {
+        "sixiemePrimaire": {
+          "abandon": 5.2,
+          "reussite": 82.4,
+          "echec": 12.4
+        },
+        "huitiemeCETB": {
+          "abandon": 4.8,
+          "reussite": 85.1,
+          "echec": 10.1
+        },
+        "quatriemeHumanite": {
+          "abandon": 6.3,
+          "reussite": 78.9,
+          "echec": 14.8
+        },
+        "diplomesMathematiques": {
+          "abandon": 3.2,
+          "reussite": 88.5,
+          "echec": 8.3
+        },
+        "diplomesFiliereTechniques": {
+          "abandon": 4.1,
+          "reussite": 86.2,
+          "echec": 9.7
+        }
+      },
+      "rendementExterne": {
+        "prescolaire": {
+          "tauxGF": 42.5,
+          "tauxFilles": 40.8
+        },
+        "espaceCommunautaireEveil": {
+          "tauxGF": 38.2,
+          "tauxFilles": 36.5
+        },
+        "classePreprimaire": {
+          "tauxGF": 45.3,
+          "tauxFilles": 43.7
+        },
+        "maternel": {
+          "tauxGF": 41.8,
+          "tauxFilles": 39.9
+        },
+        "primaire": {
+          "tauxGF": 95.2,
+          "tauxFilles": 92.8
+        },
+        "enseignementSpecialPrimaire": {
+          "tauxGF": 12.4,
+          "tauxFilles": 10.2
+        },
+        "enseignementPrimaire": {
+          "tauxGF": 96.8,
+          "tauxFilles": 94.5
+        },
+        "secondaire": {
+          "tauxGF": 68.5,
+          "tauxFilles": 65.2
+        },
+        "enseignementSpecialSecondaire": {
+          "tauxGF": 8.7,
+          "tauxFilles": 7.1
+        },
+        "enseignementSecondaireNormal": {
+          "tauxGF": 69.3,
+          "tauxFilles": 66.8
+        }
+      },
+      "efficacitePrimaire": {
+        "tauxAbandon": {
+          "tauxGF": 4.5,
+          "tauxFilles": 4.2
+        },
+        "tauxReussite": {
+          "tauxGF": 87.2,
+          "tauxFilles": 85.6
+        },
+        "tauxEchec": {
+          "tauxGF": 8.3,
+          "tauxFilles": 10.2
+        }
+      },
+      "efficaciteSecondaire": {
+        "tauxAbandon": {
+          "tauxGF": 6.8,
+          "tauxFilles": 6.2
+        },
+        "tauxReussite": {
+          "tauxGF": 84.7,
+          "tauxFilles": 83.1
+        },
+        "tauxEchec": {
+          "tauxGF": 8.5,
+          "tauxFilles": 10.7
+        }
+      },
+      "tauxDiplomesOCDE": {
+        "humanitesScientifiques": {
+          "tauxGF": 88.5,
+          "tauxFilles": 86.2
+        },
+        "humanitesTechniques": {
+          "tauxGF": 86.1,
+          "tauxFilles": 82.4
+        }
+      }
+    }
+  }
+}
