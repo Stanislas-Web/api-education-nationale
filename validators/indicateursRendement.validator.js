@@ -20,62 +20,8 @@
  * });
  */
 function validateEfficaciteSecondaire(data) {
-  if (!data) return { valid: true, errors: [] };
-  
-  const indicateursRequis = ['tauxAbandon', 'tauxReussite', 'tauxEchec'];
-  const errors = [];
-
-  indicateursRequis.forEach(indicateur => {
-    if (!data[indicateur]) return;
-
-    const { tauxGF, tauxFilles } = data[indicateur];
-
-    // Validation des types
-    if (typeof tauxGF !== 'number' || typeof tauxFilles !== 'number') {
-      errors.push(`${indicateur}: tauxGF et tauxFilles doivent être des nombres`);
-      return;
-    }
-
-    // Validation des plages (0-100%)
-    if (tauxGF < 0 || tauxGF > 100) {
-      errors.push(`${indicateur}.tauxGF doit être entre 0 et 100 (valeur: ${tauxGF})`);
-    }
-    if (tauxFilles < 0 || tauxFilles > 100) {
-      errors.push(`${indicateur}.tauxFilles doit être entre 0 et 100 (valeur: ${tauxFilles})`);
-    }
-
-    // Cohérence logique: tauxFilles ≤ tauxGF
-    if (tauxFilles > tauxGF) {
-      errors.push(`${indicateur}: tauxFilles (${tauxFilles}%) ne peut pas dépasser tauxGF (${tauxGF}%)`);
-    }
-  });
-
-  // Validation de la somme des taux (≈ 100%)
-  if (data.tauxAbandon && data.tauxReussite && data.tauxEchec) {
-    const sommeGF = (data.tauxAbandon.tauxGF || 0) + 
-                     (data.tauxReussite.tauxGF || 0) + 
-                     (data.tauxEchec.tauxGF || 0);
-    
-    if (Math.abs(sommeGF - 100) > 0.5) {
-      errors.push(
-        `La somme des taux GF (${sommeGF.toFixed(1)}%) devrait être proche de 100% ` +
-        `(abandon: ${data.tauxAbandon.tauxGF}%, réussite: ${data.tauxReussite.tauxGF}%, échec: ${data.tauxEchec.tauxGF}%)`
-      );
-    }
-
-    const sommeFilles = (data.tauxAbandon.tauxFilles || 0) + 
-                        (data.tauxReussite.tauxFilles || 0) + 
-                        (data.tauxEchec.tauxFilles || 0);
-    
-    if (Math.abs(sommeFilles - 100) > 0.5) {
-      errors.push(
-        `La somme des taux Filles (${sommeFilles.toFixed(1)}%) devrait être proche de 100% ` +
-        `(abandon: ${data.tauxAbandon.tauxFilles}%, réussite: ${data.tauxReussite.tauxFilles}%, échec: ${data.tauxEchec.tauxFilles}%)`
-      );
-    }
-  }
-
-  return { valid: errors.length === 0, errors };
+  // Aucune validation - tous les taux sont acceptés
+  return { valid: true, errors: [] };
 }
 
 /**
@@ -115,35 +61,7 @@ function validateTauxDiplomesOCDE(data) {
     if (tauxFilles < 0 || tauxFilles > 100) {
       errors.push(`${filiere}.tauxFilles doit être entre 0 et 100 (valeur: ${tauxFilles})`);
     }
-
-    // Cohérence logique: tauxFilles ≤ tauxGF
-    if (tauxFilles > tauxGF) {
-      errors.push(`${filiere}: tauxFilles (${tauxFilles}%) ne peut pas dépasser tauxGF (${tauxGF}%)`);
-    }
   });
-
-  // Validation de la somme (≤ 100%)
-  if (data.humanitesScientifiques && data.humanitesTechniques) {
-    const sommeGF = (data.humanitesScientifiques.tauxGF || 0) + 
-                    (data.humanitesTechniques.tauxGF || 0);
-    
-    if (sommeGF > 100) {
-      errors.push(
-        `La somme des taux GF (${sommeGF.toFixed(1)}%) ne peut pas dépasser 100% ` +
-        `(scientifiques: ${data.humanitesScientifiques.tauxGF}%, techniques: ${data.humanitesTechniques.tauxGF}%)`
-      );
-    }
-
-    const sommeFilles = (data.humanitesScientifiques.tauxFilles || 0) + 
-                        (data.humanitesTechniques.tauxFilles || 0);
-    
-    if (sommeFilles > 100) {
-      errors.push(
-        `La somme des taux Filles (${sommeFilles.toFixed(1)}%) ne peut pas dépasser 100% ` +
-        `(scientifiques: ${data.humanitesScientifiques.tauxFilles}%, techniques: ${data.humanitesTechniques.tauxFilles}%)`
-      );
-    }
-  }
 
   return { valid: errors.length === 0, errors };
 }
