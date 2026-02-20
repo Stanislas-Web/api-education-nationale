@@ -38,32 +38,8 @@ function validateEfficaciteSecondaire(data) {
  * });
  */
 function validateTauxDiplomesOCDE(data) {
-  if (!data) return { valid: true, errors: [] };
-  
-  const filieresRequises = ['humanitesScientifiques', 'humanitesTechniques'];
-  const errors = [];
-
-  filieresRequises.forEach(filiere => {
-    if (!data[filiere]) return;
-
-    const { tauxGF, tauxFilles } = data[filiere];
-
-    // Validation des types
-    if (typeof tauxGF !== 'number' || typeof tauxFilles !== 'number') {
-      errors.push(`${filiere}: tauxGF et tauxFilles doivent être des nombres`);
-      return;
-    }
-
-    // Validation des plages (0-100%)
-    if (tauxGF < 0 || tauxGF > 100) {
-      errors.push(`${filiere}.tauxGF doit être entre 0 et 100 (valeur: ${tauxGF})`);
-    }
-    if (tauxFilles < 0 || tauxFilles > 100) {
-      errors.push(`${filiere}.tauxFilles doit être entre 0 et 100 (valeur: ${tauxFilles})`);
-    }
-  });
-
-  return { valid: errors.length === 0, errors };
+  // Aucune validation - accepte toutes les valeurs y compris vides
+  return { valid: true, errors: [] };
 }
 
 /**
