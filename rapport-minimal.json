@@ -1,0 +1,23 @@
+{
+  "identificationProved": "6970af4de0355a44bca8a5b9",
+  "annee": "2024-2025",
+  "ameliorationQualite": {
+    "visitesEtReunions": {
+      "visitesClasses": {
+        "ece": "BON",
+        "preprimaire": "BON",
+        "maternel": "BON"
+      },
+      "reunionsPedagogiques": {
+        "ece": "BON",
+        "preprimaire": "BON",
+        "maternel": "BON"
+      },
+      "fonctionnementCelluleBase": {
+        "ece": "BON",
+        "preprimaire": "BON",
+        "maternel": "BON"
+      }
+    }
+  }
+}

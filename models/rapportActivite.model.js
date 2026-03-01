@@ -257,14 +257,19 @@ const rapportActiviteSchema = new Schema({
         },
         enseignementSecondaire: {
           nombreEcoles: { type: Number, default: 0 },
+          totalClassesSecondaire: { type: Number, default: 0 },
           premierCycle: {
             classes7emeCTEB: { type: Number, default: 0 },
-            classes8emeCTEB: { type: Number, default: 0 }
+            classes8emeCTEB: { type: Number, default: 0 },
+            nombreEcoles7eme: { type: Number, default: 0 },
+            nombreEcoles8eme: { type: Number, default: 0 }
           },
           deuxiemeCycle: {
-            totalClassesHumanites: { type: Number, default: 0 }
+            totalClassesHumanites: { type: Number, default: 0 },
+            nombreEcolesHumanites: { type: Number, default: 0 }
           },
-          totalClasses1er2emeCycle: { type: Number, default: 0 }
+          totalClasses1er2emeCycle: { type: Number, default: 0 },
+          nombreEcoles1er2emeCycle: { type: Number, default: 0 }
         }
       }
     },
