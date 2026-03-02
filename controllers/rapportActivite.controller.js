@@ -60,7 +60,46 @@ const createRapportActivite = async (req, res) => {
     });
   } catch (error) {
     console.error('Erreur lors de la création du rapport:', error);
-    res.status(400).json({
+
+    // Erreur de validation Mongoose — renvoyer les détails champ par champ
+    if (error.name === 'ValidationError') {
+      const detailedErrors = {};
+      for (const field in error.errors) {
+        detailedErrors[field] = {
+          message: error.errors[field].message,
+          value: error.errors[field].value,
+          kind: error.errors[field].kind,
+          path: error.errors[field].path
+        };
+      }
+      return res.status(400).json({
+        success: false,
+        message: 'Erreur de validation du rapport',
+        errorCount: Object.keys(detailedErrors).length,
+        errors: detailedErrors
+      });
+    }
+
+    // Erreur de clé dupliquée (duplicate key)
+    if (error.code === 11000) {
+      return res.status(409).json({
+        success: false,
+        message: 'Un rapport avec ces données existe déjà',
+        duplicateFields: error.keyValue
+      });
+    }
+
+    // Erreur de cast (ex: ID invalide)
+    if (error.name === 'CastError') {
+      return res.status(400).json({
+        success: false,
+        message: `Valeur invalide pour le champ "${error.path}": ${error.value}`,
+        error: error.message
+      });
+    }
+
+    // Autre erreur
+    res.status(500).json({
       success: false,
       message: 'Erreur lors de la création du rapport',
       error: error.message
