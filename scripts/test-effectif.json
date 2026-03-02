@@ -1,0 +1,25 @@
+{
+  "identificationProved": "6970af4de0355a44bca8a5b9",
+  "annee": "2024-2025",
+  "effectifs": {
+    "niveauPrescolaire": {
+      "espaceCommunautaireEveil": { "effectifGarconsFilles": 1500, "effectifFilles": 700 },
+      "maternel": { "effectifGarconsFilles": 2000, "effectifFilles": 950 },
+      "prePrimaire": { "effectifGarconsFilles": 1120, "effectifFilles": 548 },
+      "special": { "effectifGarconsFilles": 228, "effectifFilles": 108 }
+    },
+    "niveauPrimaire": {
+      "enseignementSpecial": { "effectifGarconsFilles": 298, "effectifFilles": 142 },
+      "enseignementPrimaire": { "effectifGarconsFilles": 34500, "effectifFilles": 16675 }
+    },
+    "niveauSecondaire": {
+      "enseignementSpecial": { "effectifGarcons": 118, "effectifFilles": 92 },
+      "enseignementSecondaire": {
+        "septiemeCTEB": { "effectifGarcons": 4000, "effectifFilles": 3500 },
+        "huitiemeCTEB": { "effectifGarcons": 2950, "effectifFilles": 2600 },
+        "premiereHumanite": { "effectifGarcons": 2700, "effectifFilles": 2400 },
+        "quatriemeHumanite": { "effectifGarcons": 2200, "effectifFilles": 1900 }
+      }
+    }
+  }
+}

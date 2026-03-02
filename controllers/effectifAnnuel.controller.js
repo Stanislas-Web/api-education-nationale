@@ -167,8 +167,52 @@ const getAllEffectifsByProved = async (req, res) => {
   }
 };
 
+/**
+ * Récupérer le dernier effectif enregistré pour une PROVED
+ */
+const getLastEffectif = async (req, res) => {
+  try {
+    const { identificationProved } = req.params;
+
+    const lastEffectif = await EffectifAnnuel.findOne({
+      identificationProved
+    })
+    .sort({ annee: -1 })
+    .populate('identificationProved', 'provinceEducationnelle directeurProvincial');
+
+    if (!lastEffectif) {
+      return res.status(404).json({
+        success: false,
+        message: 'Aucun effectif enregistré pour cette PROVED'
+      });
+    }
+
+    // Calculer l'année suivante pour garder la même structure que /previous
+    const [debut, fin] = lastEffectif.annee.split('-');
+    const anneeSuivante = `${parseInt(debut) + 1}-${parseInt(fin) + 1}`;
+
+    res.status(200).json({
+      success: true,
+      message: `Dernier effectif enregistré (${lastEffectif.annee}) récupéré avec succès`,
+      anneePrecedente: lastEffectif.annee,
+      anneeActuelle: anneeSuivante,
+      isDefaultData: false,
+      data: lastEffectif
+    });
+
+  } catch (error) {
+    console.error('Erreur lors de la récupération du dernier effectif:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Erreur lors de la récupération du dernier effectif',
+      error: error.message
+    });
+  }
+};
+
 module.exports = {
   getEffectifsPreviousYear,
   saveEffectifs,
-  getAllEffectifsByProved
+  getAllEffectifsByProved,
+  getLastEffectif
 };

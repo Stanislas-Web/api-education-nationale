@@ -4,7 +4,8 @@ const { isLoggedIn } = require('../middleware');
 const {
   getEffectifsPreviousYear,
   saveEffectifs,
-  getAllEffectifsByProved
+  getAllEffectifsByProved,
+  getLastEffectif
 } = require('../controllers/effectifAnnuel.controller');
 
 /**
@@ -18,6 +19,11 @@ const {
  * Récupérer les effectifs de l'année précédente
  */
 router.get('/effectif-annuel/previous/:identificationProved/:annee', isLoggedIn, getEffectifsPreviousYear);
+
+/**
+ * Récupérer le dernier effectif enregistré d'une PROVED
+ */
+router.get('/effectif-annuel/last/:identificationProved', isLoggedIn, getLastEffectif);
 
 /**
  * Récupérer l'historique complet des effectifs d'une PROVED
