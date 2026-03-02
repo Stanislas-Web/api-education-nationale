@@ -506,61 +506,61 @@ const rapportActiviteSchema = new Schema({
   ameliorationQualite: {
     disponibiliteMoyensEnseignement: {
       programmesScolaires: {
-        ece: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
-        preprimaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
-        maternel: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
-        primaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
-        secondaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
-        prescolaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' }
+        ece: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' },
+        preprimaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' },
+        maternel: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' },
+        primaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' },
+        secondaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' },
+        prescolaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' }
       },
       manuelsScolaires: {
-        ece: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
-        preprimaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
-        maternel: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
-        primaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
-        secondaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
-        prescolaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' }
+        ece: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' },
+        preprimaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' },
+        maternel: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' },
+        primaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' },
+        secondaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' },
+        prescolaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' }
       },
       materielsDidactiques: {
-        ece: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
-        preprimaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
-        maternel: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
-        primaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
-        secondaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
-        prescolaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' }
+        ece: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' },
+        preprimaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' },
+        maternel: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' },
+        primaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' },
+        secondaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' },
+        prescolaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' }
       },
       laboratoires: {
-        chimie: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
-        biologie: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
-        physique: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' }
+        chimie: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' },
+        biologie: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' },
+        physique: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' }
       },
       equipementsAteliers: {
-        humanitesTechniques: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' }
+        humanitesTechniques: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' }
       }
     },
     visitesEtReunions: {
       visitesClasses: {
-        ece: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: null },
-        preprimaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: null },
-        maternel: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: null },
-        primaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: 'BON' },
-        secondaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: 'BON' },
-        special: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: 'BON' }
+        ece: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: null },
+        preprimaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: null },
+        maternel: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: null },
+        primaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: null },
+        secondaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: null },
+        special: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: null }
       },
       reunionsPedagogiques: {
-        ece: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: null },
-        preprimaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: null },
-        maternel: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: null },
-        primaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: 'BON' },
-        secondaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: 'BON' }
+        ece: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: null },
+        preprimaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: null },
+        maternel: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: null },
+        primaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: null },
+        secondaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: null }
       },
       fonctionnementCelluleBase: {
-        ece: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: null },
-        preprimaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: null },
-        maternel: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: null },
-        primaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: 'BON' },
-        secondaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: 'BON' },
-        special: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON'], default: 'BON' }
+        ece: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: null },
+        preprimaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: null },
+        maternel: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: null },
+        primaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: null },
+        secondaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: null },
+        special: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: null }
       }
     },
     activitesInspectorales: {
@@ -609,10 +609,10 @@ const rapportActiviteSchema = new Schema({
         }
       },
       formationContinue: {
-        prescolaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
-        primaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
-        secondaire: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' },
-        special: { type: String, enum: ['TRES BON', 'BON', 'CARENCE'], default: 'BON' }
+        prescolaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: null },
+        primaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: null },
+        secondaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: null },
+        special: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: null }
       },
       themesExploites: {
         ece: { type: String },
