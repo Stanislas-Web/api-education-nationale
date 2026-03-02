@@ -506,61 +506,61 @@ const rapportActiviteSchema = new Schema({
   ameliorationQualite: {
     disponibiliteMoyensEnseignement: {
       programmesScolaires: {
-        ece: { type: String, default: 'BON' },
-        preprimaire: { type: String, default: 'BON' },
-        maternel: { type: String, default: 'BON' },
-        primaire: { type: String, default: 'BON' },
-        secondaire: { type: String, default: 'BON' },
-        prescolaire: { type: String, default: 'BON' }
+        ece: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' },
+        preprimaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' },
+        maternel: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' },
+        primaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' },
+        secondaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' },
+        prescolaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' }
       },
       manuelsScolaires: {
-        ece: { type: String, default: 'BON' },
-        preprimaire: { type: String, default: 'BON' },
-        maternel: { type: String, default: 'BON' },
-        primaire: { type: String, default: 'BON' },
-        secondaire: { type: String, default: 'BON' },
-        prescolaire: { type: String, default: 'BON' }
+        ece: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' },
+        preprimaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' },
+        maternel: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' },
+        primaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' },
+        secondaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' },
+        prescolaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' }
       },
       materielsDidactiques: {
-        ece: { type: String, default: 'BON' },
-        preprimaire: { type: String, default: 'BON' },
-        maternel: { type: String, default: 'BON' },
-        primaire: { type: String, default: 'BON' },
-        secondaire: { type: String, default: 'BON' },
-        prescolaire: { type: String, default: 'BON' }
+        ece: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' },
+        preprimaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' },
+        maternel: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' },
+        primaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' },
+        secondaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' },
+        prescolaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' }
       },
       laboratoires: {
-        chimie: { type: String, default: 'BON' },
-        biologie: { type: String, default: 'BON' },
-        physique: { type: String, default: 'BON' }
+        chimie: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' },
+        biologie: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' },
+        physique: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' }
       },
       equipementsAteliers: {
-        humanitesTechniques: { type: String, default: 'BON' }
+        humanitesTechniques: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: 'BON' }
       }
     },
     visitesEtReunions: {
       visitesClasses: {
-        ece: { type: String, default: null },
-        preprimaire: { type: String, default: null },
-        maternel: { type: String, default: null },
-        primaire: { type: String, default: null },
-        secondaire: { type: String, default: null },
-        special: { type: String, default: null }
+        ece: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: null },
+        preprimaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: null },
+        maternel: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: null },
+        primaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: null },
+        secondaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: null },
+        special: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: null }
       },
       reunionsPedagogiques: {
-        ece: { type: String, default: null },
-        preprimaire: { type: String, default: null },
-        maternel: { type: String, default: null },
-        primaire: { type: String, default: null },
-        secondaire: { type: String, default: null }
+        ece: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: null },
+        preprimaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: null },
+        maternel: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: null },
+        primaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: null },
+        secondaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: null }
       },
       fonctionnementCelluleBase: {
-        ece: { type: String, default: null },
-        preprimaire: { type: String, default: null },
-        maternel: { type: String, default: null },
-        primaire: { type: String, default: null },
-        secondaire: { type: String, default: null },
-        special: { type: String, default: null }
+        ece: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: null },
+        preprimaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: null },
+        maternel: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: null },
+        primaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: null },
+        secondaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: null },
+        special: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: null }
       }
     },
     activitesInspectorales: {
@@ -609,10 +609,10 @@ const rapportActiviteSchema = new Schema({
         }
       },
       formationContinue: {
-        prescolaire: { type: String, default: null },
-        primaire: { type: String, default: null },
-        secondaire: { type: String, default: null },
-        special: { type: String, default: null }
+        prescolaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: null },
+        primaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: null },
+        secondaire: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: null },
+        special: { type: String, enum: ['TRES BON', 'BON', 'ASSEZ BON', 'CARENCE'], default: null }
       },
       themesExploites: {
         ece: { type: String },
@@ -999,7 +999,14 @@ const rapportActiviteSchema = new Schema({
     default: 'brouillon'
   },
   annee: {
-    type: String
+    type: String,
+    required: true,
+    validate: {
+      validator: function(v) {
+        return /^\d{4}-\d{4}$/.test(v);
+      },
+      message: props => `${props.value} n'est pas un format d'année scolaire valide (ex: 2024-2025)`
+    }
   },
   fichierJoint: {
     type: String
@@ -1043,8 +1050,16 @@ rapportActiviteSchema.methods.reject = function() {
   return this.save();
 };
 
-// Middleware pre-save pour calculer les totaux
+// Middleware pre-save pour valider les données et calculer les totaux
 rapportActiviteSchema.pre('save', function(next) {
+  // Validation personnalisée si nécessaire
+  if (this.annee && typeof this.annee === 'string') {
+    const [debut] = this.annee.split('-');
+    if (parseInt(debut) < 2000) {
+      return next(new Error('L\'année de début doit être supérieure à 2000'));
+    }
+  }
+  
   // Calculer les totaux des infrastructures bureaux
   if (this.gouvernance && this.gouvernance.infrastructureBureaux) {
     let totalProprietaire = 0;
